@@ -12,11 +12,10 @@
        your own links, copy, or contact info.
      - Search for MEDIA SLOT: replace each <div class="media-ph">
        with a <video> loop, a GIF, or an <iframe> of a live dashboard.
-       Visual-first is your edge — prioritize the XPBD soft-body
-       clips and the live HydroLab dashboard loop.
-     - Drop this file as index.html at the root of mrdurangoc.github.io
-       and it goes live as-is. No build step, no dependencies besides
-       the two Google Fonts links below.
+     - Search for YOUR PHOTO: replace the .photo-ph block in the hero
+       with <img src="your-photo.jpg" alt="Marvin Durango">.
+     - Drop this file as index.html at the root of mrdurangoc.github.io.
+       No build step, no dependencies besides the Google Fonts link.
      ============================================================ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,19 +24,17 @@
 
 <style>
 :root{
-  --bg:#0b0a09;
-  --surface:#141210;
-  --surface-2:#1a1714;
-  --surface-3:#100f0d;
-  --line:#2a2620;
-  --text:#e9e5df;
-  --text-dim:#9b938a;
-  --text-faint:#615a51;
-  --white:#f7f5f2;
+  --bg:#ececea;
+  --surface:#ffffff;
+  --surface-2:#f5f5f3;
+  --line:#dcdcd8;
+  --line-strong:#c7c7c2;
+  --ink:#161616;
+  --ink-dim:#5c5c58;
+  --ink-faint:#8d8d88;
   --orange:#ff5e1a;
-  --orange-2:#ff7a3d;
-  --orange-dim:rgba(255,94,26,0.12);
-  --orange-dim-2:rgba(255,94,26,0.24);
+  --orange-dim:rgba(255,94,26,0.10);
+  --orange-dim-2:rgba(255,94,26,0.28);
   --radius:10px;
   --maxw:1100px;
 }
@@ -48,159 +45,210 @@ html{scroll-behavior:smooth}
   *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important}
 }
 body{
-  background:var(--bg);color:var(--text);
+  background:var(--bg);color:var(--ink-dim);
   font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing:antialiased;position:relative;
 }
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-h1,h2,h3{font-family:'Chakra Petch',sans-serif;color:var(--white);letter-spacing:-0.01em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+h1,h2,h3{font-family:'Chakra Petch',sans-serif;color:var(--ink);letter-spacing:-0.01em}
 a{color:inherit}
 .mono{font-family:'IBM Plex Mono',monospace}
 :focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
 
+/* ---------- decorative grid guides ---------- */
+.grid-lines{position:fixed;top:0;left:50%;transform:translateX(-50%);width:var(--maxw);height:100%;pointer-events:none;z-index:0}
+.grid-lines i{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.grid-lines i:first-child{left:0}
+.grid-lines i:last-child{right:0}
+
+/* ---------- icon system ---------- */
+.icon{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.icon-sm{width:16px;height:16px}
+.icon-lg{width:30px;height:30px}
+
 /* ---------- header ---------- */
-header{position:sticky;top:0;z-index:50;background:rgba(11,10,9,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.05em;color:var(--white);display:flex;align-items:center;gap:9px;text-transform:uppercase}
-.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange)}
-nav{display:flex;gap:26px}
-nav a{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .15s}
+header{position:sticky;top:0;z-index:50;background:rgba(236,236,234,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-strong)}
+.bar{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.brand{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.05em;color:var(--ink);display:flex;align-items:center;gap:9px;text-transform:uppercase;font-weight:500}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+nav{display:flex;align-items:center;gap:24px}
+nav a{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:var(--ink-dim);text-decoration:none;transition:color .15s}
 nav a:hover{color:var(--orange)}
-@media (max-width:700px){nav{display:none}}
+.btn-nav{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:7px 16px;border-radius:20px;text-decoration:none;transition:.15s}
+.btn-nav:hover{background:var(--ink);color:var(--surface)}
+@media (max-width:760px){nav a{display:none} .btn-nav{display:inline-block}}
 
 /* ---------- hero ---------- */
-.hero{padding:96px 0 56px}
-.eyebrow{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);border:1px solid var(--orange-dim-2);background:var(--orange-dim);padding:6px 14px;border-radius:20px;margin-bottom:26px}
-.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.12;font-weight:700;max-width:16ch}
-.hero h1 span{display:inline;opacity:0;animation:riseIn .6s ease forwards}
+.hero{padding:72px 0 0}
+.hero-grid{display:flex;align-items:center;gap:48px;justify-content:space-between;padding-bottom:52px}
+.hero-content{flex:1;min-width:0}
+.hero-photo{flex-shrink:0}
+.photo-ph{width:220px;height:220px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-faint);font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:center;position:relative}
+.photo-ph::before{content:'';position:absolute;top:-7px;left:-7px;width:38px;height:38px;border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink);border-radius:12px 0 0 0}
+.photo-ph::after{content:'';position:absolute;bottom:-7px;right:-7px;width:38px;height:38px;border-bottom:1.5px solid var(--ink);border-right:1.5px solid var(--ink);border-radius:0 0 12px 0}
+.photo-ph .icon{color:var(--orange)}
+.hero-photo img{width:220px;height:220px;border-radius:14px;object-fit:cover;border:1px solid var(--line);display:block}
+@media (max-width:760px){.hero-grid{flex-direction:column-reverse;gap:30px} .hero-photo{align-self:center} .photo-ph,.hero-photo img{width:170px;height:170px}}
+
+.eyebrow{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);border:1px solid var(--orange-dim-2);background:var(--orange-dim);padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero h1{font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.14;font-weight:700;max-width:17ch}
 .hero h1 .hl{color:var(--orange)}
-@keyframes riseIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.lede{margin-top:22px;font-size:17px;color:var(--text-dim);max-width:58ch;line-height:1.65}
-.lede b{color:var(--text);font-weight:600}
-.hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
-.btn{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:13px 22px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+.lede{margin-top:20px;font-size:16.5px;color:var(--ink-dim);max-width:56ch;line-height:1.65}
+.lede b{color:var(--ink);font-weight:600}
+.hero-cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.03em;text-transform:uppercase;padding:13px 22px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.15s}
 .btn.primary{background:var(--orange);color:#1a0900;font-weight:500}
-.btn.primary:hover{background:var(--orange-2);box-shadow:0 0 24px var(--orange-dim-2)}
-.btn.ghost{border:1px solid var(--line);color:var(--text)}
-.btn.ghost:hover{border-color:var(--orange);color:var(--orange)}
+.btn.primary:hover{background:#ff7438}
+.btn.ghost{border:1px solid var(--ink);color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--surface)}
+
+/* ---------- stats strip ---------- */
+.stats-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.stats-row{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:26px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat-num{font-family:'Chakra Petch',sans-serif;font-size:26px;font-weight:700;color:var(--ink)}
+.stat-label{margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);letter-spacing:.01em}
+@media (max-width:700px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .stat{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat:nth-child(2n){border-right:0}
+  .stat:nth-last-child(-n+2){border-bottom:0}
+}
 
 /* ---------- lens toggle ---------- */
-.lens{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.lens{border-bottom:1px solid var(--line);background:var(--bg)}
 .lens-row{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.lens-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}
-.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.seg button{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.03em;background:transparent;color:var(--text-dim);border:0;padding:9px 16px;cursor:pointer;transition:.15s;border-right:1px solid var(--line)}
+.lens-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint)}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{font-family:'IBM Plex Mono',monospace;font-size:12.5px;background:transparent;color:var(--ink-dim);border:0;padding:9px 16px;cursor:pointer;transition:.15s;border-right:1px solid var(--line)}
 .seg button:last-child{border-right:0}
-.seg button:hover{color:var(--text)}
+.seg button:hover{color:var(--ink)}
 .seg button.active{background:var(--orange-dim);color:var(--orange)}
-.lens-note{font-size:13px;color:var(--text-faint);margin-left:auto}
+.lens-note{font-size:13px;color:var(--ink-faint);margin-left:auto}
 @media (max-width:700px){.lens-note{margin-left:0;width:100%}}
 
 /* ---------- shared section heads ---------- */
-section{padding:88px 0}
+section{padding:80px 0}
 .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-.tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
-.sec-head h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:600}
-.sec-sub{margin-top:10px;color:var(--text-dim);max-width:56ch;font-size:15px}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--orange)}
+.sec-head h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:600}
+.sec-sub{margin-top:10px;color:var(--ink-dim);max-width:56ch;font-size:15px}
 
 /* ---------- stack diagram ---------- */
-.stack-diagram{margin-top:48px;position:relative;padding-left:34px}
-.stack-diagram::before{content:'';position:absolute;left:11px;top:10px;bottom:10px;width:1px;background:linear-gradient(var(--orange),var(--line))}
-.layer{position:relative;padding:0 0 36px 28px;border-bottom:1px dashed var(--line)}
+.stack-diagram{margin-top:44px;position:relative;padding-left:40px}
+.stack-diagram::before{content:'';position:absolute;left:13px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.layer{position:relative;padding:0 0 34px 26px;border-bottom:1px dashed var(--line)}
 .layer:last-child{border-bottom:0;padding-bottom:0}
-.layer::before{content:'';position:absolute;left:-34px;top:4px;width:23px;height:23px;border-radius:50%;background:var(--bg);border:1px solid var(--orange);box-shadow:0 0 0 4px var(--bg)}
+.layer-icon{position:absolute;left:-40px;top:-2px;width:28px;height:28px;border-radius:8px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.layer-icon .icon{width:15px;height:15px;color:var(--orange)}
 .layer-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.layer-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint)}
-.layer h3{font-size:19px;font-weight:600}
-.layer p{margin-top:8px;color:var(--text-dim);max-width:60ch;font-size:14.5px}
+.layer-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint)}
+.layer h3{font-size:18px;font-weight:600}
+.layer p{margin-top:8px;color:var(--ink-dim);max-width:60ch;font-size:14.5px}
 .layer-tools{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-.lt-chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);border:1px solid var(--line);border-radius:20px;padding:4px 11px}
+.lt-chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-dim);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px 11px}
 
 /* ---------- work grid ---------- */
-.grid{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.grid{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 @media (max-width:760px){.grid{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column}
-.card:hover{border-color:var(--orange-dim-2);box-shadow:0 0 28px rgba(255,94,26,0.08)}
+.card:hover{border-color:var(--ink-faint);box-shadow:0 4px 16px rgba(0,0,0,0.05)}
 .card.feature{grid-column:1 / -1}
 .card.hide{display:none}
-.media-ph{aspect-ratio:16/8;background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 10px,var(--surface-3) 10px,var(--surface-3) 20px);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;font-size:12.5px;border-bottom:1px solid var(--line)}
-.card.feature .media-ph{aspect-ratio:16/6}
-.media-ph .ico{font-size:16px;color:var(--orange)}
+.media-ph{aspect-ratio:16/7;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-faint);font-family:'IBM Plex Mono',monospace;font-size:12px;border-bottom:1px solid var(--line);position:relative}
+.card.feature .media-ph{aspect-ratio:16/5.5}
+.media-ph::before{content:'';position:absolute;top:10px;left:10px;width:22px;height:22px;border-top:1.5px solid var(--line-strong);border-left:1.5px solid var(--line-strong);border-radius:6px 0 0 0}
+.media-ph::after{content:'';position:absolute;bottom:10px;right:10px;width:22px;height:22px;border-bottom:1.5px solid var(--line-strong);border-right:1.5px solid var(--line-strong);border-radius:0 0 6px 0}
+.media-ph .icon{color:var(--orange)}
 .card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
-.card-idx{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange)}
+.card-idx{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--orange)}
 .card h3{font-size:18px;font-weight:600;margin-top:8px}
-.problem{margin-top:10px;font-size:14px;color:var(--text-dim);line-height:1.6}
-.problem b{color:var(--text);font-weight:600}
-.result{margin-top:10px;font-size:14px;color:var(--text-dim)}
+.problem{margin-top:10px;font-size:14px;color:var(--ink-dim);line-height:1.6}
+.problem b{color:var(--ink);font-weight:600}
+.result{margin-top:10px;font-size:14px;color:var(--ink-dim)}
 .result span{color:var(--orange);font-weight:500}
 .layer-tags{margin-top:16px;display:flex;gap:6px;flex-wrap:wrap}
-.lt{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line);color:var(--text-faint);padding:4px 9px;border-radius:20px}
+.lt{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line);color:var(--ink-faint);padding:4px 9px;border-radius:20px}
 .lt.on{color:var(--orange);border-color:var(--orange-dim-2);background:var(--orange-dim)}
 .meta{margin-top:auto;padding-top:16px}
-.meta a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text-dim);text-decoration:none;transition:.15s}
+.meta a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-dim);text-decoration:none;transition:.15s}
 .meta a:hover{color:var(--orange)}
 
 /* ---------- capabilities ---------- */
 .caps{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px}
-.cap{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:12px 18px;background:var(--surface);transition:.2s}
-.cap:hover{border-color:var(--orange);color:var(--orange);box-shadow:0 0 20px rgba(255,94,26,0.08)}
-.cap b{color:var(--text-faint);font-weight:400;margin-right:8px;text-transform:uppercase;letter-spacing:.04em}
+.cap{display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:12px 18px;background:var(--surface);transition:.2s}
+.cap:hover{border-color:var(--orange)}
+.cap .icon{color:var(--orange)}
+.cap b{color:var(--ink-faint);font-weight:400;margin-right:8px;text-transform:uppercase;letter-spacing:.04em}
+
+/* ---------- beyond the lab ---------- */
+.beyond-grid{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:900px){.beyond-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.beyond-grid{grid-template-columns:1fr}}
+.beyond-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 20px}
+.beyond-card .icon{color:var(--orange);margin-bottom:14px}
+.beyond-card h3{font-size:15.5px;font-weight:600;color:var(--ink)}
+.beyond-card p{margin-top:8px;font-size:13px;color:var(--ink-dim);line-height:1.55}
 
 /* ---------- resume ---------- */
-.resume-summary{margin-top:36px;font-size:15px;color:var(--text-dim);max-width:70ch;line-height:1.7}
-.resume-summary b{color:var(--text);font-weight:600}
+.resume-summary{margin-top:36px;font-size:15px;color:var(--ink-dim);max-width:70ch;line-height:1.7}
+.resume-summary b{color:var(--ink);font-weight:600}
 .exp-group{margin-top:48px}
 .exp-group + .exp-group{margin-top:52px}
-.exp-group-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
+.exp-group-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
 .exp-list{list-style:none;margin-top:6px}
 .exp-item{padding:24px 0;border-bottom:1px solid var(--line)}
 .exp-item:last-child{border-bottom:0}
 .exp-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.exp-role{font-size:16px;font-weight:600;color:var(--white);font-family:'Chakra Petch',sans-serif}
+.exp-role{font-size:16px;font-weight:600;color:var(--ink);font-family:'Chakra Petch',sans-serif}
 .exp-org{font-size:13.5px;color:var(--orange);margin-top:3px}
-.exp-dates{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);white-space:nowrap}
-.exp-bullets{margin-top:12px;padding-left:18px;color:var(--text-dim);font-size:14px;line-height:1.65}
+.exp-dates{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint);white-space:nowrap}
+.exp-bullets{margin-top:12px;padding-left:18px;color:var(--ink-dim);font-size:14px;line-height:1.65}
 .exp-bullets li{margin-top:6px}
-.exp-bullets b{color:var(--text);font-weight:600}
+.exp-bullets b{color:var(--ink);font-weight:600}
 .edu-list{margin-top:6px;display:flex;flex-direction:column}
 .edu-item{padding:18px 0;border-bottom:1px solid var(--line)}
 .edu-item:last-child{border-bottom:0}
-.edu-deg{font-weight:600;color:var(--white);font-family:'Chakra Petch',sans-serif;font-size:15.5px}
-.edu-school{color:var(--text-dim);font-size:14px;margin-top:3px}
-.edu-meta{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-faint);margin-top:8px;line-height:1.6}
+.edu-deg{font-weight:600;color:var(--ink);font-family:'Chakra Petch',sans-serif;font-size:15.5px}
+.edu-school{color:var(--ink-dim);font-size:14px;margin-top:3px}
+.edu-meta{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);margin-top:8px;line-height:1.6}
 
 /* ---------- publications ---------- */
 .pub-links{margin-top:36px;display:flex;gap:18px;flex-wrap:wrap}
-.pub-links a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text-dim);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:7px 15px;transition:.15s}
+.pub-links a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-dim);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:7px 15px;transition:.15s;background:var(--surface)}
 .pub-links a:hover{color:var(--orange);border-color:var(--orange-dim-2)}
 .pub-group{margin-top:44px}
 .pub-group + .pub-group{margin-top:52px}
-.pub-group-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pub-group-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
 .pub-list{list-style:none;margin-top:6px}
 .pub-item{padding:22px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .pub-item:last-child{border-bottom:0}
-.pub-cite{font-size:14.5px;color:var(--text);max-width:62ch;line-height:1.65}
-.pub-cite i{color:var(--text-dim);font-style:italic}
+.pub-cite{font-size:14.5px;color:var(--ink);max-width:62ch;line-height:1.65}
+.pub-cite i{color:var(--ink-dim);font-style:italic}
 .pub-meta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
-.pub-status{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--text-faint);white-space:nowrap}
+.pub-status{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--ink-faint);white-space:nowrap}
 .pub-status.published{color:var(--orange);border-color:var(--orange-dim-2);background:var(--orange-dim)}
-.pub-bib summary{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-faint);cursor:pointer;list-style:none;user-select:none}
+.pub-bib summary{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);cursor:pointer;list-style:none;user-select:none}
 .pub-bib summary::-webkit-details-marker{display:none}
+.pub-bib summary::before{content:'{ } ';color:var(--ink-faint)}
 .pub-bib summary:hover{color:var(--orange)}
-.pub-bib summary::before{content:'{ } ';color:var(--text-faint)}
 .pub-bib[open] summary{color:var(--orange)}
-.pub-bib pre{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);background:var(--surface-3);border:1px solid var(--line);border-radius:8px;padding:14px 16px;max-width:440px;white-space:pre-wrap;line-height:1.55}
-.pub-note{font-size:13px;color:var(--text-faint);font-style:italic}
+.pub-bib pre{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-dim);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;max-width:440px;white-space:pre-wrap;line-height:1.55}
+.pub-note{font-size:13px;color:var(--ink-faint);font-style:italic}
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:64px 0 80px;margin-top:0}
+footer{border-top:1px solid var(--line-strong);padding:64px 0 80px;position:relative}
 .foot-grid{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:30px}
-footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(1.6rem,4vw,2.6rem);color:var(--white);max-width:14ch;line-height:1.05}
+footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(1.5rem,3.6vw,2.4rem);color:var(--ink);max-width:14ch;line-height:1.1}
 .foot-links{display:flex;flex-direction:column;gap:12px}
-.foot-links a{color:var(--text-dim);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;transition:.2s;display:flex;gap:10px;align-items:center}
+.foot-links a{color:var(--ink-dim);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;transition:.2s;display:flex;gap:10px;align-items:center}
 .foot-links a:hover{color:var(--orange)}
-.foot-links a .k{color:var(--text-faint);width:18px}
-.copyright{margin-top:48px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-faint);letter-spacing:.05em;text-transform:uppercase}
+.foot-links a .k{color:var(--ink-faint);width:18px}
+.copyright{margin-top:48px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);letter-spacing:.05em;text-transform:uppercase}
+.foot-corner{position:absolute;width:7px;height:7px;background:var(--orange)}
+.foot-corner.left{left:28px;bottom:24px}
+.foot-corner.right{right:28px;bottom:24px}
 
 /* ---------- scroll reveal ---------- */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
@@ -209,16 +257,39 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
 </head>
 <body>
 
+<div class="grid-lines" aria-hidden="true"><i></i><i></i></div>
+
+<!-- ============ ICON SPRITE — edit paths here to restyle icons everywhere ============ -->
+<svg style="display:none" aria-hidden="true">
+<defs>
+  <symbol id="icon-wave" viewBox="0 0 24 24"><path d="M1 12c1.6-4.2 3.7-4.2 5.3 0s3.7 4.2 5.3 0 3.7-4.2 5.3 0 3.7 4.2 5.3 0"/></symbol>
+  <symbol id="icon-loop" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></symbol>
+  <symbol id="icon-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><line x1="9" y1="2" x2="9" y2="6"/><line x1="15" y1="2" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="22"/><line x1="15" y1="18" x2="15" y2="22"/><line x1="2" y1="9" x2="6" y2="9"/><line x1="2" y1="15" x2="6" y2="15"/><line x1="18" y1="9" x2="22" y2="9"/><line x1="18" y1="15" x2="22" y2="15"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l1.3-1.7A1.8 1.8 0 0 1 9.7 3.6h4.6a1.8 1.8 0 0 1 1.4.7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.4"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-bow" viewBox="0 0 24 24"><path d="M6 2a16 16 0 0 1 0 20"/><line x1="6" y1="12" x2="22" y2="12"/><polyline points="18 8 22 12 18 16"/></symbol>
+  <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></symbol>
+  <symbol id="icon-dumbbell" viewBox="0 0 24 24"><rect x="1" y="9" width="3" height="6" rx="1"/><rect x="20" y="9" width="3" height="6" rx="1"/><rect x="5" y="7" width="2.5" height="10" rx="1"/><rect x="16.5" y="7" width="2.5" height="10" rx="1"/><line x1="7.5" y1="12" x2="16.5" y2="12"/></symbol>
+  <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M12 21c0-9.5 4-14 9-16-1 8.5-3.5 14-9 16z"/><path d="M12 21c0-9.5-4-14-9-16 1 8.5 3.5 14 9 16z"/><line x1="12" y1="21" x2="12" y2="10"/></symbol>
+  <symbol id="icon-gauge" viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0"/><line x1="12" y1="18" x2="16" y2="11"/><line x1="4" y1="18" x2="2.5" y2="18"/><line x1="20" y1="18" x2="21.5" y2="18"/></symbol>
+  <symbol id="icon-droplet" viewBox="0 0 24 24"><circle cx="6" cy="14" r="2"/><circle cx="12" cy="9" r="2.6"/><circle cx="18" cy="15" r="1.8"/><circle cx="12" cy="18" r="1.4"/></symbol>
+  <symbol id="icon-cube" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5"/><line x1="12" y1="12" x2="12" y2="22"/></symbol>
+  <symbol id="icon-arm" viewBox="0 0 24 24"><circle cx="4" cy="20" r="1.6"/><line x1="4" y1="20" x2="9" y2="11"/><circle cx="9" cy="11" r="1.6"/><line x1="9" y1="11" x2="17" y2="7"/><circle cx="17" cy="7" r="1.6"/><line x1="17" y1="7" x2="21" y2="13"/></symbol>
+  <symbol id="icon-browser" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><circle cx="5.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="8" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></symbol>
+</defs>
+</svg>
+
 <header>
   <div class="bar">
-    <div class="brand"><span class="dot"></span> M. DURANGO</div>
+    <div class="brand"><span class="dot"></span> MARVIN DURANGO COGOLLO</div>
     <nav>
       <a href="#stack">Stack</a>
       <a href="#work">Work</a>
       <a href="#caps">Capabilities</a>
       <a href="#resume">Resume</a>
       <a href="#publications">Publications</a>
-      <a href="#contact">Contact</a>
+      <a href="#beyond">Beyond</a>
+      <a href="#contact" class="btn-nav">Contact</a>
     </nav>
   </div>
 </header>
@@ -227,27 +298,46 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <div class="eyebrow mono">Digital Twin Engineer · Simulation × Control × IoT × XR</div>
-    <h1>
-      <span style="animation-delay:.1s">I build </span><br>
-      <span class="hl" style="animation-delay:.22s">digital twins</span>
-      <span style="animation-delay:.34s"> of complex physical systems.</span>
-    </h1>
-    <p class="lede">
-      <!-- [EDIT] tweak your positioning line if you'd like -->
-      From the <b>governing physics</b>, through <b>state estimation and control</b>,
-      to <b>real-time IoT pipelines</b> and <b>immersive XR interfaces</b> — I connect the
-      layers most engineers only touch one of. The integration is the hard part. That's what I do.
-    </p>
-    <div class="hero-cta">
-      <a class="btn primary" href="#work">View selected work →</a>
-      <!-- [EDIT] link your CV file -->
-      <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download CV</a>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow mono">Digital Twin Engineer · Simulation × Control × IoT × XR</div>
+        <h1>
+          I build <span class="hl">digital twins</span> of complex physical systems.
+        </h1>
+        <p class="lede">
+          <!-- [EDIT] tweak your positioning line if you'd like -->
+          From the <b>governing physics</b>, through <b>state estimation and control</b>,
+          to <b>real-time IoT pipelines</b> and <b>immersive XR interfaces</b> — I connect the
+          layers most engineers only touch one of. The integration is the hard part. That's what I do.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#work">View selected work →</a>
+          <!-- [EDIT] link your CV file -->
+          <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download CV</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <!-- [EDIT] YOUR PHOTO — replace this whole .photo-ph div with:
+             <img src="your-photo.jpg" alt="Marvin Durango"> -->
+        <div class="photo-ph"><svg class="icon icon-lg"><use href="#icon-camera"/></svg>YOUR PHOTO<br>220×220</div>
+      </div>
     </div>
   </section>
+</div>
 
+<!-- ============ STATS STRIP ============ -->
+<div class="stats-strip">
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label mono">— years in fluid-power research</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label mono">— stack-spanning projects</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label mono">— papers &amp; conference talks</div></div>
+    <div class="stat"><div class="stat-num">&lt;7%</div><div class="stat-label mono">— twin tracking error</div></div>
+  </div>
+</div>
+
+<div class="wrap">
   <!-- ============ LENS / ROLE TOGGLE ============ -->
-  <div class="lens">
+  <div class="lens" style="margin:0 -28px">
     <div class="lens-row">
       <span class="lens-label mono">VIEW THROUGH THE LENS OF:</span>
       <div class="seg" id="seg">
@@ -266,6 +356,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
 
     <div class="stack-diagram">
       <div class="layer">
+        <div class="layer-icon"><svg class="icon"><use href="#icon-wave"/></svg></div>
         <div class="layer-head"><span class="layer-num mono">L1</span><h3>Physics</h3></div>
         <p>The governing equations of the asset — fluid dynamics, structural response, friction. Where the model earns the right to be trusted.</p>
         <div class="layer-tools">
@@ -273,6 +364,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         </div>
       </div>
       <div class="layer">
+        <div class="layer-icon"><svg class="icon"><use href="#icon-loop"/></svg></div>
         <div class="layer-head"><span class="layer-num mono">L2</span><h3>Estimation &amp; Control</h3></div>
         <p>Turning noisy, partial sensor data into a trustworthy state — and turning that state into action.</p>
         <div class="layer-tools">
@@ -280,6 +372,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         </div>
       </div>
       <div class="layer">
+        <div class="layer-icon"><svg class="icon"><use href="#icon-chip"/></svg></div>
         <div class="layer-head"><span class="layer-num mono">L3</span><h3>IoT / Edge</h3></div>
         <p>Getting the physical asset and the model talking to each other in real time, reliably, on hardware that's actually in the room.</p>
         <div class="layer-tools">
@@ -287,6 +380,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         </div>
       </div>
       <div class="layer">
+        <div class="layer-icon"><svg class="icon"><use href="#icon-eye"/></svg></div>
         <div class="layer-head"><span class="layer-num mono">L4</span><h3>XR / Visualization</h3></div>
         <p>Making the invisible state of a system visible and touchable — for an operator, a reviewer, or a recruiter.</p>
         <div class="layer-tools">
@@ -306,7 +400,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       <!-- FEATURE PROJECT -->
       <article class="card feature" data-lens="modeling automation">
         <!-- MEDIA SLOT: replace with a looping screen-capture of your live HydroLab Flask dashboard -->
-        <div class="media-ph"><span class="ico">▶</span> MEDIA SLOT · live dashboard loop / bench video</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-gauge"/></svg><span>MEDIA SLOT · live dashboard loop / bench video</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 01 · FLAGSHIP</div>
           <h3>Hydraulic Manipulator Digital Twin</h3>
@@ -320,84 +414,78 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
 
       <article class="card" data-lens="modeling">
         <!-- MEDIA SLOT: SPH particle render / flow animation -->
-        <div class="media-ph"><span class="ico">≈</span> MEDIA SLOT · SPH flow render</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-droplet"/></svg><span>MEDIA SLOT · SPH flow render</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 02</div>
           <h3>Spool Valve SPH Simulation</h3>
           <p class="problem">GPU-accelerated <b>Smoothed Particle Hydrodynamics</b> of internal flow in a hydraulic spool valve, validated experimentally. Presented — ASME/BATH FPMC 2023.</p>
           <p class="result"><span>Outcome:</span> peer-reviewed proof I can run serious computational modeling and ground it in real data.</p>
           <div class="layer-tags"><span class="lt on">Physics</span><span class="lt">Control</span><span class="lt">IoT</span><span class="lt">Viz</span></div>
-          <!-- [EDIT] link the paper -->
           <div class="meta"><a href="#publications">see publications →</a></div>
         </div>
       </article>
 
       <article class="card" data-lens="modeling automation">
         <!-- MEDIA SLOT: Unity clip of cloth / soft-body deformation -->
-        <div class="media-ph"><span class="ico">❖</span> MEDIA SLOT · XPBD soft-body clip</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-cube"/></svg><span>MEDIA SLOT · XPBD soft-body clip</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 03</div>
           <h3>Real-Time Physics — XPBD in Unity</h3>
           <p class="problem">Real-time soft-body and deformable-body simulation in Unity built on <b>XPBD</b> (Extended Position-Based Dynamics) with energy-derived, neo-Hookean constraints — paired with an <b>OpenGL</b> course (rendering pipeline up, not engine-down).</p>
           <p class="result"><span>Outcome:</span> the real-time, interactive counterpart to my offline CFD/SPH work — fast, stable physics a twin can actually run live.</p>
           <div class="layer-tags"><span class="lt on">Physics</span><span class="lt">Control</span><span class="lt">IoT</span><span class="lt on">Viz</span></div>
-          <!-- [EDIT] link a demo reel -->
           <div class="meta"><a href="#">demos →</a></div>
         </div>
       </article>
 
       <article class="card" data-lens="modeling automation">
         <!-- MEDIA SLOT: pneumatic teleoperation demo -->
-        <div class="media-ph"><span class="ico">◷</span> MEDIA SLOT · pneumatic twin demo</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-gauge"/></svg><span>MEDIA SLOT · pneumatic twin demo</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 04</div>
           <h3>Pneumatic Digital Twin</h3>
           <p class="problem">A teleoperation-ready twin built on a <b>hybrid EKF + machine-learning</b> approach. The proof-of-concept that scaled into the hydraulic platform. Under review.</p>
           <p class="result"><span>Outcome:</span> showed the method generalizes across actuation domains, not a one-off.</p>
           <div class="layer-tags"><span class="lt on">Physics</span><span class="lt on">Control</span><span class="lt on">IoT</span><span class="lt">Viz</span></div>
-          <!-- [EDIT] link the paper once accepted -->
           <div class="meta"><a href="#publications">see publications →</a></div>
         </div>
       </article>
 
       <article class="card" data-lens="automation">
         <!-- MEDIA SLOT: Unity clip of FABRIK + RRT* crane -->
-        <div class="media-ph"><span class="ico">✦</span> MEDIA SLOT · Unity crane control clip</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-arm"/></svg><span>MEDIA SLOT · Unity crane control clip</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 05</div>
           <h3>Crane Control — FABRIK IK + RRT*</h3>
           <p class="problem">In <b>Unity</b>: a FABRIK inverse-kinematics solver fused with RRT* path planning for collision-free control of a robotic crane/manipulator.</p>
           <p class="result"><span>Outcome:</span> bridges motion planning and real-time 3D — the robotics + XR side of the stack.</p>
           <div class="layer-tags"><span class="lt">Physics</span><span class="lt on">Control</span><span class="lt">IoT</span><span class="lt on">Viz</span></div>
-          <!-- [EDIT] link a demo reel -->
           <div class="meta"><a href="#">demo →</a></div>
         </div>
       </article>
 
       <article class="card" data-lens="automation">
         <!-- MEDIA SLOT: HoloLens / MR smart-factory walkthrough -->
-        <div class="media-ph"><span class="ico">⬡</span> MEDIA SLOT · MR smart manufacturing</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-eye"/></svg><span>MEDIA SLOT · MR smart manufacturing</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 06</div>
           <h3>Mixed Reality Smart Manufacturing</h3>
           <p class="problem">Designed <b>mixed-reality environments</b> for a smart learning factory — robotic arms, conveyors and AGVs — connecting shop-floor assets to immersive interfaces.</p>
           <p class="result"><span>Outcome:</span> industrial-grade XR + IoT integration, taught and deployed in coursework.</p>
           <div class="layer-tags"><span class="lt">Physics</span><span class="lt">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
-          <!-- [EDIT] link an overview / writeup -->
           <div class="meta"><a href="#">overview →</a></div>
         </div>
       </article>
 
       <article class="card" data-lens="modeling automation">
         <!-- MEDIA SLOT: screenshots of your live web apps -->
-        <div class="media-ph"><span class="ico">⊞</span> MEDIA SLOT · web app screens</div>
+        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-browser"/></svg><span>MEDIA SLOT · web app screens</span></div>
         <div class="card-body">
           <div class="card-idx">PROJECT 07</div>
           <h3>Shipped Web App Ecosystem</h3>
           <p class="problem">A set of <b>production PWAs</b> I built and actually use daily — trackers syncing to Google Sheets via Apps Script, offline-first, hosted on GitHub Pages.</p>
           <p class="result"><span>Outcome:</span> proof I ship and maintain real software end-to-end, not just lab demos.</p>
           <div class="layer-tags"><span class="lt">Physics</span><span class="lt">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
-          <!-- [EDIT] link the live apps -->
           <div class="meta"><a href="#">live →</a></div>
         </div>
       </article>
@@ -410,11 +498,11 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
     <div class="sec-head"><span class="tag">03 / toolkit</span><h2>Capabilities</h2></div>
     <p class="sec-sub">The supporting depth behind the integration.</p>
     <div class="caps">
-      <span class="cap"><b>sim</b>CFD · SPH · CFD-DEM · XPBD</span>
-      <span class="cap"><b>ctrl</b>EKF · Stribeck/LuGre friction · feedback control</span>
-      <span class="cap"><b>iot</b>Raspberry Pi · Modbus/RS-485 · Firebase · Flask</span>
-      <span class="cap"><b>xr</b>Unity · Mixed Reality</span>
-      <span class="cap"><b>gfx</b>OpenGL · shaders · render pipeline</span>
+      <span class="cap"><svg class="icon"><use href="#icon-wave"/></svg><span><b>sim</b>CFD · SPH · CFD-DEM · XPBD</span></span>
+      <span class="cap"><svg class="icon"><use href="#icon-loop"/></svg><span><b>ctrl</b>EKF · Stribeck/LuGre friction · feedback control</span></span>
+      <span class="cap"><svg class="icon"><use href="#icon-chip"/></svg><span><b>iot</b>Raspberry Pi · Modbus/RS-485 · Firebase · Flask</span></span>
+      <span class="cap"><svg class="icon"><use href="#icon-eye"/></svg><span><b>xr</b>Unity · Mixed Reality</span></span>
+      <span class="cap"><svg class="icon"><use href="#icon-cube"/></svg><span><b>gfx</b>OpenGL · shaders · render pipeline</span></span>
       <!-- [EDIT] add/remove chips as needed -->
     </div>
   </section>
@@ -429,7 +517,6 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
     </p>
 
     <div class="hero-cta" style="margin-top:26px">
-      <!-- [EDIT] same CV file as the hero button — keep both pointing to the same PDF -->
       <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download full CV (PDF) →</a>
     </div>
 
@@ -656,18 +743,49 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
     </div>
   </section>
 
+  <!-- ============ BEYOND THE LAB ============ -->
+  <section id="beyond" class="reveal">
+    <div class="sec-head"><span class="tag">06 / outside the lab</span><h2>Beyond the lab</h2></div>
+    <p class="sec-sub">The other systems I tend to, just without the state equations.</p>
+
+    <div class="beyond-grid">
+      <div class="beyond-card">
+        <svg class="icon icon-lg"><use href="#icon-bow"/></svg>
+        <h3>Archery</h3>
+        <p>Target archery most weekends — the same patience and repeatable form a good experiment needs.</p>
+      </div>
+      <div class="beyond-card">
+        <svg class="icon icon-lg"><use href="#icon-mic"/></svg>
+        <h3>Podcast</h3>
+        <p>Co-host of a podcast for Latino grad students about the human side of the PhD.</p>
+      </div>
+      <div class="beyond-card">
+        <svg class="icon icon-lg"><use href="#icon-dumbbell"/></svg>
+        <h3>Gym</h3>
+        <p>A non-negotiable training day every week — rain, deadline, or defense season.</p>
+      </div>
+      <div class="beyond-card">
+        <svg class="icon icon-lg"><use href="#icon-leaf"/></svg>
+        <h3>Tropical plants</h3>
+        <p>A growing indoor jungle — the one system I tend without writing a single state equation for it.</p>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <!-- ============ FOOTER / CONTACT ============ -->
 <footer id="contact">
+  <span class="foot-corner left"></span>
+  <span class="foot-corner right"></span>
   <div class="wrap">
     <div class="foot-grid">
       <h2>Let's talk about where a twin like this fits on your team.</h2>
       <div class="foot-links">
-        <!-- [EDIT] swap in your real links -->
         <a href="mailto:mdurango@purdue.edu"><span class="k">↳</span> mdurango@purdue.edu</a>
         <a href="https://github.com/mrdurangoc" target="_blank" rel="noopener"><span class="k">↳</span> github.com/mrdurangoc</a>
         <a href="https://www.linkedin.com/in/marvin-durango-cogollo" target="_blank" rel="noopener"><span class="k">↳</span> linkedin.com/in/marvin-durango-cogollo</a>
+        <!-- [EDIT] claim your ResearchGate profile first, then swap this link in -->
         <a href="#" target="_blank" rel="noopener"><span class="k">↳</span> researchgate.net/profile/your-handle</a>
       </div>
     </div>
