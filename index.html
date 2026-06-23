@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marvin Durango — Digital Twin Engineer</title>
+<meta name="description" content="Digital Twin Engineer · Simulation × Control × IoT × XR. PhD candidate, Purdue University.">
+
+<!-- ============================================================
+     HOW TO USE THIS FILE
+     - Search for [EDIT] comments: every place you need to swap in
+       your own links, copy, or contact info.
+     - Search for MEDIA SLOT: replace each <div class="media-ph">
+       with a <video> loop, a GIF, or an <iframe> of a live dashboard.
+       Visual-first is your edge — prioritize the XPBD soft-body
+       clips and the live HydroLab dashboard loop.
+     - Drop this file as index.html at the root of mrdurangoc.github.io
+       and it goes live as-is. No build step, no dependencies besides
+       the two Google Fonts links below.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0a09;
+  --surface:#141210;
+  --surface-2:#1a1714;
+  --surface-3:#100f0d;
+  --line:#2a2620;
+  --text:#e9e5df;
+  --text-dim:#9b938a;
+  --text-faint:#615a51;
+  --white:#f7f5f2;
+  --orange:#ff5e1a;
+  --orange-2:#ff7a3d;
+  --orange-dim:rgba(255,94,26,0.12);
+  --orange-dim-2:rgba(255,94,26,0.24);
+  --radius:10px;
+  --maxw:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important}
+}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:'Chakra Petch',sans-serif;color:var(--white);letter-spacing:-0.01em}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(11,10,9,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.05em;color:var(--white);display:flex;align-items:center;gap:9px;text-transform:uppercase}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange)}
+nav{display:flex;gap:26px}
+nav a{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .15s}
+nav a:hover{color:var(--orange)}
+@media (max-width:700px){nav{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:96px 0 56px}
+.eyebrow{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);border:1px solid var(--orange-dim-2);background:var(--orange-dim);padding:6px 14px;border-radius:20px;margin-bottom:26px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.12;font-weight:700;max-width:16ch}
+.hero h1 span{display:inline;opacity:0;animation:riseIn .6s ease forwards}
+.hero h1 .hl{color:var(--orange)}
+@keyframes riseIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.lede{margin-top:22px;font-size:17px;color:var(--text-dim);max-width:58ch;line-height:1.65}
+.lede b{color:var(--text);font-weight:600}
+.hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:13px 22px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+.btn.primary{background:var(--orange);color:#1a0900;font-weight:500}
+.btn.primary:hover{background:var(--orange-2);box-shadow:0 0 24px var(--orange-dim-2)}
+.btn.ghost{border:1px solid var(--line);color:var(--text)}
+.btn.ghost:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ---------- lens toggle ---------- */
+.lens{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.lens-row{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.lens-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.03em;background:transparent;color:var(--text-dim);border:0;padding:9px 16px;cursor:pointer;transition:.15s;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button:hover{color:var(--text)}
+.seg button.active{background:var(--orange-dim);color:var(--orange)}
+.lens-note{font-size:13px;color:var(--text-faint);margin-left:auto}
+@media (max-width:700px){.lens-note{margin-left:0;width:100%}}
+
+/* ---------- shared section heads ---------- */
+section{padding:88px 0}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.sec-head h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:600}
+.sec-sub{margin-top:10px;color:var(--text-dim);max-width:56ch;font-size:15px}
+
+/* ---------- stack diagram ---------- */
+.stack-diagram{margin-top:48px;position:relative;padding-left:34px}
+.stack-diagram::before{content:'';position:absolute;left:11px;top:10px;bottom:10px;width:1px;background:linear-gradient(var(--orange),var(--line))}
+.layer{position:relative;padding:0 0 36px 28px;border-bottom:1px dashed var(--line)}
+.layer:last-child{border-bottom:0;padding-bottom:0}
+.layer::before{content:'';position:absolute;left:-34px;top:4px;width:23px;height:23px;border-radius:50%;background:var(--bg);border:1px solid var(--orange);box-shadow:0 0 0 4px var(--bg)}
+.layer-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.layer-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint)}
+.layer h3{font-size:19px;font-weight:600}
+.layer p{margin-top:8px;color:var(--text-dim);max-width:60ch;font-size:14.5px}
+.layer-tools{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.lt-chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);border:1px solid var(--line);border-radius:20px;padding:4px 11px}
+
+/* ---------- work grid ---------- */
+.grid{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column}
+.card:hover{border-color:var(--orange-dim-2);box-shadow:0 0 28px rgba(255,94,26,0.08)}
+.card.feature{grid-column:1 / -1}
+.card.hide{display:none}
+.media-ph{aspect-ratio:16/8;background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 10px,var(--surface-3) 10px,var(--surface-3) 20px);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;font-size:12.5px;border-bottom:1px solid var(--line)}
+.card.feature .media-ph{aspect-ratio:16/6}
+.media-ph .ico{font-size:16px;color:var(--orange)}
+.card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.card-idx{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange)}
+.card h3{font-size:18px;font-weight:600;margin-top:8px}
+.problem{margin-top:10px;font-size:14px;color:var(--text-dim);line-height:1.6}
+.problem b{color:var(--text);font-weight:600}
+.result{margin-top:10px;font-size:14px;color:var(--text-dim)}
+.result span{color:var(--orange);font-weight:500}
+.layer-tags{margin-top:16px;display:flex;gap:6px;flex-wrap:wrap}
+.lt{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line);color:var(--text-faint);padding:4px 9px;border-radius:20px}
+.lt.on{color:var(--orange);border-color:var(--orange-dim-2);background:var(--orange-dim)}
+.meta{margin-top:auto;padding-top:16px}
+.meta a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text-dim);text-decoration:none;transition:.15s}
+.meta a:hover{color:var(--orange)}
+
+/* ---------- capabilities ---------- */
+.caps{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:12px 18px;background:var(--surface);transition:.2s}
+.cap:hover{border-color:var(--orange);color:var(--orange);box-shadow:0 0 20px rgba(255,94,26,0.08)}
+.cap b{color:var(--text-faint);font-weight:400;margin-right:8px;text-transform:uppercase;letter-spacing:.04em}
+
+/* ---------- resume ---------- */
+.resume-summary{margin-top:36px;font-size:15px;color:var(--text-dim);max-width:70ch;line-height:1.7}
+.resume-summary b{color:var(--text);font-weight:600}
+.exp-group{margin-top:48px}
+.exp-group + .exp-group{margin-top:52px}
+.exp-group-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
+.exp-list{list-style:none;margin-top:6px}
+.exp-item{padding:24px 0;border-bottom:1px solid var(--line)}
+.exp-item:last-child{border-bottom:0}
+.exp-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.exp-role{font-size:16px;font-weight:600;color:var(--white);font-family:'Chakra Petch',sans-serif}
+.exp-org{font-size:13.5px;color:var(--orange);margin-top:3px}
+.exp-dates{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);white-space:nowrap}
+.exp-bullets{margin-top:12px;padding-left:18px;color:var(--text-dim);font-size:14px;line-height:1.65}
+.exp-bullets li{margin-top:6px}
+.exp-bullets b{color:var(--text);font-weight:600}
+.edu-list{margin-top:6px;display:flex;flex-direction:column}
+.edu-item{padding:18px 0;border-bottom:1px solid var(--line)}
+.edu-item:last-child{border-bottom:0}
+.edu-deg{font-weight:600;color:var(--white);font-family:'Chakra Petch',sans-serif;font-size:15.5px}
+.edu-school{color:var(--text-dim);font-size:14px;margin-top:3px}
+.edu-meta{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-faint);margin-top:8px;line-height:1.6}
+
+/* ---------- publications ---------- */
+.pub-links{margin-top:36px;display:flex;gap:18px;flex-wrap:wrap}
+.pub-links a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text-dim);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:7px 15px;transition:.15s}
+.pub-links a:hover{color:var(--orange);border-color:var(--orange-dim-2)}
+.pub-group{margin-top:44px}
+.pub-group + .pub-group{margin-top:52px}
+.pub-group-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pub-list{list-style:none;margin-top:6px}
+.pub-item{padding:22px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.pub-item:last-child{border-bottom:0}
+.pub-cite{font-size:14.5px;color:var(--text);max-width:62ch;line-height:1.65}
+.pub-cite i{color:var(--text-dim);font-style:italic}
+.pub-meta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.pub-status{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--text-faint);white-space:nowrap}
+.pub-status.published{color:var(--orange);border-color:var(--orange-dim-2);background:var(--orange-dim)}
+.pub-bib summary{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-faint);cursor:pointer;list-style:none;user-select:none}
+.pub-bib summary::-webkit-details-marker{display:none}
+.pub-bib summary:hover{color:var(--orange)}
+.pub-bib summary::before{content:'{ } ';color:var(--text-faint)}
+.pub-bib[open] summary{color:var(--orange)}
+.pub-bib pre{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);background:var(--surface-3);border:1px solid var(--line);border-radius:8px;padding:14px 16px;max-width:440px;white-space:pre-wrap;line-height:1.55}
+.pub-note{font-size:13px;color:var(--text-faint);font-style:italic}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:64px 0 80px;margin-top:0}
+.foot-grid{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:30px}
+footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(1.6rem,4vw,2.6rem);color:var(--white);max-width:14ch;line-height:1.05}
+.foot-links{display:flex;flex-direction:column;gap:12px}
+.foot-links a{color:var(--text-dim);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;transition:.2s;display:flex;gap:10px;align-items:center}
+.foot-links a:hover{color:var(--orange)}
+.foot-links a .k{color:var(--text-faint);width:18px}
+.copyright{margin-top:48px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-faint);letter-spacing:.05em;text-transform:uppercase}
+
+/* ---------- scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="brand"><span class="dot"></span> M. DURANGO</div>
+    <nav>
+      <a href="#stack">Stack</a>
+      <a href="#work">Work</a>
+      <a href="#caps">Capabilities</a>
+      <a href="#resume">Resume</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="eyebrow mono">Digital Twin Engineer · Simulation × Control × IoT × XR</div>
+    <h1>
+      <span style="animation-delay:.1s">I build </span><br>
+      <span class="hl" style="animation-delay:.22s">digital twins</span>
+      <span style="animation-delay:.34s"> of complex physical systems.</span>
+    </h1>
+    <p class="lede">
+      <!-- [EDIT] tweak your positioning line if you'd like -->
+      From the <b>governing physics</b>, through <b>state estimation and control</b>,
+      to <b>real-time IoT pipelines</b> and <b>immersive XR interfaces</b> — I connect the
+      layers most engineers only touch one of. The integration is the hard part. That's what I do.
+    </p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#work">View selected work →</a>
+      <!-- [EDIT] link your CV file -->
+      <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download CV</a>
+    </div>
+  </section>
+
+  <!-- ============ LENS / ROLE TOGGLE ============ -->
+  <div class="lens">
+    <div class="lens-row">
+      <span class="lens-label mono">VIEW THROUGH THE LENS OF:</span>
+      <div class="seg" id="seg">
+        <button class="active" data-lens="all">All work</button>
+        <button data-lens="modeling">Computational Modeling</button>
+        <button data-lens="automation">Automation / Robotics</button>
+      </div>
+      <span class="lens-note mono" id="lensNote">Showing every project across all four layers.</span>
+    </div>
+  </div>
+
+  <!-- ============ THE STACK ============ -->
+  <section id="stack" class="reveal">
+    <div class="sec-head"><span class="tag">01 / system</span><h2>The full stack of a digital twin</h2></div>
+    <p class="sec-sub">Most people specialize in one band. Each project below shows where it sits — and the work that actually matters happens at the seams between layers.</p>
+
+    <div class="stack-diagram">
+      <div class="layer">
+        <div class="layer-head"><span class="layer-num mono">L1</span><h3>Physics</h3></div>
+        <p>The governing equations of the asset — fluid dynamics, structural response, friction. Where the model earns the right to be trusted.</p>
+        <div class="layer-tools">
+          <span class="lt-chip">ODEs / PDEs</span><span class="lt-chip">CFD</span><span class="lt-chip">SPH</span><span class="lt-chip">XPBD</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-head"><span class="layer-num mono">L2</span><h3>Estimation &amp; Control</h3></div>
+        <p>Turning noisy, partial sensor data into a trustworthy state — and turning that state into action.</p>
+        <div class="layer-tools">
+          <span class="lt-chip">Extended Kalman Filter</span><span class="lt-chip">Stribeck / LuGre friction</span><span class="lt-chip">Feedback control</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-head"><span class="layer-num mono">L3</span><h3>IoT / Edge</h3></div>
+        <p>Getting the physical asset and the model talking to each other in real time, reliably, on hardware that's actually in the room.</p>
+        <div class="layer-tools">
+          <span class="lt-chip">Raspberry Pi</span><span class="lt-chip">DAQ / Modbus / RS-485</span><span class="lt-chip">Firebase</span><span class="lt-chip">Flask</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-head"><span class="layer-num mono">L4</span><h3>XR / Visualization</h3></div>
+        <p>Making the invisible state of a system visible and touchable — for an operator, a reviewer, or a recruiter.</p>
+        <div class="layer-tools">
+          <span class="lt-chip">Unity</span><span class="lt-chip">HoloLens 2 / Mixed Reality</span><span class="lt-chip">Live dashboards</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SELECTED WORK ============ -->
+  <section id="work" class="reveal">
+    <div class="sec-head"><span class="tag">02 / work</span><h2>Selected work</h2></div>
+    <p class="sec-sub">Each project shows which layers of the stack it spans. Filter by lens above to match the role you're reading for.</p>
+
+    <div class="grid" id="grid">
+
+      <!-- FEATURE PROJECT -->
+      <article class="card feature" data-lens="modeling automation">
+        <!-- MEDIA SLOT: replace with a looping screen-capture of your live HydroLab Flask dashboard -->
+        <div class="media-ph"><span class="ico">▶</span> MEDIA SLOT · live dashboard loop / bench video</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 01 · FLAGSHIP</div>
+          <h3>Hydraulic Manipulator Digital Twin</h3>
+          <p class="problem">A real-time twin of a Parker cylinder bench: a <b>4-state Python plant model validated against MATLAB/Simulink</b>, with an Extended Kalman Filter running on a Raspberry Pi, streaming over TCP/IP + Firebase from DAQ hardware into a live Flask dashboard. Friction fully characterized (Stribeck/LuGre).</p>
+          <p class="result"><span>Outcome:</span> end-to-end twin closing the loop from physics → estimation → edge → web, used as the core of my doctoral platform.</p>
+          <div class="layer-tags"><span class="lt on">Physics</span><span class="lt on">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
+          <!-- [EDIT] add a real repo / case study link -->
+          <div class="meta"><a href="#">repo / case study →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="modeling">
+        <!-- MEDIA SLOT: SPH particle render / flow animation -->
+        <div class="media-ph"><span class="ico">≈</span> MEDIA SLOT · SPH flow render</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 02</div>
+          <h3>Spool Valve SPH Simulation</h3>
+          <p class="problem">GPU-accelerated <b>Smoothed Particle Hydrodynamics</b> of internal flow in a hydraulic spool valve, validated experimentally. Presented — ASME/BATH FPMC 2023.</p>
+          <p class="result"><span>Outcome:</span> peer-reviewed proof I can run serious computational modeling and ground it in real data.</p>
+          <div class="layer-tags"><span class="lt on">Physics</span><span class="lt">Control</span><span class="lt">IoT</span><span class="lt">Viz</span></div>
+          <!-- [EDIT] link the paper -->
+          <div class="meta"><a href="#publications">see publications →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="modeling automation">
+        <!-- MEDIA SLOT: Unity clip of cloth / soft-body deformation -->
+        <div class="media-ph"><span class="ico">❖</span> MEDIA SLOT · XPBD soft-body clip</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 03</div>
+          <h3>Real-Time Physics — XPBD in Unity</h3>
+          <p class="problem">Real-time soft-body and deformable-body simulation in Unity built on <b>XPBD</b> (Extended Position-Based Dynamics) with energy-derived, neo-Hookean constraints — paired with an <b>OpenGL</b> course (rendering pipeline up, not engine-down).</p>
+          <p class="result"><span>Outcome:</span> the real-time, interactive counterpart to my offline CFD/SPH work — fast, stable physics a twin can actually run live.</p>
+          <div class="layer-tags"><span class="lt on">Physics</span><span class="lt">Control</span><span class="lt">IoT</span><span class="lt on">Viz</span></div>
+          <!-- [EDIT] link a demo reel -->
+          <div class="meta"><a href="#">demos →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="modeling automation">
+        <!-- MEDIA SLOT: pneumatic teleoperation demo -->
+        <div class="media-ph"><span class="ico">◷</span> MEDIA SLOT · pneumatic twin demo</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 04</div>
+          <h3>Pneumatic Digital Twin</h3>
+          <p class="problem">A teleoperation-ready twin built on a <b>hybrid EKF + machine-learning</b> approach. The proof-of-concept that scaled into the hydraulic platform. Under review.</p>
+          <p class="result"><span>Outcome:</span> showed the method generalizes across actuation domains, not a one-off.</p>
+          <div class="layer-tags"><span class="lt on">Physics</span><span class="lt on">Control</span><span class="lt on">IoT</span><span class="lt">Viz</span></div>
+          <!-- [EDIT] link the paper once accepted -->
+          <div class="meta"><a href="#publications">see publications →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="automation">
+        <!-- MEDIA SLOT: Unity clip of FABRIK + RRT* crane -->
+        <div class="media-ph"><span class="ico">✦</span> MEDIA SLOT · Unity crane control clip</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 05</div>
+          <h3>Crane Control — FABRIK IK + RRT*</h3>
+          <p class="problem">In <b>Unity</b>: a FABRIK inverse-kinematics solver fused with RRT* path planning for collision-free control of a robotic crane/manipulator.</p>
+          <p class="result"><span>Outcome:</span> bridges motion planning and real-time 3D — the robotics + XR side of the stack.</p>
+          <div class="layer-tags"><span class="lt">Physics</span><span class="lt on">Control</span><span class="lt">IoT</span><span class="lt on">Viz</span></div>
+          <!-- [EDIT] link a demo reel -->
+          <div class="meta"><a href="#">demo →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="automation">
+        <!-- MEDIA SLOT: HoloLens / MR smart-factory walkthrough -->
+        <div class="media-ph"><span class="ico">⬡</span> MEDIA SLOT · MR smart manufacturing</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 06</div>
+          <h3>Mixed Reality Smart Manufacturing</h3>
+          <p class="problem">Designed <b>mixed-reality environments</b> for a smart learning factory — robotic arms, conveyors and AGVs — connecting shop-floor assets to immersive interfaces.</p>
+          <p class="result"><span>Outcome:</span> industrial-grade XR + IoT integration, taught and deployed in coursework.</p>
+          <div class="layer-tags"><span class="lt">Physics</span><span class="lt">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
+          <!-- [EDIT] link an overview / writeup -->
+          <div class="meta"><a href="#">overview →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="modeling automation">
+        <!-- MEDIA SLOT: screenshots of your live web apps -->
+        <div class="media-ph"><span class="ico">⊞</span> MEDIA SLOT · web app screens</div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 07</div>
+          <h3>Shipped Web App Ecosystem</h3>
+          <p class="problem">A set of <b>production PWAs</b> I built and actually use daily — trackers syncing to Google Sheets via Apps Script, offline-first, hosted on GitHub Pages.</p>
+          <p class="result"><span>Outcome:</span> proof I ship and maintain real software end-to-end, not just lab demos.</p>
+          <div class="layer-tags"><span class="lt">Physics</span><span class="lt">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
+          <!-- [EDIT] link the live apps -->
+          <div class="meta"><a href="#">live →</a></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ CAPABILITIES ============ -->
+  <section id="caps" class="reveal">
+    <div class="sec-head"><span class="tag">03 / toolkit</span><h2>Capabilities</h2></div>
+    <p class="sec-sub">The supporting depth behind the integration.</p>
+    <div class="caps">
+      <span class="cap"><b>sim</b>CFD · SPH · CFD-DEM · XPBD</span>
+      <span class="cap"><b>ctrl</b>EKF · Stribeck/LuGre friction · feedback control</span>
+      <span class="cap"><b>iot</b>Raspberry Pi · Modbus/RS-485 · Firebase · Flask</span>
+      <span class="cap"><b>xr</b>Unity · Mixed Reality</span>
+      <span class="cap"><b>gfx</b>OpenGL · shaders · render pipeline</span>
+      <!-- [EDIT] add/remove chips as needed -->
+    </div>
+  </section>
+
+  <!-- ============ RESUME ============ -->
+  <section id="resume" class="reveal">
+    <div class="sec-head"><span class="tag">04 / history</span><h2>Resume</h2></div>
+    <p class="sec-sub">The formal record behind the projects above — full version available as a PDF.</p>
+
+    <p class="resume-summary">
+      Engineer and PhD candidate specializing in <b>physics-based computational modeling and digital twins</b>, with equal strength in simulation and hands-on experimentation. Builds first-principles and data-driven models — multiphysics/CFD, dynamic system simulation, discrete-event simulation, real-time state estimation — and validates them against experimental and operating data. Industry and applied work span a manufacturing-cell digital twin at Hitachi and discrete-manufacturing systems in Purdue's Smart Learning Factory.
+    </p>
+
+    <div class="hero-cta" style="margin-top:26px">
+      <!-- [EDIT] same CV file as the hero button — keep both pointing to the same PDF -->
+      <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download full CV (PDF) →</a>
+    </div>
+
+    <div class="exp-group">
+      <h3 class="exp-group-title mono">Experience</h3>
+      <ul class="exp-list">
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">R&amp;D Intern — Industrial Innovation Laboratory</div>
+              <div class="exp-org">Hitachi America, Ltd. · Farmington Hills, MI</div>
+            </div>
+            <div class="exp-dates">Jun 2023 – Jan 2024</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developed a sensor-integrated <b>digital twin prototype</b> for a manufacturing cell, enabling simulation-driven decision-making and streamlined robot commissioning.</li>
+            <li>Built discrete-event simulations of packaging processes and demand-forecasting scenarios to evaluate throughput and capacity.</li>
+            <li>Programmed UR5 collaborative-robot tasks for hybrid manufacturing workflows, increasing capacity predictability by <b>89%</b> and reducing operator fatigue by over <b>50%</b>.</li>
+          </ul>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">Graduate Researcher (PhD)</div>
+              <div class="exp-org">Purdue University · School of Engineering Technology</div>
+            </div>
+            <div class="exp-dates">Aug 2021 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developing a physics-based digital twin for hydraulically actuated serial manipulators, coupling first-principles dynamic models with real-time sensor data for online state estimation and condition monitoring.</li>
+            <li>Implemented a 4-state <b>Extended Kalman Filter</b> deployed on embedded hardware for real-time estimation; identified nonlinear (Stribeck) friction parameters from experimental data.</li>
+            <li>Designed and instrumented a hydraulic test bench and validated model predictions against measured data (<b>&lt;7% tracking error</b>) across multiple operating conditions.</li>
+            <li>Contributes to Purdue's Smart Learning Factory, applying digital-twin and simulation methods to discrete manufacturing systems (robotic cells, conveyors, AGVs).</li>
+          </ul>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">Instructor / Graduate Teaching Assistant</div>
+              <div class="exp-org">Purdue University · School of Engineering Technology</div>
+            </div>
+            <div class="exp-dates">2021 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Instructor of record (Fall 2025) for <b>Mixed Reality Smart Manufacturing</b> and <b>AI &amp; Mixed Reality for Manufacturing</b> — a project-based course where students build digital twins of a full discrete-manufacturing line in Purdue Polytechnic's flagship learning factory.</li>
+            <li>Instructor / TA for Advanced Fluid Power (MET 334) and Pneumatic Control (MET 436): system modeling, instrumentation, and control.</li>
+            <li>Developed instructional materials integrating simulation and XR for real-time visualization of system dynamics.</li>
+          </ul>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">Earlier Research</div>
+              <div class="exp-org">Universidad de los Andes &amp; Purdue University</div>
+            </div>
+            <div class="exp-dates">2017 – 2020</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Graduate Researcher &amp; TA, Universidad de los Andes (2017–2019): optimized hydrocyclone separators using coupled <b>CFD–DEM</b> (Eulerian flow with discrete-element particle tracking); measured particle-size distributions by laser diffraction (Malvern Mastersizer) to parameterize and validate the model.</li>
+            <li>Visiting Scholar, Purdue University (2019–2020): designed and built a custom hydraulic test rig; CFD modeling of multiphase reservoir systems.</li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="exp-group">
+      <h3 class="exp-group-title mono">Education</h3>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-deg">Ph.D., Engineering Technology</div>
+          <div class="edu-school">Purdue University, West Lafayette, IN</div>
+          <div class="edu-meta">Expected Aug 2026 · Dissertation: Physics-Based Digital Twin for Hydraulic Serial Manipulators · Advisor: Dr. José Garcia-Bravo</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">M.S., Mechanical Engineering</div>
+          <div class="edu-school">Universidad de los Andes, Bogotá, Colombia</div>
+          <div class="edu-meta">2019 · Thesis: CFD–DEM optimization of hydrocyclones (multiphase solid–liquid separation)</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">B.S., Mechanical Engineering</div>
+          <div class="edu-school">Universidad Tecnológica de Bolívar, Cartagena, Colombia</div>
+          <div class="edu-meta">2015</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <section id="publications" class="reveal">
+    <div class="sec-head"><span class="tag">05 / record</span><h2>Publications</h2></div>
+    <p class="sec-sub">Peer-reviewed and presented work grounding the projects above in validated research.</p>
+
+    <div class="pub-links">
+      <!-- [EDIT] link your real ORCID / Scholar profiles -->
+      <a href="#" target="_blank" rel="noopener">ORCID ↗</a>
+      <a href="#" target="_blank" rel="noopener">Google Scholar ↗</a>
+      <!-- [EDIT] claim your ResearchGate profile first, then swap this link in -->
+      <a href="#" target="_blank" rel="noopener">ResearchGate ↗</a>
+    </div>
+
+    <div class="pub-group">
+      <h3 class="pub-group-title mono">Journal Articles</h3>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango-Cogollo, M., Garcia-Bravo, J. M., Newell, B., &amp; Gonzalez-Mancera, A. (2020). <i>CFD Modeling of Hydrocyclones — A Study of Efficiency of Hydrodynamic Reservoirs.</i> Fluids, 5(3), 118.</p>
+          <div class="pub-meta">
+            <span class="pub-status published">Published</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@article{durango2020cfd,
+  author  = {Durango-Cogollo, Marvin and
+             Garcia-Bravo, Jos&#233; M. and
+             Newell, Brittany and
+             Gonzalez-Mancera, Andr&#233;s},
+  title   = {CFD Modeling of Hydrocyclones&#8212;
+             A Study of Efficiency of
+             Hydrodynamic Reservoirs},
+  journal = {Fluids},
+  volume  = {5},
+  number  = {3},
+  pages   = {118},
+  year    = {2020}
+}
+<!-- [EDIT] add doi = {...} once you have it handy --></pre>
+            </details>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango-Cogollo, M., Garcia, J., Duncan, &amp; Garcia-Bravo, J. M. (2026). <i>A Physics-Informed Hybrid Digital Twin Framework with Mixed Reality Interface for Fluid Power Teleoperation: A Pneumatic Proof-of-Concept.</i> Engineering Science and Technology, an International Journal (JESTECH).</p>
+          <div class="pub-meta">
+            <span class="pub-status">Under review</span>
+            <span class="pub-note mono">citation finalizes on acceptance</span>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango-Cogollo, M., &amp; Garcia-Bravo, J. M. (2026). <i>Smoothed Particle Hydrodynamics for Internal Flow Simulation in Hydraulic Components: Capabilities, Limitations, and Open Challenges.</i> Journal of Hydrodynamics.</p>
+          <div class="pub-meta">
+            <span class="pub-status">Under review</span>
+            <span class="pub-note mono">citation finalizes on acceptance</span>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="pub-group">
+      <h3 class="pub-group-title mono">Conference Presentations</h3>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., Garcia-Bravo, J. M. (2025). <i>Demonstration of a Digital Twin Framework for a Two-Actuator Hydraulic Application.</i> Purdue Polytechnic Graduate Student Poster Symposium.</p>
+          <div class="pub-meta">
+            <span class="pub-status">In press</span>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., &amp; Garcia-Bravo, J. M. (2024). <i>Physics-Based Digital Twin for Hydraulic Equipment.</i> DigiTwin Conference.</p>
+          <div class="pub-meta">
+            <span class="pub-status">Presented</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{durango2024dt,
+  author    = {Durango, Marvin and
+               Garcia-Bravo, Jos&#233; M.},
+  title     = {Physics-Based Digital Twin
+               for Hydraulic Equipment},
+  booktitle = {DigiTwin Conference},
+  year      = {2024}
+}</pre>
+            </details>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., &amp; Garcia-Bravo, J. M. (2023). <i>SPH as a Model for Hydraulic Components.</i> ASME/BATH Symposium on Fluid Power and Motion Control (FPMC).</p>
+          <div class="pub-meta">
+            <span class="pub-status">Presented</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{durango2023sph,
+  author    = {Durango, Marvin and
+               Garcia-Bravo, Jos&#233; M.},
+  title     = {SPH as a Model for
+               Hydraulic Components},
+  booktitle = {ASME/BATH Symposium on Fluid
+               Power and Motion Control},
+  year      = {2023}
+}</pre>
+            </details>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., Borders, E., Newell, B., Garcia, J., &amp; Breidi, F. (2022). <i>Mixed Reality for Fluid Power Instruction.</i> ASEE Annual Conference &amp; Exposition.</p>
+          <div class="pub-meta">
+            <span class="pub-status">Presented</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{durango2022mr,
+  author    = {Durango, Marvin and
+               Borders, E. and Newell,
+               Brittany and Garcia, J. and
+               Breidi, Farid},
+  title     = {Mixed Reality for Fluid
+               Power Instruction},
+  booktitle = {ASEE Annual Conference
+               \&amp; Exposition},
+  year      = {2022}
+}</pre>
+            </details>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ FOOTER / CONTACT ============ -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <h2>Let's talk about where a twin like this fits on your team.</h2>
+      <div class="foot-links">
+        <!-- [EDIT] swap in your real links -->
+        <a href="mailto:mdurango@purdue.edu"><span class="k">↳</span> mdurango@purdue.edu</a>
+        <a href="https://github.com/mrdurangoc" target="_blank" rel="noopener"><span class="k">↳</span> github.com/mrdurangoc</a>
+        <a href="https://www.linkedin.com/in/marvin-durango-cogollo" target="_blank" rel="noopener"><span class="k">↳</span> linkedin.com/in/marvin-durango-cogollo</a>
+        <a href="#" target="_blank" rel="noopener"><span class="k">↳</span> researchgate.net/profile/your-handle</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Marvin Durango-Cogollo · Purdue University · Built with plain HTML/CSS, no framework</div>
+  </div>
+</footer>
+
+<script>
+// Lens / role filter
+const segButtons = document.querySelectorAll('#seg button');
+const cards = document.querySelectorAll('.card');
+const lensNote = document.getElementById('lensNote');
+const notes = {
+  all: 'Showing every project across all four layers.',
+  modeling: 'Filtered for Computational Modeling roles — physics-heavy, validation-first work.',
+  automation: 'Filtered for Automation / Robotics roles — control, IoT, and real-time systems.'
+};
+
+segButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    segButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const lens = btn.dataset.lens;
+    lensNote.textContent = notes[lens];
+    cards.forEach(card => {
+      const matches = lens === 'all' || card.dataset.lens.includes(lens);
+      card.classList.toggle('hide', !matches);
+    });
+  });
+});
+
+// Scroll reveal
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+</script>
+
+</body>
+</html>
