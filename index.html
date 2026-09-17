@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dr. Marvin Durango-Cogollo — Digital Twin Engineer</title>
-<meta name="description" content="Marvin Durango Cogollo (Durango-Cogollo) — Digital Twin Engineer and PhD candidate at Purdue University. Simulation × Control × IoT × XR for fluid-power systems.">
+<meta name="description" content="Marvin Durango Cogollo (Durango-Cogollo) — Digital Twin Engineer with a Ph.D. from Purdue University. Simulation × Control × IoT × XR for fluid-power systems.">
 <link rel="canonical" href="https://mrdurangoc.github.io/">
 <script type="application/ld+json">
 {
@@ -12,7 +12,7 @@
   "@type": "Person",
   "name": "Marvin Durango Cogollo",
   "alternateName": ["Marvin Durango-Cogollo", "Marvin R. Durango"],
-  "jobTitle": "Digital Twin Engineer / PhD Candidate",
+  "jobTitle": "Digital Twin Engineer",
   "affiliation": {
     "@type": "CollegeOrUniversity",
     "name": "Purdue University"
@@ -182,6 +182,14 @@ section{padding:80px 0}
 .media-ph::before{content:'';position:absolute;top:10px;left:10px;width:22px;height:22px;border-top:1.5px solid var(--line-strong);border-left:1.5px solid var(--line-strong);border-radius:6px 0 0 0}
 .media-ph::after{content:'';position:absolute;bottom:10px;right:10px;width:22px;height:22px;border-bottom:1.5px solid var(--line-strong);border-right:1.5px solid var(--line-strong);border-radius:0 0 6px 0}
 .media-ph .icon{color:var(--orange)}
+.media{aspect-ratio:16/7;position:relative;background:var(--surface-2);border-bottom:1px solid var(--line);overflow:hidden}
+.card.feature .media{aspect-ratio:16/5.5}
+.media video,.media img{display:block;width:100%;height:100%;object-fit:cover}
+.media.fit{background:#000}
+.media.fit video{object-fit:contain}
+.media::before,.media::after{content:'';position:absolute;width:22px;height:22px;z-index:1;pointer-events:none}
+.media::before{top:10px;left:10px;border-top:1.5px solid var(--orange);border-left:1.5px solid var(--orange);border-radius:6px 0 0 0}
+.media::after{bottom:10px;right:10px;border-bottom:1.5px solid var(--orange);border-right:1.5px solid var(--orange);border-radius:0 0 6px 0}
 .card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
 .card-idx{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--orange)}
 .card h3{font-size:18px;font-weight:600;margin-top:8px}
@@ -433,8 +441,10 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       </article>
 
       <article class="card" data-lens="modeling">
-        <!-- MEDIA SLOT: SPH particle render / flow animation -->
-        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-droplet"/></svg><span>MEDIA SLOT · SPH flow render</span></div>
+        <!-- MEDIA: Fluid.mp4 -->
+        <div class="media">
+          <video src="Fluid.mp4" poster="Fluid-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Valve internal flow velocity field visualized in mixed reality"></video>
+        </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 02</div>
           <h3>Spool Valve SPH Simulation</h3>
@@ -446,8 +456,10 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       </article>
 
       <article class="card" data-lens="modeling automation">
-        <!-- MEDIA SLOT: Unity clip of cloth / soft-body deformation -->
-        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-cube"/></svg><span>MEDIA SLOT · XPBD soft-body clip</span></div>
+        <!-- MEDIA: XPBD.mp4 -->
+        <div class="media fit">
+          <video src="XPBD.mp4" poster="XPBD-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="XPBD soft bodies with pressure constraints in Unity"></video>
+        </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 03</div>
           <h3>Real-Time Physics — XPBD in Unity</h3>
@@ -472,8 +484,10 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       </article>
 
       <article class="card" data-lens="automation">
-        <!-- MEDIA SLOT: Unity clip of FABRIK + RRT* crane -->
-        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-arm"/></svg><span>MEDIA SLOT · Unity crane control clip</span></div>
+        <!-- MEDIA: Media2.mp4 -->
+        <div class="media">
+          <video src="Media2.mp4" poster="Media2-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="FABRIK inverse kinematics chain following a target in Unity"></video>
+        </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 05</div>
           <h3>Crane Control — FABRIK IK + RRT*</h3>
@@ -485,8 +499,10 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       </article>
 
       <article class="card" data-lens="automation">
-        <!-- MEDIA SLOT: HoloLens / MR smart-factory walkthrough -->
-        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-eye"/></svg><span>MEDIA SLOT · MR smart manufacturing</span></div>
+        <!-- MEDIA: URMR.mp4 -->
+        <div class="media">
+          <video src="URMR.mp4" poster="URMR-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Mixed reality twin of a UR collaborative robot in the learning factory"></video>
+        </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 06</div>
           <h3>Mixed Reality Smart Manufacturing</h3>
@@ -533,7 +549,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
     <p class="sec-sub">The formal record behind the projects above — full version available as a PDF.</p>
 
     <p class="resume-summary">
-      Engineer and PhD candidate specializing in <b>physics-based computational modeling and digital twins</b>, with equal strength in simulation and hands-on experimentation. Builds first-principles and data-driven models — multiphysics/CFD, dynamic system simulation, discrete-event simulation, real-time state estimation — and validates them against experimental and operating data. Industry and applied work span a manufacturing-cell digital twin at Hitachi and discrete-manufacturing systems in Purdue's Smart Learning Factory.
+      Ph.D. engineer specializing in <b>physics-based computational modeling and digital twins</b>, with equal strength in simulation and hands-on experimentation. Builds first-principles and data-driven models — multiphysics/CFD, dynamic system simulation, discrete-event simulation, real-time state estimation — and validates them against experimental and operating data. Industry and applied work span a manufacturing-cell digital twin at Hitachi and discrete-manufacturing systems in Purdue's Smart Learning Factory.
     </p>
 
     <div class="hero-cta" style="margin-top:26px">
@@ -613,7 +629,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         <div class="edu-item">
           <div class="edu-deg">Ph.D., Engineering Technology</div>
           <div class="edu-school">Purdue University, West Lafayette, IN</div>
-          <div class="edu-meta">Expected Aug 2026 · Dissertation: Physics-Based Digital Twin for Hydraulic Serial Manipulators · Advisor: Dr. José Garcia-Bravo</div>
+          <div class="edu-meta">2026 · Dissertation: Physics-Based Digital Twin for Hydraulic Serial Manipulators · Advisor: Dr. José Garcia-Bravo</div>
         </div>
         <div class="edu-item">
           <div class="edu-deg">M.S., Mechanical Engineering</div>
@@ -682,8 +698,8 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         <li class="pub-item">
           <p class="pub-cite">Durango-Cogollo, M., &amp; Garcia-Bravo, J. M. (2026). <i>Smoothed Particle Hydrodynamics for Internal Flow Simulation in Hydraulic Components: Capabilities, Limitations, and Open Challenges.</i> Journal of Hydrodynamics.</p>
           <div class="pub-meta">
-            <span class="pub-status">Under review</span>
-            <span class="pub-note mono">citation finalizes on acceptance</span>
+            <span class="pub-status published">Accepted</span>
+            <span class="pub-note mono">in production</span>
           </div>
         </li>
 
@@ -841,6 +857,20 @@ segButtons.forEach(btn => {
     });
   });
 });
+
+// Project videos: play only while on screen; no autoplay for reduced motion
+const clips = document.querySelectorAll('.media video');
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  clips.forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
+} else if ('IntersectionObserver' in window) {
+  const clipObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.play().catch(() => {}); }
+      else { e.target.pause(); }
+    });
+  }, { threshold: 0.25 });
+  clips.forEach(v => clipObserver.observe(v));
+}
 
 // Scroll reveal
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
