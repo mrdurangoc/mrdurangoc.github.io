@@ -186,7 +186,9 @@ section{padding:80px 0}
 .card.feature .media{aspect-ratio:16/5.5}
 .media video,.media img{display:block;width:100%;height:100%;object-fit:cover}
 .media.fit{background:#000}
-.media.fit video{object-fit:contain}
+.media.fit video,.media.fit img{object-fit:contain}
+.media.fit.light{background:#fbfbf8}
+.media.tall{aspect-ratio:16/10}
 .media::before,.media::after{content:'';position:absolute;width:22px;height:22px;z-index:1;pointer-events:none}
 .media::before{top:10px;left:10px;border-top:1.5px solid var(--orange);border-left:1.5px solid var(--orange);border-radius:6px 0 0 0}
 .media::after{bottom:10px;right:10px;border-bottom:1.5px solid var(--orange);border-right:1.5px solid var(--orange);border-radius:0 0 6px 0}
@@ -357,7 +359,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
 <div class="stats-strip">
   <div class="stats-row">
     <div class="stat"><div class="stat-num">5+</div><div class="stat-label mono">— years in fluid-power research</div></div>
-    <div class="stat"><div class="stat-num">7</div><div class="stat-label mono">— stack-spanning projects</div></div>
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label mono">— stack-spanning projects</div></div>
     <div class="stat"><div class="stat-num">5</div><div class="stat-label mono">— papers &amp; conference talks</div></div>
     <div class="stat"><div class="stat-num">&lt;7%</div><div class="stat-label mono">— twin tracking error</div></div>
   </div>
@@ -441,17 +443,31 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       </article>
 
       <article class="card" data-lens="modeling">
-        <!-- MEDIA: Fluid.mp4 -->
-        <div class="media">
-          <video src="Fluid.mp4" poster="Fluid-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Valve internal flow velocity field visualized in mixed reality"></video>
+        <!-- MEDIA: spool.mp4 -->
+        <div class="media fit tall">
+          <video src="spool.mp4" poster="spool-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="SPH particles flowing through a hydraulic spool valve, colored by velocity"></video>
         </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 02</div>
           <h3>Spool Valve SPH Simulation</h3>
-          <p class="problem">GPU-accelerated <b>Smoothed Particle Hydrodynamics</b> of internal flow in a hydraulic spool valve, validated experimentally. Presented — ASME/BATH FPMC 2023.</p>
+          <p class="problem">GPU-accelerated <b>Smoothed Particle Hydrodynamics</b> of internal flow in a hydraulic spool valve, validated experimentally and benchmarked against CFD across 2–8 mm spool strokes. Presented — ASME/BATH FPMC 2023; review accepted in the <i>Journal of Hydrodynamics</i>.</p>
           <p class="result"><span>Outcome:</span> peer-reviewed proof I can run serious computational modeling and ground it in real data.</p>
           <div class="layer-tags"><span class="lt on">Physics</span><span class="lt">Control</span><span class="lt">IoT</span><span class="lt">Viz</span></div>
           <div class="meta"><a href="#publications">see publications →</a></div>
+        </div>
+      </article>
+
+      <article class="card" data-lens="modeling">
+        <!-- MEDIA: Fluid.mp4 -->
+        <div class="media">
+          <video src="Fluid.mp4" poster="Fluid-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Relief valve CFD velocity field explored in mixed reality"></video>
+        </div>
+        <div class="card-body">
+          <div class="card-idx">PROJECT 03</div>
+          <h3>Relief Valve CFD in Mixed Reality</h3>
+          <p class="problem">CFD results of the internal flow in a hydraulic <b>relief valve</b>, rebuilt in <b>Unity</b> as an interactive mixed-reality scene — custom shaders for color, lighting and texture, and scripts that animate the solution through its time steps.</p>
+          <p class="result"><span>Outcome:</span> solver output you can walk around and read in the room — the bridge between the physics and visualization layers.</p>
+          <div class="layer-tags"><span class="lt on">Physics</span><span class="lt">Control</span><span class="lt">IoT</span><span class="lt on">Viz</span></div>
         </div>
       </article>
 
@@ -461,7 +477,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
           <video src="XPBD.mp4" poster="XPBD-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="XPBD soft bodies with pressure constraints in Unity"></video>
         </div>
         <div class="card-body">
-          <div class="card-idx">PROJECT 03</div>
+          <div class="card-idx">PROJECT 04</div>
           <h3>Real-Time Physics — XPBD in Unity</h3>
           <p class="problem">Real-time soft-body and deformable-body simulation in Unity built on <b>XPBD</b> (Extended Position-Based Dynamics) with energy-derived, neo-Hookean constraints — paired with an <b>OpenGL</b> course (rendering pipeline up, not engine-down).</p>
           <p class="result"><span>Outcome:</span> the real-time, interactive counterpart to my offline CFD/SPH work — fast, stable physics a twin can actually run live.</p>
@@ -474,7 +490,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         <!-- MEDIA SLOT: pneumatic teleoperation demo -->
         <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-gauge"/></svg><span>MEDIA SLOT · pneumatic twin demo</span></div>
         <div class="card-body">
-          <div class="card-idx">PROJECT 04</div>
+          <div class="card-idx">PROJECT 05</div>
           <h3>Pneumatic Digital Twin</h3>
           <p class="problem">A teleoperation-ready twin built on a <b>hybrid EKF + machine-learning</b> approach. The proof-of-concept that scaled into the hydraulic platform. Under review.</p>
           <p class="result"><span>Outcome:</span> showed the method generalizes across actuation domains, not a one-off.</p>
@@ -489,7 +505,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
           <video src="Media2.mp4" poster="Media2-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="FABRIK inverse kinematics chain following a target in Unity"></video>
         </div>
         <div class="card-body">
-          <div class="card-idx">PROJECT 05</div>
+          <div class="card-idx">PROJECT 06</div>
           <h3>Crane Control — FABRIK IK + RRT*</h3>
           <p class="problem">In <b>Unity</b>: a FABRIK inverse-kinematics solver fused with RRT* path planning for collision-free control of a robotic crane/manipulator.</p>
           <p class="result"><span>Outcome:</span> bridges motion planning and real-time 3D — the robotics + XR side of the stack.</p>
@@ -504,7 +520,7 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
           <video src="URMR.mp4" poster="URMR-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Mixed reality twin of a UR collaborative robot in the learning factory"></video>
         </div>
         <div class="card-body">
-          <div class="card-idx">PROJECT 06</div>
+          <div class="card-idx">PROJECT 07</div>
           <h3>Mixed Reality Smart Manufacturing</h3>
           <p class="problem">Designed <b>mixed-reality environments</b> for a smart learning factory — robotic arms, conveyors and AGVs — connecting shop-floor assets to immersive interfaces.</p>
           <p class="result"><span>Outcome:</span> industrial-grade XR + IoT integration, taught and deployed in coursework.</p>
@@ -513,11 +529,11 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
         </div>
       </article>
 
-      <article class="card" data-lens="modeling automation">
+      <article class="card feature" data-lens="modeling automation">
         <!-- MEDIA SLOT: screenshots of your live web apps -->
         <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-browser"/></svg><span>MEDIA SLOT · web app screens</span></div>
         <div class="card-body">
-          <div class="card-idx">PROJECT 07</div>
+          <div class="card-idx">PROJECT 08</div>
           <h3>Shipped Web App Ecosystem</h3>
           <p class="problem">A set of <b>production PWAs</b> I built and actually use daily — trackers syncing to Google Sheets via Apps Script, offline-first, hosted on GitHub Pages.</p>
           <p class="result"><span>Outcome:</span> proof I ship and maintain real software end-to-end, not just lab demos.</p>
