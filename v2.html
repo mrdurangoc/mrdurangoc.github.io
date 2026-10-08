@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Marvin Durango — Digital Twin Engineer (v2 preview)</title>
+<meta name="description" content="Design preview of Marvin Durango's portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050506; --ink:#0d0d0f; --ink-2:#1d1d1f; --grey:#6e6e73; --grey-2:#a1a1a6;
+  --line:#d2d2d7; --paper:#f5f5f7; --white:#fff;
+  --orange:#ff5e1a; --orange-soft:#ff8a50;
+  --display:'Inter Tight',system-ui,sans-serif; --text:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+  --maxw:1180px; --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--text);background:var(--white);color:var(--ink-2);-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.5}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;display:flex;align-items:center;transition:background .4s,border-color .4s,color .4s;border-bottom:1px solid transparent;color:#fff}
+.nav.solid{background:rgba(251,251,253,.9);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-color:rgba(0,0,0,.08);color:var(--ink-2)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand i{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.nav nav{display:flex;gap:28px;align-items:center}
+.nav nav a{font-size:13px;text-decoration:none;opacity:.8;transition:opacity .2s}
+.nav nav a:hover{opacity:1}
+.nav .pill{opacity:1;background:var(--orange);color:#fff;padding:6px 14px;border-radius:999px;font-weight:500}
+@media (max-width:700px){.nav nav a:not(.pill){display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:620px;background:var(--black);color:#fff;overflow:hidden;display:flex;align-items:flex-end}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:blur(2px) saturate(1.1);transform:scale(1.06)}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,6,.85) 0%,rgba(5,5,6,.35) 60%,rgba(5,5,6,.15) 100%),linear-gradient(180deg,rgba(5,5,6,.7) 0%,rgba(5,5,6,0) 25%,rgba(5,5,6,0) 55%,rgba(5,5,6,.95) 100%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:9vh;width:100%}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.95;letter-spacing:-.045em;max-width:12ch}
+.hero h1 span{color:var(--orange)}
+.hero p{margin-top:26px;font-size:clamp(18px,1.7vw,23px);color:rgba(255,255,255,.78);max-width:34ch;line-height:1.4;letter-spacing:-.01em}
+.hero .ctas{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;text-decoration:none;padding:13px 24px;border-radius:999px;transition:transform .3s var(--ease),background .3s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--orange);color:#fff}
+.btn.primary:hover{background:var(--orange-soft)}
+.btn.ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.btn.ghost.dark{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
+.scroll-cue{position:absolute;z-index:2;right:24px;bottom:9vh;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.55);writing-mode:vertical-rl}
+@media (max-width:700px){.scroll-cue{display:none}}
+
+/* ---------- statement ---------- */
+.statement{padding:clamp(110px,16vw,190px) 0;background:var(--white)}
+.statement h2{font-family:var(--display);font-weight:700;font-size:clamp(34px,5.4vw,72px);line-height:1.04;letter-spacing:-.035em;color:var(--ink-2);max-width:17ch}
+.statement h2 em{font-style:normal;color:var(--grey-2)}
+.layers{margin-top:72px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.layer{padding:26px 22px 0 0}
+.layer b{display:block;font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:.08em}
+.layer h3{font-family:var(--display);font-size:24px;letter-spacing:-.02em;margin-top:12px;color:var(--ink-2)}
+.layer p{margin-top:8px;font-size:15px;color:var(--grey);max-width:24ch}
+@media (max-width:800px){.layers{grid-template-columns:1fr 1fr;row-gap:40px}}
+
+/* ---------- chapter (dark, sticky) ---------- */
+.chapter{background:var(--black);color:#f5f5f7}
+.chapter-head{padding:clamp(100px,13vw,160px) 0 70px;text-align:center}
+.chapter-head h2{font-family:var(--display);font-weight:800;font-size:clamp(44px,7.5vw,108px);line-height:.95;letter-spacing:-.045em;margin-top:18px}
+.chapter-head p{margin:24px auto 0;max-width:40ch;font-size:clamp(18px,1.6vw,21px);color:var(--grey-2);line-height:1.45}
+.sticky-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:64px;padding-bottom:120px;align-items:start}
+.stage{position:sticky;--h:min(64vh,34vw);height:var(--h);top:calc((100vh - var(--h)) / 2);border-radius:22px;overflow:hidden;background:#111114;box-shadow:0 0 0 1px rgba(255,255,255,.07)}
+.stage > *{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s var(--ease),transform 1.2s var(--ease);transform:scale(1.03)}
+.stage > .on{opacity:1;transform:none}
+.stage .contain{object-fit:contain;background:#0b0c10}
+.stage-tag{position:absolute;left:18px;bottom:16px;inset:auto auto 16px 18px;width:auto;height:auto;opacity:1;transform:none;z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);padding:6px 11px;border-radius:999px}
+.steps{padding:6vh 0}
+.step{min-height:76vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .6s var(--ease)}
+.step.on{opacity:1}
+.step b{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--orange)}
+.step h3{font-family:var(--display);font-size:clamp(30px,3.2vw,44px);line-height:1.05;letter-spacing:-.03em;margin-top:14px}
+.step p{margin-top:16px;font-size:18px;color:var(--grey-2);line-height:1.5;max-width:30ch}
+.step .num{margin-top:28px;font-family:var(--display);font-weight:800;font-size:clamp(52px,5.6vw,80px);letter-spacing:-.04em;line-height:1;color:#fff}
+.step .num small{display:block;margin-top:8px;font-family:var(--text);font-weight:500;font-size:14px;letter-spacing:0;color:var(--grey-2)}
+.step .m-media{display:none}
+@media (max-width:860px){
+  .sticky-grid{grid-template-columns:1fr;gap:0}
+  .stage{display:none}
+  .step{min-height:auto;opacity:1;padding:48px 0;border-top:1px solid #222}
+  .step .m-media{display:block;margin-top:26px;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#111}
+  .step .m-media > *{width:100%;height:100%;object-fit:cover}
+}
+
+/* ---------- numbers ---------- */
+.numbers{background:var(--paper);padding:clamp(100px,13vw,150px) 0}
+.numbers .eyebrow{text-align:center;display:block}
+.num-grid{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.big{text-align:center}
+.big strong{display:block;font-family:var(--display);font-weight:800;font-size:clamp(52px,6vw,88px);letter-spacing:-.05em;line-height:1;background:linear-gradient(180deg,var(--ink-2) 30%,#555 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big strong.o{background:linear-gradient(180deg,var(--orange) 20%,#c93f05 100%);-webkit-background-clip:text;background-clip:text}
+.big span{display:block;margin:14px auto 0;max-width:20ch;font-size:15px;color:var(--grey);line-height:1.4}
+@media (max-width:800px){.num-grid{grid-template-columns:1fr 1fr;row-gap:56px}}
+
+/* ---------- chapter 2 (light) ---------- */
+.ch2{padding:clamp(110px,14vw,170px) 0 clamp(90px,10vw,130px)}
+.ch2-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+.ch2 h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.8vw,84px);line-height:.97;letter-spacing:-.045em;margin-top:16px}
+.ch2-head p{font-size:19px;color:var(--grey);line-height:1.5;max-width:38ch}
+.ch2-media{margin-top:64px;border-radius:24px;overflow:hidden;background:#fbfbf8;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 40px 80px -30px rgba(0,0,0,.25)}
+.ch2-media img{width:100%}
+.ch2-foot{margin-top:28px;display:flex;gap:56px;flex-wrap:wrap}
+.ch2-foot div{font-size:15px;color:var(--grey);max-width:30ch}
+.ch2-foot strong{display:block;font-family:var(--display);font-size:40px;letter-spacing:-.04em;color:var(--ink-2);line-height:1.1}
+@media (max-width:800px){.ch2-head{grid-template-columns:1fr;gap:20px}}
+
+/* ---------- more work ---------- */
+.more{background:var(--black);color:#f5f5f7;padding:clamp(100px,13vw,150px) 0}
+.more-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.more h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.4vw,76px);letter-spacing:-.045em;line-height:1}
+.more-head p{color:var(--grey-2);max-width:36ch}
+.tiles{margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.tile{grid-column:span 2;position:relative;border-radius:20px;overflow:hidden;background:#141417;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;text-decoration:none;color:#fff;transition:transform .5s var(--ease)}
+.tile:hover{transform:translateY(-4px)}
+.tile.wide{grid-column:span 3}
+.tile video,.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
+.tile:hover video,.tile:hover img{transform:scale(1.04)}
+.tile::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.85) 100%)}
+.tile .t{padding:24px}
+.tile b{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-soft)}
+.tile h3{font-family:var(--display);font-size:24px;letter-spacing:-.025em;line-height:1.1;margin-top:8px}
+.tile p{margin-top:6px;font-size:14.5px;color:rgba(255,255,255,.72);max-width:34ch}
+@media (max-width:900px){.tiles{grid-template-columns:1fr 1fr}.tile,.tile.wide{grid-column:span 1;min-height:320px}}
+@media (max-width:600px){.tiles{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+.contact{padding:clamp(120px,16vw,200px) 0 60px;text-align:center}
+.contact h2{font-family:var(--display);font-weight:800;font-size:clamp(46px,8vw,120px);letter-spacing:-.05em;line-height:.95}
+.contact h2 span{color:var(--orange)}
+.contact p{margin:26px auto 0;color:var(--grey);font-size:19px;max-width:36ch}
+.contact .ctas{margin-top:38px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.contact .btn.primary{color:#fff}
+.links{margin-top:90px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--grey)}
+.links a{text-decoration:none;margin-left:22px}.links a:first-child{margin-left:0}
+.links a:hover{color:var(--ink-2)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+  *{transition-duration:.01ms!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>Marvin Durango</a>
+    <nav>
+      <a href="#crane">Work</a>
+      <a href="#more">Projects</a>
+      <a href="index.html#publications">Research</a>
+      <a href="CV_Marvin_Durango.pdf" download>CV</a>
+      <a class="pill" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <video src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <div class="wrap">
+    <div class="eyebrow">Digital Twin Engineer · PhD, Purdue</div>
+    <h1 style="margin-top:20px">Twins that close <span>the loop.</span></h1>
+    <p>From the governing physics to the operator's headset. I build every layer, and make them work together.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#crane">See the work</a>
+      <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download CV</a>
+    </div>
+  </div>
+  <div class="scroll-cue">SCROLL ↓</div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="statement">
+  <div class="wrap">
+    <h2 class="rv">Most engineers work in one layer. <em>The hard part is connecting all four.</em></h2>
+    <div class="layers">
+      <div class="layer rv"><b>01</b><h3>Physics</h3><p>Lumped-parameter, CFD and SPH models validated against real benches.</p></div>
+      <div class="layer rv"><b>02</b><h3>Estimation</h3><p>Extended Kalman Filters and friction models running in real time.</p></div>
+      <div class="layer rv"><b>03</b><h3>Edge &amp; IoT</h3><p>DAQ, Raspberry Pi, Modbus, TCP/IP and Firebase pipelines.</p></div>
+      <div class="layer rv"><b>04</b><h3>Interface</h3><p>Web dashboards and mixed-reality teleoperation in Unity.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 01 · CRANE ============ -->
+<section class="chapter" id="crane">
+  <div class="wrap">
+    <div class="chapter-head rv">
+      <div class="eyebrow">Flagship · Doctoral platform</div>
+      <h2>Hydraulic crane<br>digital twin.</h2>
+      <p>A real test bench and its twin, synchronized live, from the plant model to a HoloLens.</p>
+    </div>
+
+    <div class="sticky-grid">
+      <div class="stage" aria-hidden="true">
+        <video data-s="0" class="on" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+        <img data-s="1" src="assets/webapps/daq-plots.webp" class="contain" alt="" loading="lazy">
+        <img data-s="2" src="assets/webapps/daq-live.webp" class="contain" alt="" loading="lazy">
+        <video data-s="3" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="none"></video>
+        <span class="stage-tag" id="stageTag">Plant model</span>
+      </div>
+
+      <div class="steps">
+        <article class="step" data-s="0" data-tag="Plant model">
+          <b>01 — Physics</b>
+          <h3>A plant model that matches the bench.</h3>
+          <p>A 4-state Python model of the Parker cylinder bench, validated against MATLAB/Simulink, with friction characterized using Stribeck and LuGre models.</p>
+          <div class="num">4<small>states, validated against Simulink</small></div>
+          <div class="m-media"><img src="HydroLabMR-poster.webp" alt="Hydraulic crane digital twin in mixed reality" loading="lazy"></div>
+        </article>
+        <article class="step" data-s="1" data-tag="State estimation">
+          <b>02 — Estimation</b>
+          <h3>An EKF running on the edge.</h3>
+          <p>An Extended Kalman Filter estimates cylinder states in real time on a Raspberry Pi, next to the hardware it is watching.</p>
+          <div class="m-media"><img src="assets/webapps/daq-plots.webp" alt="Pressure, torque and command signals from the test bench" loading="lazy"></div>
+        </article>
+        <article class="step" data-s="2" data-tag="Live DAQ dashboard">
+          <b>03 — Edge to web</b>
+          <h3>Every sensor, live in a browser.</h3>
+          <p>DAQ data streams over TCP/IP and Firebase into a web dashboard that also drives the EHA and pump VFD and runs scripted experiments.</p>
+          <div class="m-media"><img src="assets/webapps/daq-live.webp" alt="Live excitation experiment dashboard" loading="lazy"></div>
+        </article>
+        <article class="step" data-s="3" data-tag="Mixed reality">
+          <b>04 — Interface</b>
+          <h3>Teleoperate it from mixed reality.</h3>
+          <p>In a HoloLens 2, the operator sees the twin over the real crane, with live telemetry and the estimated cylinder position.</p>
+          <div class="m-media"><video src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="none" class="lazyplay"></video></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="numbers">
+  <div class="wrap">
+    <span class="eyebrow rv">By the numbers</span>
+    <div class="num-grid">
+      <div class="big rv"><strong>5+</strong><span>years in fluid-power research</span></div>
+      <div class="big rv"><strong class="o">&lt;7%</strong><span>twin tracking error on the hydraulic bench</span></div>
+      <div class="big rv"><strong class="o">4</strong><span>layers connected end to end, from model to headset</span></div>
+      <div class="big rv"><strong>5</strong><span>papers and conference talks</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 02 · HITACHI ============ -->
+<section class="ch2" id="hitachi">
+  <div class="wrap">
+    <div class="ch2-head">
+      <div class="rv">
+        <div class="eyebrow">Industry · Hitachi America R&amp;D</div>
+        <h2>One task.<br>Two cells.<br>In sync.</h2>
+      </div>
+      <p class="rv">A physical UR5 workcell and its Visual Components twin, driven by the same task description online. Robot trajectories are logged against a human fatigue model, so each cycle is judged on throughput and ergonomics together.</p>
+    </div>
+    <div class="ch2-media rv">
+      <img src="HRC-cell.webp" alt="Physical UR collaborative cell, its virtual twin in Visual Components, and operator fatigue curves" loading="lazy">
+    </div>
+    <div class="ch2-foot">
+      <div class="rv"><strong>+89%</strong>capacity predictability</div>
+      <div class="rv"><strong>&gt;50%</strong>lower operator fatigue</div>
+      <div class="rv"><strong>UR5 · Pi · VC</strong>robot, edge translator, virtual cell</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MORE WORK ============ -->
+<section class="more" id="more">
+  <div class="wrap">
+    <div class="more-head rv">
+      <h2>More work.</h2>
+      <p>Simulation, real-time physics, robotics and the software that ships it.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile wide rv" href="index.html#publications">
+        <video class="lazyplay" src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><b>Simulation · Peer-reviewed</b><h3>Spool valve SPH</h3><p>GPU particle simulation of internal valve flow, validated against experiments and CFD.</p></div>
+      </a>
+      <a class="tile wide rv" href="#more">
+        <video class="lazyplay" src="Fluid.mp4" poster="Fluid-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><b>Simulation · XR</b><h3>Relief valve CFD in MR</h3><p>Solver output you can walk around and read in the room.</p></div>
+      </a>
+      <a class="tile rv" href="#more">
+        <video class="lazyplay" src="XPBD.mp4" poster="XPBD-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><b>Real-time physics</b><h3>XPBD in Unity</h3><p>Neo-Hookean soft bodies a twin can run live.</p></div>
+      </a>
+      <a class="tile rv" href="index.html#publications">
+        <video class="lazyplay" src="PneumaticDT-web.mp4" poster="PneumaticDT-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><b>Estimation · ML</b><h3>Pneumatic twin</h3><p>Hybrid EKF and machine learning, the proof of concept for the hydraulic platform.</p></div>
+      </a>
+      <a class="tile rv" href="#more">
+        <video class="lazyplay" src="Media2.mp4" poster="Media2-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><b>Robotics</b><h3>FABRIK + RRT*</h3><p>Inverse kinematics fused with path planning for a robotic crane.</p></div>
+      </a>
+      <a class="tile wide rv" href="https://www.youtube.com/watch?v=70PWStT7o1c" target="_blank" rel="noopener">
+        <video class="lazyplay" src="URMR.mp4" poster="URMR-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><b>Smart manufacturing · XR</b><h3>Mixed reality learning factory</h3><p>Robots, conveyors and AGVs connected to immersive interfaces.</p></div>
+      </a>
+      <a class="tile wide rv" href="https://github.com/mrdurangoc" target="_blank" rel="noopener">
+        <img src="assets/webapps/daq-plots.webp" alt="" loading="lazy" style="object-position:top left">
+        <div class="t"><b>Software</b><h3>Shipped web apps</h3><p>A lab DAQ and control dashboard plus offline-first PWAs I use daily.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 class="rv">Let's build<br>the <span>twin.</span></h2>
+    <p class="rv">Open to R&amp;D roles in fluid power, simulation and digital twins.</p>
+    <div class="ctas rv">
+      <a class="btn primary" href="mailto:mdurango@purdue.edu">mdurango@purdue.edu</a>
+      <a class="btn ghost dark" href="https://www.linkedin.com/in/marvin-durango-cogollo" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="links">
+      <span>© 2026 Marvin Durango-Cogollo · Purdue University</span>
+      <span><a href="https://github.com/mrdurangoc" target="_blank" rel="noopener">GitHub</a><a href="index.html#publications">Publications</a><a href="CV_Marvin_Durango.pdf" download>CV</a></span>
+    </div>
+  </div>
+</section>
+
+<script>
+// Nav turns solid after the hero
+const nav=document.getElementById('nav'), hero=document.querySelector('.hero');
+new IntersectionObserver(([e])=>nav.classList.toggle('solid',!e.isIntersecting),{rootMargin:'-60px 0px 0px 0px'}).observe(hero);
+
+// Reveal on scroll
+const rvObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.parentElement.querySelectorAll(':scope > .rv').length>1?(Array.from(el.parentElement.children).indexOf(el)%4)*90:0)+'ms';rvObs.observe(el)});
+
+// Sticky chapter: swap the stage as each step reaches the middle
+const layers=document.querySelectorAll('.stage > [data-s]'), tag=document.getElementById('stageTag');
+const stepObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  const s=e.target.dataset.s;
+  document.querySelectorAll('.step').forEach(st=>st.classList.toggle('on',st===e.target));
+  layers.forEach(l=>{const on=l.dataset.s===s;l.classList.toggle('on',on);if(l.tagName==='VIDEO'){on?l.play().catch(()=>{}):l.pause()}});
+  tag.textContent=e.target.dataset.tag;
+}),{rootMargin:'-45% 0px -45% 0px'});
+document.querySelectorAll('.step').forEach(s=>stepObs.observe(s));
+
+// Lazy play: tile videos only load and play while on screen
+const vidObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.preload='auto';v.play().catch(()=>{})}else v.pause()}),{threshold:.25});
+document.querySelectorAll('video.lazyplay').forEach(v=>vidObs.observe(v));
+</script>
+</body>
+</html>
