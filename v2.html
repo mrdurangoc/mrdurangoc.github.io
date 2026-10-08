@@ -40,7 +40,7 @@ a{color:inherit}
 
 /* ---------- hero ---------- */
 .hero{position:relative;height:100svh;min-height:620px;background:var(--black);color:#fff;overflow:hidden;display:flex;align-items:flex-end}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:blur(2px) saturate(1.1);transform:scale(1.06)}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%;opacity:.6;filter:blur(1px) saturate(1.15);transform:scale(1.04)}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,6,.85) 0%,rgba(5,5,6,.35) 60%,rgba(5,5,6,.15) 100%),linear-gradient(180deg,rgba(5,5,6,.7) 0%,rgba(5,5,6,0) 25%,rgba(5,5,6,0) 55%,rgba(5,5,6,.95) 100%)}
 .hero .wrap{position:relative;z-index:2;padding-bottom:9vh;width:100%}
 .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.95;letter-spacing:-.045em;max-width:12ch}
@@ -174,7 +174,7 @@ a{color:inherit}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
-  <video src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <video src="hero-twin.mp4" poster="hero-twin-poster.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <div class="wrap">
     <div class="eyebrow">Digital Twin Engineer · PhD, Purdue</div>
     <h1 style="margin-top:20px">Twins that close <span>the loop.</span></h1>
