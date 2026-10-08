@@ -178,7 +178,8 @@ section{padding:80px 0}
 .card.feature{grid-column:1 / -1}
 .card.hide{display:none}
 .media-ph{aspect-ratio:16/7;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-faint);font-family:'IBM Plex Mono',monospace;font-size:12px;border-bottom:1px solid var(--line);position:relative}
-.card.feature .media-ph{aspect-ratio:16/5.5}
+.card.feature .media{aspect-ratio:16/5.5}
+.card.feature .media.wide{aspect-ratio:16/9}
 .media-ph::before{content:'';position:absolute;top:10px;left:10px;width:22px;height:22px;border-top:1.5px solid var(--line-strong);border-left:1.5px solid var(--line-strong);border-radius:6px 0 0 0}
 .media-ph::after{content:'';position:absolute;bottom:10px;right:10px;width:22px;height:22px;border-bottom:1.5px solid var(--line-strong);border-right:1.5px solid var(--line-strong);border-radius:0 0 6px 0}
 .media-ph .icon{color:var(--orange)}
@@ -459,8 +460,10 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
 
       <!-- FEATURE PROJECT -->
       <article class="card feature" data-lens="modeling automation">
-        <!-- MEDIA SLOT: replace with a looping screen-capture of your live HydroLab Flask dashboard -->
-        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-gauge"/></svg><span>MEDIA SLOT · live dashboard loop / bench video</span></div>
+        <!-- MEDIA: HydroLabMR.mp4 -->
+        <div class="media fit wide">
+          <video src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Operator teleoperating the hydraulic crane from mixed reality, with the digital twin, live telemetry and EKF cylinder position"></video>
+        </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 01 · FLAGSHIP</div>
           <h3>Hydraulic Manipulator Digital Twin</h3>
