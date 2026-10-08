@@ -193,6 +193,40 @@ section{padding:80px 0}
 .media::before,.media::after{content:'';position:absolute;width:22px;height:22px;z-index:1;pointer-events:none}
 .media::before{top:10px;left:10px;border-top:1.5px solid var(--orange);border-left:1.5px solid var(--orange);border-radius:6px 0 0 0}
 .media::after{bottom:10px;right:10px;border-bottom:1.5px solid var(--orange);border-right:1.5px solid var(--orange);border-radius:0 0 6px 0}
+/* ---- Project 09: web app showcase (browser + phone + widget) ---- */
+.card.feature .media.wa-stage{aspect-ratio:16/8}
+.wa-stage{background:#0b0c10;background-image:linear-gradient(rgba(255,94,26,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,94,26,.07) 1px,transparent 1px);background-size:28px 28px;display:grid;grid-template-columns:1fr 26%;align-items:center;gap:5%;padding:5% 6% 5% 5%}
+.wa-stage::before{z-index:3}.wa-stage::after{z-index:3}
+.wa-glow{position:absolute;width:55%;height:70%;left:10%;top:15%;background:radial-gradient(closest-side,rgba(255,94,26,.22),transparent);filter:blur(10px);pointer-events:none}
+.wa-browser{position:relative;border-radius:9px;overflow:hidden;background:#121318;border:1px solid #2a2c33;box-shadow:0 24px 50px rgba(0,0,0,.55),0 0 0 1px rgba(255,94,26,.08);transform:perspective(1400px) rotateY(4deg);transform-origin:left center}
+.wa-bar{display:flex;align-items:center;gap:6px;padding:8px 11px;background:#17181e;border-bottom:1px solid #2a2c33}
+.wa-bar i{width:8px;height:8px;border-radius:50%;background:#3a3c44}
+.wa-bar i:first-child{background:#ff5e1a}
+.wa-url{margin-left:10px;flex:1;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8b8d95;background:#0e0f13;border:1px solid #24262d;border-radius:5px;padding:3px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-live{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:#3ddc84;display:flex;align-items:center;gap:5px}
+.wa-live::before{content:'';width:6px;height:6px;border-radius:50%;background:#3ddc84;box-shadow:0 0 6px #3ddc84;animation:waPulse 1.6s ease-in-out infinite}
+.wa-screen{position:relative;aspect-ratio:16/9.3;overflow:hidden}
+.media .wa-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left}
+.media .wa-screen img.wa-b{opacity:0;animation:waSwap 12s ease-in-out infinite}
+.wa-phone{position:relative;border-radius:22px;padding:6px;background:#1b1c22;border:1px solid #33353d;box-shadow:0 24px 50px rgba(0,0,0,.6);transform:rotate(3deg) translateY(-4%)}
+.wa-phone::before{content:'';position:absolute;top:10px;left:50%;width:30%;height:5px;border-radius:4px;background:#0b0c10;transform:translateX(-50%);z-index:2}
+.wa-phone .wa-pscreen{border-radius:16px;overflow:hidden;aspect-ratio:3/5;background:#0a0b0e}
+.media .wa-phone img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.wa-widget{position:absolute;right:2.5%;bottom:6%;width:19%;border-radius:10px;overflow:hidden;border:1px solid #2f3139;box-shadow:0 18px 40px rgba(0,0,0,.6);transform:rotate(-2.5deg);z-index:2}
+.media .wa-widget img{height:auto}
+.wa-chip{position:absolute;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:4px 9px;border-radius:20px;backdrop-filter:blur(4px)}
+.wa-chip.lab{left:5%;bottom:6%;color:var(--orange);background:rgba(255,94,26,.12);border:1px solid rgba(255,94,26,.35)}
+.wa-chip.daily{right:31%;top:6%;color:#7da2ff;background:rgba(77,124,255,.12);border:1px solid rgba(77,124,255,.35)}
+@keyframes waSwap{0%,42%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
+@keyframes waPulse{50%{opacity:.35}}
+@media (max-width:760px){
+  .card.feature .media.wa-stage{aspect-ratio:auto;grid-template-columns:1fr;padding:44px 18px 64px;gap:28px}
+  .wa-browser{transform:none}
+  .wa-phone{width:48%;justify-self:start;margin-left:6%;transform:rotate(2deg)}
+  .wa-widget{width:44%;right:6%;bottom:12%}
+  .wa-chip.daily{right:auto;left:6%;top:auto;bottom:4%}
+  .wa-chip.lab{left:18px;top:14px;bottom:auto}
+}
 .card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
 .card-idx{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--orange)}
 .card h3{font-size:18px;font-weight:600;margin-top:8px}
@@ -582,15 +616,33 @@ footer h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(
       </article>
 
       <article class="card feature" data-lens="modeling automation">
-        <!-- MEDIA SLOT: screenshots of your live web apps -->
-        <div class="media-ph"><svg class="icon icon-lg"><use href="#icon-browser"/></svg><span>MEDIA SLOT · web app screens</span></div>
+        <!-- MEDIA: assets/webapps/*.webp — lab DAQ dashboard (browser) + training PWA (phone + widget) -->
+        <div class="media wa-stage">
+          <div class="wa-glow" aria-hidden="true"></div>
+          <div class="wa-browser">
+            <div class="wa-bar"><i></i><i></i><i></i><span class="wa-url">crane-daq · test bench dashboard</span><span class="wa-live">LIVE</span></div>
+            <div class="wa-screen">
+              <img src="assets/webapps/daq-plots.webp" alt="Web DAQ dashboard for the hydraulic crane test bench: EHA and pump VFD controls with motor pressure, torque, speed and command plots" loading="lazy">
+              <img class="wa-b" src="assets/webapps/daq-live.webp" alt="Live excitation experiment view with motor speed, supply pressures and a streaming log" loading="lazy">
+            </div>
+          </div>
+          <div class="wa-phone"><div class="wa-pscreen">
+            <img src="assets/webapps/gym-today.webp" alt="Training PWA showing today's pull session with exercises, sets and rest timers" loading="lazy">
+          </div></div>
+          <div class="wa-widget">
+            <img src="assets/webapps/gym-progress.webp" alt="Training PWA plan versus actual pull-up progress by week" loading="lazy">
+          </div>
+          <span class="wa-chip lab">lab · DAQ + control</span>
+          <span class="wa-chip daily">daily · PWA</span>
+        </div>
         <div class="card-body">
           <div class="card-idx">PROJECT 09</div>
           <h3>Shipped Web App Ecosystem</h3>
-          <p class="problem">A set of <b>production PWAs</b> I built and actually use daily — trackers syncing to Google Sheets via Apps Script, offline-first, hosted on GitHub Pages.</p>
-          <p class="result"><span>Outcome:</span> proof I ship and maintain real software end-to-end, not just lab demos.</p>
-          <div class="layer-tags"><span class="lt">Physics</span><span class="lt">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
-          <div class="meta"><a href="#">live →</a></div>
+          <p class="problem">Browser tools I built, deployed and use every day: a <b>live DAQ &amp; control dashboard</b> for the hydraulic crane test bench (Firebase streaming, EHA and pump VFD control, scripted excitation experiments, CSV export) and a set of <b>offline-first PWAs</b> syncing to Google Sheets via Apps Script, all hosted on GitHub Pages.</p>
+          <p class="result"><span>Outcome:</span> proof I ship and maintain real software end-to-end, from lab instrumentation to apps people use daily.</p>
+          <div class="layer-tags"><span class="lt">Physics</span><span class="lt on">Control</span><span class="lt on">IoT</span><span class="lt on">Viz</span></div>
+          <!-- [EDIT] point this at a live app or repo -->
+          <div class="meta"><a href="https://github.com/mrdurangoc" target="_blank" rel="noopener">code on GitHub ↗</a></div>
         </div>
       </article>
 
