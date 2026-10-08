@@ -155,17 +155,100 @@ a{color:inherit}
   .rv{opacity:1;transform:none}
   *{transition-duration:.01ms!important;animation:none!important}
 }
+
+/* ---------- v3 merge: accessibility, menu, motion control ---------- */
+section,details{scroll-margin-top:72px}
+.skip{position:fixed;left:16px;top:-100px;z-index:100;background:#fff;color:#000;padding:12px 16px;border-radius:8px}
+.skip:focus{top:12px}
+.eyebrow{color:#b83c08}
+.hero .eyebrow,.chapter .eyebrow,.more .eyebrow{color:#ff8a50}
+.layer b{color:#b83c08}
+.btn.primary,.nav .pill{background:#bc3b09}
+.btn.primary:hover{background:#9c3006}
+.btn{min-height:44px}
+.motion-toggle{position:absolute;z-index:3;right:24px;bottom:9vh;display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,.45);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 15px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px)}
+.motion-toggle:hover{border-color:#fff}
+.menu-toggle{display:none}
+@media (max-width:700px){
+  .menu-toggle{display:block;background:transparent;color:inherit;border:1px solid currentColor;padding:7px 14px;border-radius:999px;font:500 13px var(--text);cursor:pointer}
+  .nav nav{display:none;position:absolute;top:52px;left:0;right:0;background:#fff;color:var(--ink-2);padding:12px 24px 20px;flex-direction:column;align-items:stretch;gap:2px;border-bottom:1px solid #ddd;box-shadow:0 20px 40px rgba(0,0,0,.12)}
+  .nav nav.open{display:flex}
+  .nav nav a:not(.pill){display:block;padding:12px 4px;font-size:16px;opacity:1;border-bottom:1px solid #eee}
+  .nav nav .pill{margin-top:12px;text-align:center;padding:12px}
+  .motion-toggle{right:auto;left:24px;bottom:24px}
+  .hero .wrap{padding-bottom:96px}
+}
+
+/* ---------- SPH chapter ---------- */
+.ch2.sim{background:var(--paper)}
+.ch2-media video{display:block;width:100%;max-height:640px;background:#0b0b0e}
+
+/* ---------- project notes ---------- */
+.casework{padding:clamp(90px,11vw,130px) 0;background:var(--paper)}
+.casework h2,.about h2,.record h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.6vw,62px);line-height:1.02;letter-spacing:-.04em;margin:14px 0 32px}
+.casework details{padding:22px 0;border-top:1px solid var(--line)}
+.casework details:last-child{border-bottom:1px solid var(--line)}
+.casework summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.casework summary::-webkit-details-marker{display:none}
+.casework summary::after{content:'+';font-weight:400;font-size:26px;color:var(--grey);transition:transform .3s var(--ease)}
+.casework details[open] summary::after{transform:rotate(45deg)}
+.casework p{max-width:72ch;margin-top:14px;color:#55555b}
+
+/* ---------- about ---------- */
+.about{padding:clamp(110px,13vw,160px) 0}
+.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}
+.about img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:24px;background:var(--paper)}
+.about p{max-width:50ch;margin:16px 0;color:#55555b;font-size:18px}
+.hobbies{margin:26px 0 32px;display:flex;flex-wrap:wrap;gap:8px}
+.hobbies span{font-size:14px;padding:7px 14px;border-radius:999px;background:var(--paper);color:var(--ink-2)}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px}.about img{max-width:380px}}
+
+/* ---------- resume & publications ---------- */
+.records{padding-bottom:40px}
+.record{padding:clamp(80px,9vw,110px) 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;flex-direction:column}
+.sec-head .tag{order:-1;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#b83c08}
+.sec-sub,.resume-summary{color:#55555b;max-width:80ch;margin-bottom:22px;font-size:17px}
+.resume-summary b{color:var(--ink-2)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.exp-group,.pub-group{margin-top:48px}
+.exp-group-title,.pub-group-title{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--grey);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.exp-list,.pub-list,.exp-bullets{list-style:none}
+.exp-item,.pub-item{padding:26px 0;border-bottom:1px solid var(--line)}
+.exp-head{display:flex;justify-content:space-between;gap:24px}
+.exp-role,.edu-deg{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.015em;color:var(--ink-2)}
+.exp-org{color:#b83c08;font-size:15px;margin-top:2px}
+.exp-dates,.edu-meta,.pub-note{color:#55555b;font:13px var(--mono)}
+.exp-dates{white-space:nowrap}
+.exp-bullets{margin-top:14px;max-width:85ch}
+.exp-bullets li{margin:10px 0;padding-left:18px;position:relative;color:#3a3a3f;font-size:16px}
+.exp-bullets li::before{content:'';position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:50%;border:1.5px solid #b83c08}
+.edu-item{padding:22px 0;border-bottom:1px solid var(--line)}
+.edu-school{color:#55555b}
+.edu-meta{margin-top:6px}
+.pub-cite{max-width:85ch;font-size:16px;color:#3a3a3f}
+.pub-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;align-items:flex-start}
+.pub-status{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);color:#55555b;padding:4px 10px;border-radius:999px}
+.pub-status.published{border-color:#b83c08;color:#b83c08}
+.pub-bib summary{cursor:pointer;font:500 12px var(--mono);color:#55555b}
+.pub-bib pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 var(--mono);margin-top:12px;background:var(--paper);padding:16px;border-radius:12px}
+@media (max-width:860px){.exp-head{flex-direction:column;gap:6px}}
 </style>
 </head>
 <body>
 
+<a class="skip" href="#crane">Skip to selected work</a>
+
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#top"><i></i>Marvin Durango</a>
-    <nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation">Menu</button>
+    <nav id="navigation" aria-label="Main navigation">
       <a href="#crane">Work</a>
       <a href="#more">Projects</a>
-      <a href="index.html#publications">Research</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#publications">Research</a>
       <a href="CV_Marvin_Durango.pdf" download>CV</a>
       <a class="pill" href="#contact">Contact</a>
     </nav>
@@ -174,7 +257,7 @@ a{color:inherit}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
-  <video src="hero-twin.mp4" poster="hero-twin-poster.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <video src="hero-twin.mp4" poster="hero-twin-poster.webp" muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <div class="wrap">
     <div class="eyebrow">Digital Twin &amp; Simulation Engineer · VR/XR Developer</div>
     <h1 style="margin-top:20px">Twins that close <span>the loop.</span></h1>
@@ -184,7 +267,7 @@ a{color:inherit}
       <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download CV</a>
     </div>
   </div>
-  <div class="scroll-cue">SCROLL ↓</div>
+  <button class="motion-toggle" id="motionToggle" type="button" aria-pressed="true">❚❚ Pause motion</button>
 </section>
 
 <!-- ============ STATEMENT ============ -->
@@ -211,7 +294,7 @@ a{color:inherit}
 
     <div class="sticky-grid">
       <div class="stage" aria-hidden="true">
-        <video data-s="0" class="on" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+        <video data-s="0" class="on" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="metadata"></video>
         <img data-s="1" src="assets/webapps/daq-plots.webp" class="contain" alt="" loading="lazy">
         <img data-s="2" src="assets/webapps/daq-live.webp" class="contain" alt="" loading="lazy">
         <video data-s="3" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="none"></video>
@@ -283,6 +366,26 @@ a{color:inherit}
   </div>
 </section>
 
+<!-- ============ CHAPTER 03 · SPH ============ -->
+<section class="ch2 sim" id="sph">
+  <div class="wrap">
+    <div class="ch2-head">
+      <div class="rv">
+        <div class="eyebrow">Computational modeling · SPH / CFD</div>
+        <h2>See the flow.<br>Understand<br>the physics.</h2>
+      </div>
+      <p class="rv">GPU-accelerated Smoothed Particle Hydrodynamics of the internal flow in a hydraulic spool valve, compared with experiments and mesh CFD across 2–8 mm spool strokes. A view of behavior no installed sensor can measure.</p>
+    </div>
+    <div class="ch2-media rv">
+      <video class="lazyplay" src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none" aria-label="SPH particles flowing through a hydraulic spool valve, colored by velocity"></video>
+    </div>
+    <div class="ch2-foot">
+      <div class="rv"><strong>9 studies</strong>compared in a go/no-go guide for SPH vs. mesh CFD</div>
+      <div class="rv"><strong>J. Hydrodyn.</strong>review accepted (Springer), plus ASME/BATH FPMC 2023</div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ MORE WORK ============ -->
 <section class="more" id="more">
   <div class="wrap">
@@ -291,23 +394,23 @@ a{color:inherit}
       <p>Simulation, real-time physics, robotics and the software that ships it.</p>
     </div>
     <div class="tiles">
-      <a class="tile wide rv" href="index.html#publications">
+      <a class="tile wide rv" href="#sph">
         <video class="lazyplay" src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><b>Simulation · Peer-reviewed</b><h3>Spool valve SPH</h3><p>GPU particle simulation of internal valve flow, validated against experiments and CFD.</p></div>
       </a>
-      <a class="tile wide rv" href="#more">
+      <a class="tile wide rv" href="#relief">
         <video class="lazyplay" src="Fluid.mp4" poster="Fluid-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><b>Simulation · XR</b><h3>Relief valve CFD in MR</h3><p>Solver output you can walk around and read in the room.</p></div>
       </a>
-      <a class="tile rv" href="#more">
+      <a class="tile rv" href="#xpbd">
         <video class="lazyplay" src="XPBD.mp4" poster="XPBD-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><b>Real-time physics</b><h3>XPBD in Unity</h3><p>Neo-Hookean soft bodies a twin can run live.</p></div>
       </a>
-      <a class="tile rv" href="index.html#publications">
+      <a class="tile rv" href="#pneumatic">
         <video class="lazyplay" src="PneumaticDT-web.mp4" poster="PneumaticDT-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><b>Estimation · ML</b><h3>Pneumatic twin</h3><p>Hybrid EKF and machine learning, the proof of concept for the hydraulic platform.</p></div>
       </a>
-      <a class="tile rv" href="#more">
+      <a class="tile rv" href="#planning">
         <video class="lazyplay" src="Media2.mp4" poster="Media2-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><b>Robotics</b><h3>FABRIK + RRT*</h3><p>Inverse kinematics fused with path planning for a robotic crane.</p></div>
       </a>
@@ -323,6 +426,279 @@ a{color:inherit}
   </div>
 </section>
 
+<!-- ============ PROJECT NOTES ============ -->
+<section class="casework" id="project-details">
+  <div class="wrap">
+    <div class="eyebrow">Project notes</div>
+    <h2>The details.</h2>
+    <details id="relief"><summary>Relief valve CFD in mixed reality</summary>
+      <p>CFD results of the internal flow in a hydraulic relief valve (Ansys CFX), rebuilt in Unity as an interactive mixed-reality scene, with custom shaders for color, lighting and texture and scripts that animate the solution through its time steps.</p>
+      <p><b>Why it matters:</b> solver output you can walk around and read in the room, exposing internal velocity and pressure that no installed sensor can measure.</p></details>
+    <details id="xpbd"><summary>Real-time physics with XPBD</summary>
+      <p>Soft-body and deformable-body simulation built on Extended Position-Based Dynamics with energy-derived, neo-Hookean constraints, implemented in C++ and OpenGL compute shaders and in Unity.</p>
+      <p><b>Why it matters:</b> the real-time counterpart to offline CFD and SPH, fast and stable enough for a twin to run live.</p></details>
+    <details id="pneumatic"><summary>Pneumatic Digital Twin</summary>
+      <p>A teleoperation-ready twin built on a hybrid estimator (EKF, LuGre friction and Bayesian regression) that predicts actuator motion from measured signals only, with real-time proportional control from a HoloLens and an open dataset.</p>
+      <p><b>Why it matters:</b> the proof of concept that scaled into the hydraulic crane platform. Under revision at <i>Engineering Science and Technology, an International Journal</i>.</p></details>
+    <details id="planning"><summary>Crane motion planning: FABRIK + RRT*</summary>
+      <p>A FABRIK inverse-kinematics solver fused with RRT* path planning in Unity for collision-free control of a robotic crane.</p>
+      <p><b>Why it matters:</b> the same IK now turns a hand gesture in mixed reality into joint targets for the physical crane.</p></details>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <img src="PPicture1.png" alt="Portrait of Marvin Durango-Cogollo" loading="lazy">
+    <div class="rv">
+      <div class="eyebrow">About</div>
+      <h2>Curiosity,<br>built into systems.</h2>
+      <p>I'm Marvin Durango-Cogollo, a mechanical engineer from Cartagena, Colombia, with a Ph.D. in Engineering Technology from Purdue. My work connects physical modeling, experimental validation and the software that puts both in front of people.</p>
+      <p>My doctoral research focuses on digital twins for hydraulic machinery. In industry, I worked on human–robot collaboration at Hitachi America's Industrial Innovation Laboratory.</p>
+      <div class="hobbies" aria-label="Beyond the lab"><span>🏹 Archery</span><span>🎙️ Podcast for Latino grad students</span><span>🏋️ Gym</span><span>🌿 Tropical plants</span><span>🚲 Biking</span></div>
+      <a class="btn ghost dark" href="CV_Marvin_Durango.pdf" download>Download CV</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap records">
+<section id="resume" class="record">
+    <div class="sec-head"><span class="tag">04 / history</span><h2>Resume</h2></div>
+    <p class="sec-sub">The formal record behind the projects above — full version available as a PDF.</p>
+
+    <p class="resume-summary">
+      I build the full <b>Digital Twin</b> stack and make it pay off: physics models at the right fidelity (CFD down to real-time), estimation that replaces sensors, industrial connectivity and edge computing, <b>robotics and discrete-event simulation</b> (Visual Components, NVIDIA Isaac Sim), and <b>VR/XR interfaces</b> that let people see and operate the machine, written in <b>Python and C++</b>. I prefer the simplest model that answers the question, and I prove it against measured data.
+    </p>
+
+    <div class="hero-cta" style="margin-top:26px">
+      <a class="btn ghost dark" href="CV_Marvin_Durango.pdf" download>Download full CV (PDF) →</a>
+    </div>
+
+    <div class="exp-group">
+      <h3 class="exp-group-title mono">Experience</h3>
+      <ul class="exp-list">
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">Digital Twin Research Engineer (Graduate Researcher, Ph.D.)</div>
+              <div class="exp-org">Purdue University · School of Engineering Technology</div>
+            </div>
+            <div class="exp-dates">Aug 2021 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li><b>Built a hydraulic crane and its Digital Twin from the ground up:</b> HPU with VFD, proportional valves, boom cylinder, hydraulic swing motor, EHA-driven load brake, full instrumentation, DAQ and edge computer.</li>
+            <li>Lumped-parameter models in Python of EHAs, hydrostatic transmissions, cylinders, motors and proportional valves, identified from bench data and validated to <b>&lt;7% tracking error</b>.</li>
+            <li>Real-time <b>Extended Kalman Filter</b> reconstructs actuator velocity and pressures on a Raspberry Pi 4 in <b>186 µs per update</b>, replacing a physical sensor.</li>
+            <li>Mixed-reality teleoperation on HoloLens 2: the operator drags the crane's tip by hand; FABRIK inverse kinematics streams joint targets over TCP and the physical machine follows.</li>
+            <li>Industrial network and safety: Modbus RTU fieldbus (370 transactions, 0 errors), zero-capital VFD automation of the power unit, and a supervisory state machine that latches faults and enforces travel limits.</li>
+            <li>Virtual commissioning of the 6-station skateboard line in Purdue's Smart Learning Factory (Visual Components, OPC UA); virtual UR10e validated against the physical robot; shop-floor data streamed to AWS and over MQTT.</li>
+          </ul>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">R&amp;D Intern — Smart &amp; Digital Manufacturing</div>
+              <div class="exp-org">Hitachi America, Ltd. · Industrial Innovation Laboratory · Farmington Hills, MI</div>
+            </div>
+            <div class="exp-dates">Jun 2023 – Jan 2024</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Raised capacity predictability by <b>89%</b> and cut operator fatigue by <b>over 50%</b> by programming UR5 collaborative-robot tasks for hybrid human–robot workflows.</li>
+            <li>De-risked robot commissioning with a sensor-integrated <b>Digital Twin</b> of a manufacturing cell, so robot programs and layouts were tested virtually first.</li>
+            <li>Streamed live UR5 data through ROS into the cell's twin, so the virtual cell mirrored the physical robot without manual exports.</li>
+            <li>Discrete-event simulation of packaging processes and demand-forecast scenarios to evaluate throughput and capacity before investing.</li>
+          </ul>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">Instructor / Graduate Teaching Assistant</div>
+              <div class="exp-org">Purdue University · School of Engineering Technology</div>
+            </div>
+            <div class="exp-dates">2021 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Instructor of record (Fall 2025) for <b>Mixed Reality Smart Manufacturing</b> and <b>AI &amp; Mixed Reality for Manufacturing</b> — a project-based course where students build digital twins of a full discrete-manufacturing line in Purdue Polytechnic's flagship learning factory.</li>
+            <li>Instructor / TA for Advanced Fluid Power (MET 334) and Pneumatic Control (MET 436): system modeling, instrumentation, and control.</li>
+            <li>Developed instructional materials integrating simulation and XR for real-time visualization of system dynamics.</li>
+          </ul>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-head">
+            <div>
+              <div class="exp-role">Earlier Research</div>
+              <div class="exp-org">Universidad de los Andes &amp; Purdue University</div>
+            </div>
+            <div class="exp-dates">2017 – 2020</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Graduate Researcher &amp; TA, Universidad de los Andes (2017–2019): optimized hydrocyclone separators using coupled <b>CFD–DEM</b> (Eulerian flow with discrete-element particle tracking); measured particle-size distributions by laser diffraction (Malvern Mastersizer) to parameterize and validate the model.</li>
+            <li>Visiting Scholar, Purdue University (2019–2020): designed and built a custom hydraulic test rig; CFD modeling of multiphase reservoir systems.</li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="exp-group">
+      <h3 class="exp-group-title mono">Education</h3>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-deg">Ph.D., Engineering Technology</div>
+          <div class="edu-school">Purdue University, West Lafayette, IN</div>
+          <div class="edu-meta">2026 · Dissertation: Physics-Based Digital Twin for Hydraulic Serial Manipulators · Advisor: Dr. José Garcia-Bravo</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">M.S., Mechanical Engineering</div>
+          <div class="edu-school">Universidad de los Andes, Bogotá, Colombia</div>
+          <div class="edu-meta">2019 · Thesis: CFD–DEM optimization of hydrocyclones (multiphase solid–liquid separation)</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">B.S., Mechanical Engineering</div>
+          <div class="edu-school">Universidad Tecnológica de Bolívar, Cartagena, Colombia</div>
+          <div class="edu-meta">2015</div>
+        </div>
+      </div>
+    </div>
+  </section>
+<section id="publications" class="record">
+    <div class="sec-head"><span class="tag">05 / record</span><h2>Publications</h2></div>
+    <p class="sec-sub">Peer-reviewed and presented work grounding the projects above in validated research.</p>
+
+    <div class="pub-links">
+      <!-- [EDIT] link your real ORCID / Scholar profiles -->
+      <a href="#" target="_blank" rel="noopener">ORCID ↗</a>
+      <a href="#" target="_blank" rel="noopener">Google Scholar ↗</a>
+      <!-- [EDIT] claim your ResearchGate profile first, then swap this link in -->
+      <a href="#" target="_blank" rel="noopener">ResearchGate ↗</a>
+    </div>
+
+    <div class="pub-group">
+      <h3 class="pub-group-title mono">Journal Articles</h3>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango-Cogollo, M., Garcia-Bravo, J. M., Newell, B., &amp; Gonzalez-Mancera, A. (2020). <i>CFD Modeling of Hydrocyclones — A Study of Efficiency of Hydrodynamic Reservoirs.</i> Fluids, 5(3), 118.</p>
+          <div class="pub-meta">
+            <span class="pub-status published">Published</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@article{durango2020cfd,
+  author  = {Durango-Cogollo, Marvin and
+             Garcia-Bravo, Jos&#233; M. and
+             Newell, Brittany and
+             Gonzalez-Mancera, Andr&#233;s},
+  title   = {CFD Modeling of Hydrocyclones&#8212;
+             A Study of Efficiency of
+             Hydrodynamic Reservoirs},
+  journal = {Fluids},
+  volume  = {5},
+  number  = {3},
+  pages   = {118},
+  year    = {2020}
+}
+<!-- [EDIT] add doi = {...} once you have it handy --></pre>
+            </details>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango-Cogollo, M., Garcia, Y., Duncan, S., &amp; Garcia-Bravo, J. M. (2026). <i>A Physics-Informed Hybrid Digital Twin Framework with Mixed Reality Interface for Fluid Power Teleoperation: A Pneumatic Proof-of-Concept.</i> Engineering Science and Technology, an International Journal (JESTECH).</p>
+          <div class="pub-meta">
+            <span class="pub-status">Under revision</span>
+            <span class="pub-note mono">citation finalizes on acceptance</span>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango-Cogollo, M., &amp; Garcia-Bravo, J. M. (2026). <i>Smoothed Particle Hydrodynamics for Internal Flow Simulation in Hydraulic Components: Capabilities, Limitations, and Open Challenges.</i> Journal of Hydrodynamics.</p>
+          <div class="pub-meta">
+            <span class="pub-status published">Accepted</span>
+            <span class="pub-note mono">in production</span>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="pub-group">
+      <h3 class="pub-group-title mono">Conference Presentations</h3>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., Garcia-Bravo, J. M. (2025). <i>Demonstration of a Digital Twin Framework for a Two-Actuator Hydraulic Application.</i> Purdue Polytechnic Graduate Student Poster Symposium.</p>
+          <div class="pub-meta">
+            <span class="pub-status">In press</span>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., &amp; Garcia-Bravo, J. M. (2024). <i>Physics-Based Digital Twin for Hydraulic Equipment.</i> DigiTwin Conference.</p>
+          <div class="pub-meta">
+            <span class="pub-status">Presented</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{durango2024dt,
+  author    = {Durango, Marvin and
+               Garcia-Bravo, Jos&#233; M.},
+  title     = {Physics-Based Digital Twin
+               for Hydraulic Equipment},
+  booktitle = {DigiTwin Conference},
+  year      = {2024}
+}</pre>
+            </details>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., &amp; Garcia-Bravo, J. M. (2023). <i>SPH as a Model for Hydraulic Components.</i> ASME/BATH Symposium on Fluid Power and Motion Control (FPMC).</p>
+          <div class="pub-meta">
+            <span class="pub-status">Presented</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{durango2023sph,
+  author    = {Durango, Marvin and
+               Garcia-Bravo, Jos&#233; M.},
+  title     = {SPH as a Model for
+               Hydraulic Components},
+  booktitle = {ASME/BATH Symposium on Fluid
+               Power and Motion Control},
+  year      = {2023}
+}</pre>
+            </details>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-cite">Durango, M., Borders, E., Newell, B., Garcia, J., &amp; Breidi, F. (2022). <i>Mixed Reality for Fluid Power Instruction.</i> ASEE Annual Conference &amp; Exposition.</p>
+          <div class="pub-meta">
+            <span class="pub-status">Presented</span>
+            <details class="pub-bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{durango2022mr,
+  author    = {Durango, Marvin and
+               Borders, E. and Newell,
+               Brittany and Garcia, J. and
+               Breidi, Farid},
+  title     = {Mixed Reality for Fluid
+               Power Instruction},
+  booktitle = {ASEE Annual Conference
+               \&amp; Exposition},
+  year      = {2022}
+}</pre>
+            </details>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+</div>
+
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact">
   <div class="wrap">
@@ -334,7 +710,7 @@ a{color:inherit}
     </div>
     <div class="links">
       <span>© 2026 Marvin Durango-Cogollo · Purdue University</span>
-      <span><a href="https://github.com/mrdurangoc" target="_blank" rel="noopener">GitHub</a><a href="index.html#publications">Publications</a><a href="CV_Marvin_Durango.pdf" download>CV</a></span>
+      <span><a href="https://github.com/mrdurangoc" target="_blank" rel="noopener">GitHub</a><a href="#publications">Publications</a><a href="CV_Marvin_Durango.pdf" download>CV</a></span>
     </div>
   </div>
 </section>
@@ -348,20 +724,44 @@ new IntersectionObserver(([e])=>nav.classList.toggle('solid',!e.isIntersecting),
 const rvObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.parentElement.querySelectorAll(':scope > .rv').length>1?(Array.from(el.parentElement.children).indexOf(el)%4)*90:0)+'ms';rvObs.observe(el)});
 
+// Mobile menu
+const menu=document.querySelector('.menu-toggle'), navigation=document.getElementById('navigation');
+function closeMenu(){navigation.classList.remove('open');menu.setAttribute('aria-expanded','false')}
+menu.addEventListener('click',()=>{const o=navigation.classList.toggle('open');menu.setAttribute('aria-expanded',String(o))});
+navigation.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&navigation.classList.contains('open')){closeMenu();menu.focus()}});
+
+// Open a project note when linked to it
+function openTarget(){const el=document.getElementById(location.hash.slice(1));if(el&&el.tagName==='DETAILS')el.open=true}
+addEventListener('hashchange',openTarget);openTarget();
+
+// Ambient video: plays only when visible, motion is allowed, and the tab is in front
+const reduce=matchMedia('(prefers-reduced-motion: reduce)'), toggle=document.getElementById('motionToggle');
+const videos=[...document.querySelectorAll('video')], visible=new Set();
+let enabled=!reduce.matches;
+function shouldPlay(v){return enabled&&visible.has(v)&&!document.hidden&&(!v.closest('.stage')||v.classList.contains('on'))}
+function refresh(){
+  videos.forEach(v=>{if(shouldPlay(v)){if(v.preload==='none')v.preload='auto';v.play().catch(()=>{})}else v.pause()});
+  toggle.textContent=enabled?'❚❚ Pause motion':'▶ Play motion';
+  toggle.setAttribute('aria-pressed',String(enabled));
+}
+toggle.addEventListener('click',()=>{enabled=!enabled;refresh()});
+reduce.addEventListener('change',()=>{enabled=!reduce.matches;refresh()});
+document.addEventListener('visibilitychange',refresh);
+const vidObs=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?visible.add(e.target):visible.delete(e.target));refresh()},{threshold:.2});
+videos.forEach(v=>vidObs.observe(v));
+
 // Sticky chapter: swap the stage as each step reaches the middle
 const layers=document.querySelectorAll('.stage > [data-s]'), tag=document.getElementById('stageTag');
 const stepObs=new IntersectionObserver(es=>es.forEach(e=>{
   if(!e.isIntersecting) return;
-  const s=e.target.dataset.s;
-  document.querySelectorAll('.step').forEach(st=>st.classList.toggle('on',st===e.target));
-  layers.forEach(l=>{const on=l.dataset.s===s;l.classList.toggle('on',on);if(l.tagName==='VIDEO'){on?l.play().catch(()=>{}):l.pause()}});
-  tag.textContent=e.target.dataset.tag;
+  const st=e.target.dataset.s;
+  document.querySelectorAll('.step').forEach(x=>x.classList.toggle('on',x===e.target));
+  layers.forEach(l=>l.classList.toggle('on',l.dataset.s===st));
+  tag.textContent=e.target.dataset.tag; refresh();
 }),{rootMargin:'-45% 0px -45% 0px'});
-document.querySelectorAll('.step').forEach(s=>stepObs.observe(s));
-
-// Lazy play: tile videos only load and play while on screen
-const vidObs=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.preload='auto';v.play().catch(()=>{})}else v.pause()}),{threshold:.25});
-document.querySelectorAll('video.lazyplay').forEach(v=>vidObs.observe(v));
+document.querySelectorAll('.step').forEach(x=>stepObs.observe(x));
+refresh();
 </script>
 </body>
 </html>
