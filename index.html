@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dr. Marvin Durango-Cogollo — Digital Twin &amp; Simulation Engineer · VR/XR Developer</title>
-<meta name="description" content="Marvin Durango Cogollo (Durango-Cogollo) — Digital Twin &amp; Simulation Engineer and VR/XR Developer with a Ph.D. from Purdue University. Fluid power, smart manufacturing and IoT.">
+<title>Marvin Durango Cogollo, Ph.D. — Digital Twin &amp; Simulation Engineer</title>
+<meta name="description" content="Marvin Durango Cogollo (Durango-Cogollo) — Digital twin, simulation and industrial automation engineer (Ph.D., Purdue; R&amp;D at Hitachi America). Physics-based models, automation and industrial IoT, VR/MR interfaces and physics-informed AI.">
 <link rel="canonical" href="https://mrdurangoc.github.io/">
 <script type="application/ld+json">
 {
@@ -12,7 +12,7 @@
   "@type": "Person",
   "name": "Marvin Durango Cogollo",
   "alternateName": ["Marvin Durango-Cogollo", "Marvin R. Durango"],
-  "jobTitle": "Digital Twin & Simulation Engineer · VR/XR Developer",
+  "jobTitle": "Digital Twin and Simulation Engineer",
   "affiliation": {
     "@type": "CollegeOrUniversity",
     "name": "Purdue University"
@@ -148,7 +148,8 @@ a{color:inherit}
 .tile.wide{grid-column:span 3}
 .tile video,.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
 .tile:hover video,.tile:hover img{transform:scale(1.04)}
-.tile::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.85) 100%)}
+.tile::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.35) 30%,rgba(0,0,0,.82) 58%,rgba(0,0,0,.95) 100%)}
+.tile .t{text-shadow:0 1px 14px rgba(0,0,0,.85)}
 .tile .t{padding:24px}
 .tile b{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-soft)}
 .tile h3{font-family:var(--display);font-size:24px;letter-spacing:-.025em;line-height:1.1;margin-top:8px}
@@ -253,6 +254,60 @@ section,details{scroll-margin-top:72px}
 .pub-bib summary{cursor:pointer;font:500 12px var(--mono);color:#55555b}
 .pub-bib pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 var(--mono);margin-top:12px;background:var(--paper);padding:16px;border-radius:12px}
 @media (max-width:860px){.exp-head{flex-direction:column;gap:6px}}
+
+/* ---------- story thread: the four layers ---------- */
+.bars{display:inline-flex;gap:3px;vertical-align:middle;flex:none}
+.bars i{display:block;width:14px;height:4px;border-radius:2px;background:currentColor;opacity:.25}
+.bars i.on{opacity:1;background:var(--orange)}
+.layer b{display:flex;align-items:center;gap:10px}
+.legend{margin-top:56px;display:flex;align-items:center;gap:12px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--grey)}
+.lm{display:flex;align-items:center;gap:10px;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-top:20px;color:var(--grey)}
+.lm.center{justify-content:center;margin-top:30px;color:var(--grey-2)}
+.tile .lm{margin:0 0 10px;color:rgba(255,255,255,.78)}
+.stage-tag{display:flex;align-items:center;gap:10px}
+.stage-tag .bars i{background:#fff}
+.stage-tag .bars i.on{background:var(--orange)}
+.wip{display:inline-block;margin-left:10px;padding:2px 8px;border:1px solid rgba(255,138,80,.55);border-radius:999px;font-size:10px;letter-spacing:.1em;color:#ff8a50;vertical-align:middle}
+.svgwrap{background:#0b0c10;display:flex;align-items:center;justify-content:center;padding:3%}
+.svgwrap svg{width:100%;height:100%}
+.stage .svgwrap{transform:none}
+.step .m-media.svgwrap{aspect-ratio:auto;padding:20px 12px}
+.step .m-media.svgwrap svg{height:auto}
+
+/* ---------- factory chapter ---------- */
+.fx{margin-top:64px;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 40px 80px -40px rgba(0,0,0,.28)}
+.fx-media{background:#fbfbf8}
+.fx-media img,.fx-media video{display:block;width:100%;height:100%;object-fit:cover}
+.fx-body{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;padding:36px 40px 40px;align-items:end}
+.fx-kicker{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#b83c08}
+.fx h3{font-family:var(--display);font-weight:800;font-size:clamp(28px,3vw,40px);letter-spacing:-.035em;line-height:1.05;margin-top:12px;color:var(--ink-2)}
+.fx p{margin-top:14px;color:#55555b;font-size:17px;max-width:58ch}
+.fx p.teach{font-size:15px;padding-left:14px;border-left:2px solid #b83c08}
+.fx-stats{display:grid;gap:22px}
+.fx-stats div{font-size:14px;color:var(--grey);line-height:1.35}
+.fx-stats strong{display:block;font-family:var(--display);font-weight:800;font-size:clamp(34px,3.4vw,50px);letter-spacing:-.045em;line-height:1;color:var(--ink-2);margin-bottom:6px}
+.fx.split{display:grid;grid-template-columns:1.05fr 1fr}
+.fx.split .fx-media{background:#0b0c10;min-height:440px}
+.fx.split .fx-body{grid-template-columns:1fr;align-content:space-between;gap:32px}
+.fx.split .fx-stats{grid-template-columns:1fr 1fr}
+@media (max-width:860px){
+  .fx-body{grid-template-columns:1fr;padding:28px 24px 32px;gap:28px}
+  .fx.split{grid-template-columns:1fr}
+  .fx.split .fx-media{min-height:0;aspect-ratio:16/10}
+  .fx-stats{grid-template-columns:1fr 1fr}
+}
+
+/* ---------- text tile ---------- */
+.tile.text{background:radial-gradient(120% 90% at 85% 8%,rgba(255,94,26,.30),transparent 60%),linear-gradient(160deg,#1b1c21,#0e0f12)}
+.tile.text::before{display:none}
+.watermark{position:absolute;top:22px;right:26px;z-index:-1;font-family:var(--display);font-weight:800;font-size:clamp(56px,7vw,104px);letter-spacing:-.05em;line-height:1;color:rgba(255,255,255,.06)}
+
+/* ---------- skills ---------- */
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.skills div{padding:16px 0;border-bottom:1px solid var(--line)}
+.skills dt{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink-2)}
+.skills dd{margin-top:4px;color:#55555b;font-size:15px}
+@media (max-width:760px){.skills{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -279,27 +334,28 @@ section,details{scroll-margin-top:72px}
 <section class="hero" id="top">
   <video src="hero-twin.mp4" poster="hero-twin-poster.webp" muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <div class="wrap">
-    <div class="eyebrow">Digital Twin &amp; Simulation Engineer · VR/XR Developer</div>
+    <div class="eyebrow">Digital Twin &amp; Simulation Engineer · Ph.D., Purdue</div>
     <h1 style="margin-top:20px">Twins that close <span>the loop.</span></h1>
-    <p>From the governing physics to the operator's headset. I build every layer, and make them work together.</p>
+    <p>Eight years building digital twins that run next to real machines: the physics, the hardware that keeps them in sync, the people who use them, and now AI.</p>
     <div class="ctas">
-      <a class="btn primary" href="#crane">See the work</a>
+      <a class="btn primary" href="#stack">See how it connects</a>
       <a class="btn ghost" href="CV_Marvin_Durango.pdf" download>Download CV</a>
     </div>
   </div>
   <button class="motion-toggle" id="motionToggle" type="button" aria-pressed="true">❚❚ Pause motion</button>
 </section>
 
-<!-- ============ STATEMENT ============ -->
-<section class="statement">
+<!-- ============ STATEMENT · THE FOUR LAYERS ============ -->
+<section class="statement" id="stack">
   <div class="wrap">
-    <h2 class="rv">Most engineers work in one layer. <em>The hard part is connecting all four.</em></h2>
+    <h2 class="rv">Most engineers work in one layer. <em>A twin needs all four, connected.</em></h2>
     <div class="layers">
-      <div class="layer rv"><b>01</b><h3>Physics</h3><p>Lumped-parameter, CFD and SPH models validated against real benches.</p></div>
-      <div class="layer rv"><b>02</b><h3>Estimation</h3><p>Extended Kalman Filters and friction models running in real time.</p></div>
-      <div class="layer rv"><b>03</b><h3>Edge &amp; IoT</h3><p>DAQ, Raspberry Pi, Modbus, TCP/IP and Firebase pipelines.</p></div>
-      <div class="layer rv"><b>04</b><h3>Interface</h3><p>Web dashboards and mixed-reality teleoperation in Unity.</p></div>
+      <div class="layer rv"><b><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>01</b><h3>Model</h3><p>The physics of the machine: CFD, FEA, SPH and dynamic-system models, validated against measured data.</p></div>
+      <div class="layer rv"><b><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i></span>02</b><h3>Machine</h3><p>The hardware and automation that keep the twin in sync: sensors, PLCs, robots, OPC UA, MQTT, ROS.</p></div>
+      <div class="layer rv"><b><span class="bars" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i></span>03</b><h3>People</h3><p>Cloud applications and VR/MR interfaces in Unity that let people see and operate the machine.</p></div>
+      <div class="layer rv"><b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i></span>04</b><h3>AI</h3><p>Physics-informed neural networks and surrogate models: the newest layer, built on the other three.</p></div>
     </div>
+    <p class="legend rv"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i class="on"></i></span>Every project below lights up the layers it connects.</p>
   </div>
 </section>
 
@@ -309,43 +365,87 @@ section,details{scroll-margin-top:72px}
     <div class="chapter-head rv">
       <div class="eyebrow">Flagship · Doctoral platform</div>
       <h2>Hydraulic crane<br>digital twin.</h2>
-      <p>A real test bench and its twin, synchronized live, from the plant model to a HoloLens.</p>
+      <p>Two joints, real hydraulics, and a twin that tracks the machine within 7%. Built end to end, one layer at a time.</p>
+      <div class="lm center"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span>Model · Machine · People · AI</span></div>
     </div>
 
     <div class="sticky-grid">
       <div class="stage" aria-hidden="true">
-        <video data-s="0" class="on" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="metadata"></video>
-        <img data-s="1" src="assets/webapps/daq-plots.webp" class="contain" alt="" loading="lazy">
-        <img data-s="2" src="assets/webapps/daq-live.webp" class="contain" alt="" loading="lazy">
-        <video data-s="3" src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="none"></video>
-        <span class="stage-tag" id="stageTag">Plant model</span>
+        <img data-s="0" class="on contain" src="assets/webapps/daq-plots.webp" alt="">
+        <img data-s="1" src="assets/crane-machine.webp" alt="" loading="lazy">
+        <video data-s="2" src="hero-twin.mp4" poster="hero-twin-poster.webp" muted loop playsinline preload="none"></video>
+        <div data-s="3" class="svgwrap"><svg viewBox="0 0 800 500" role="img" aria-label="Inverse physics-informed neural network: bench measurements feed a neural network that estimates states and model parameters; training minimizes data error plus the residual of the hydraulic model equations">
+  <g font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#a1a1a6" text-anchor="middle">
+    <text x="140" y="80">MEASURED</text><text x="400" y="80">NEURAL NETWORK</text><text x="660" y="80">ESTIMATED</text>
+  </g>
+  <g fill="#141519" stroke="#34353c" stroke-width="1.5">
+    <rect x="40" y="100" width="200" height="200" rx="14"/><rect x="560" y="100" width="200" height="200" rx="14"/>
+  </g>
+  <g font-family="Inter, sans-serif" font-size="18" fill="#ececee">
+    <text x="64" y="158">Pressures</text><text x="64" y="208">Valve command</text><text x="64" y="258">Encoder angle</text>
+    <text x="584" y="158">Position</text><text x="584" y="208">Velocity</text><text x="584" y="258">Model parameters</text>
+  </g>
+  <g stroke="#3a3b42" stroke-width="1.2">
+    <path d="M330 140L400 120M330 140L400 170M330 140L400 220M330 140L400 270M330 200L400 120M330 200L400 170M330 200L400 220M330 200L400 270M330 260L400 120M330 260L400 170M330 260L400 220M330 260L400 270M400 120L470 160M400 170L470 160M400 220L470 160M400 270L470 160M400 120L470 240M400 170L470 240M400 220L470 240M400 270L470 240"/>
+  </g>
+  <g fill="#1d1e24" stroke="#c8c8cc" stroke-width="1.5">
+    <circle cx="330" cy="140" r="9"/><circle cx="330" cy="200" r="9"/><circle cx="330" cy="260" r="9"/>
+    <circle cx="400" cy="120" r="9"/><circle cx="400" cy="170" r="9"/><circle cx="400" cy="220" r="9"/><circle cx="400" cy="270" r="9"/>
+    <circle cx="470" cy="160" r="9"/><circle cx="470" cy="240" r="9"/>
+  </g>
+  <g stroke="#a1a1a6" stroke-width="2" fill="none"><path d="M246 200H296"/><path d="M500 200H552"/><path d="M660 304V400H560"/></g>
+  <g fill="#a1a1a6"><path d="M304 200l-10 -6v12z"/><path d="M560 200l-10 -6v12z"/><path d="M552 400l10 -6v12z"/></g>
+  <rect x="250" y="360" width="300" height="80" rx="14" fill="rgba(255,94,26,.10)" stroke="#ff5e1a" stroke-width="1.5"/>
+  <text x="400" y="396" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#fff">Hydraulic model equations</text>
+  <text x="400" y="421" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="1" fill="#ff8a50">physics residual</text>
+  <path d="M400 356V316" stroke="#ff5e1a" stroke-width="2"/><path d="M400 308l-6 10h12z" fill="#ff5e1a"/>
+  <text x="412" y="342" font-family="IBM Plex Mono, monospace" font-size="13" fill="#ff8a50">physics loss</text>
+  <text x="400" y="482" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1" fill="#a1a1a6">training loss = data error + physics residual</text>
+</svg></div>
+        <span class="stage-tag"><span class="bars" id="stageBars"><i class="on"></i><i></i><i></i><i></i></span><span id="stageTag">Model · bench data</span></span>
       </div>
 
       <div class="steps">
-        <article class="step" data-s="0" data-tag="Plant model">
-          <b>01 — Physics</b>
-          <h3>A plant model that matches the bench.</h3>
-          <p>A 4-state Python model of the Parker cylinder bench, validated against MATLAB/Simulink, with friction characterized using Stribeck and LuGre models.</p>
-          <div class="num">4<small>states, validated against Simulink</small></div>
-          <div class="m-media"><img src="HydroLabMR-poster.webp" alt="Hydraulic crane digital twin in mixed reality" loading="lazy"></div>
+        <article class="step" data-s="0" data-tag="Model · bench data">
+          <b>01 — Model</b>
+          <h3>Physics that matches the machine.</h3>
+          <p>Lumped-parameter models of cylinders, motors, electro-hydrostatic actuators, hydrostatic transmissions and proportional valves, identified from bench data, then ported from MATLAB to open-source Python so they run license-free on low-cost edge devices.</p>
+          <div class="num">&lt;1.3%<small>NRMSE, Python port vs. MATLAB original</small></div>
+          <div class="m-media"><img src="assets/webapps/daq-plots.webp" alt="Pressure, torque, speed and command signals recorded on the hydraulic test bench" loading="lazy" style="object-fit:contain;background:#0b0c10"></div>
         </article>
-        <article class="step" data-s="1" data-tag="State estimation">
-          <b>02 — Estimation</b>
-          <h3>An EKF running on the edge.</h3>
-          <p>An Extended Kalman Filter estimates cylinder states in real time on a Raspberry Pi, next to the hardware it is watching.</p>
-          <div class="m-media"><img src="assets/webapps/daq-plots.webp" alt="Pressure, torque and command signals from the test bench" loading="lazy"></div>
+        <article class="step" data-s="1" data-tag="Machine · the test bench">
+          <b>02 — Machine</b>
+          <h3>Built from the ground up, then automated.</h3>
+          <p>Power unit, proportional valves, cylinder, hydraulic motor and EHA, with pressure, position, torque and encoder sensors, data acquisition and edge computing, designed in Inventor and NX. Remote start-up, software speed control and fault-handled sequences now run unattended test campaigns.</p>
+          <div class="num">&lt;7%<small>tracking error, twin vs. physical machine</small></div>
+          <div class="m-media"><img src="assets/crane-machine.webp" alt="The crane's hydraulic swing motor and boom cylinder" loading="lazy"></div>
         </article>
-        <article class="step" data-s="2" data-tag="Live DAQ dashboard">
-          <b>03 — Edge to web</b>
-          <h3>Every sensor, live in a browser.</h3>
-          <p>DAQ data streams over TCP/IP and Firebase into a web dashboard that also drives the EHA and pump VFD and runs scripted experiments.</p>
-          <div class="m-media"><img src="assets/webapps/daq-live.webp" alt="Live excitation experiment dashboard" loading="lazy"></div>
+        <article class="step" data-s="2" data-tag="People · mixed-reality view">
+          <b>03 — People</b>
+          <h3>Operate it by hand, from mixed reality.</h3>
+          <p>On HoloLens 2, the operator places a target by hand. FABRIK inverse kinematics and RRT* path planning turn it into collision-free joint commands, streamed over TCP/IP to the physical boom and swing, while a web dashboard shows every sensor live.</p>
+          <div class="m-media"><video src="hero-twin.mp4" poster="hero-twin-poster.webp" muted loop playsinline preload="none" aria-label="Mixed-reality view of the crane's digital twin with live telemetry"></video></div>
         </article>
-        <article class="step" data-s="3" data-tag="Mixed reality">
-          <b>04 — Interface</b>
-          <h3>Teleoperate it from mixed reality.</h3>
-          <p>In a HoloLens 2, the operator sees the twin over the real crane, with live telemetry and the estimated cylinder position.</p>
-          <div class="m-media"><video src="HydroLabMR.mp4" poster="HydroLabMR-poster.webp" muted loop playsinline preload="none" class="lazyplay"></video></div>
+        <article class="step" data-s="3" data-tag="AI · in progress">
+          <b>04 — AI <span class="wip">In progress</span></b>
+          <h3>Now, physics-informed AI.</h3>
+          <p>An inverse physics-informed neural network for hydraulic state estimation: it learns from bench data while respecting the same hydraulic equations, extending the Kalman filter that already runs in real time on the edge.</p>
+          <div class="m-media svgwrap"><svg viewBox="0 0 400 610" role="img" aria-label="Inverse physics-informed neural network: bench measurements feed a neural network that estimates states and model parameters; training minimizes data error plus the residual of the hydraulic model equations">
+  <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#a1a1a6" text-anchor="middle"><text x="200" y="30">MEASURED</text><text x="200" y="372">ESTIMATED</text></g>
+  <g fill="#141519" stroke="#34353c" stroke-width="1.5"><rect x="20" y="44" width="360" height="66" rx="12"/><rect x="20" y="386" width="360" height="66" rx="12"/></g>
+  <g font-family="Inter, sans-serif" font-size="17" fill="#ececee" text-anchor="middle"><text x="200" y="83">Pressures · Command · Encoder</text><text x="200" y="425">Position · Velocity · Parameters</text></g>
+  <g stroke="#3a3b42" stroke-width="1.2"><path d="M140 180L110 235M140 180L170 235M140 180L230 235M140 180L290 235M200 180L110 235M200 180L170 235M200 180L230 235M200 180L290 235M260 180L110 235M260 180L170 235M260 180L230 235M260 180L290 235M110 235L170 290M170 235L170 290M230 235L170 290M290 235L170 290M110 235L230 290M170 235L230 290M230 235L230 290M290 235L230 290"/></g>
+  <g fill="#1d1e24" stroke="#c8c8cc" stroke-width="1.5"><circle cx="140" cy="180" r="9"/><circle cx="200" cy="180" r="9"/><circle cx="260" cy="180" r="9"/><circle cx="110" cy="235" r="9"/><circle cx="170" cy="235" r="9"/><circle cx="230" cy="235" r="9"/><circle cx="290" cy="235" r="9"/><circle cx="170" cy="290" r="9"/><circle cx="230" cy="290" r="9"/></g>
+  <text x="32" y="239" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1" fill="#a1a1a6">NN</text>
+  <g stroke="#a1a1a6" stroke-width="2"><path d="M200 114V156"/><path d="M200 304V346"/><path d="M200 456V490"/></g>
+  <g fill="#a1a1a6"><path d="M200 164l-6 -10h12z"/><path d="M200 354l-6 -10h12z"/><path d="M200 498l-6 -10h12z"/></g>
+  <rect x="60" y="500" width="280" height="68" rx="12" fill="rgba(255,94,26,.10)" stroke="#ff5e1a" stroke-width="1.5"/>
+  <text x="200" y="530" text-anchor="middle" font-family="Inter, sans-serif" font-size="17" fill="#fff">Hydraulic model equations</text>
+  <text x="200" y="553" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#ff8a50">physics residual</text>
+  <path d="M340 534H378V235H312" stroke="#ff5e1a" stroke-width="2" fill="none"/><path d="M302 235l10 -6v12z" fill="#ff5e1a"/>
+  <text transform="rotate(-90 392 390)" x="392" y="390" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#ff8a50">physics loss</text>
+  <text x="200" y="598" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#a1a1a6">loss = data error + physics residual</text>
+</svg></div>
         </article>
       </div>
     </div>
@@ -357,51 +457,77 @@ section,details{scroll-margin-top:72px}
   <div class="wrap">
     <span class="eyebrow rv">By the numbers</span>
     <div class="num-grid">
-      <div class="big rv"><strong>5+</strong><span>years in fluid-power research</span></div>
-      <div class="big rv"><strong class="o">&lt;7%</strong><span>twin tracking error on the hydraulic bench</span></div>
-      <div class="big rv"><strong class="o">4</strong><span>layers connected end to end, from model to headset</span></div>
-      <div class="big rv"><strong>5</strong><span>papers and conference talks</span></div>
+      <div class="big rv"><strong>8+</strong><span>years building digital twins and simulations</span></div>
+      <div class="big rv"><strong class="o">&lt;7%</strong><span>tracking error between twin and machine</span></div>
+      <div class="big rv"><strong class="o">&lt;1.3%</strong><span>NRMSE after moving models to open-source Python</span></div>
+      <div class="big rv"><strong>144k+</strong><span>particles in real-time SPH on my own GPU engine</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============ CHAPTER 02 · HITACHI ============ -->
-<section class="ch2" id="hitachi">
+<!-- ============ CHAPTER 02 · FACTORY FLOOR ============ -->
+<section class="ch2" id="factory">
   <div class="wrap">
     <div class="ch2-head">
       <div class="rv">
-        <div class="eyebrow">Industry · Hitachi America R&amp;D</div>
-        <h2>One task.<br>Two cells.<br>In sync.</h2>
+        <div class="eyebrow">Smart manufacturing · Industry</div>
+        <h2>From one robot cell<br>to a whole line.</h2>
       </div>
-      <p class="rv">A physical UR5 workcell and its Visual Components twin, driven by the same task description online. Robot trajectories are logged against a human fatigue model, so each cycle is judged on throughput and ergonomics together.</p>
+      <p class="rv">The same stack on the factory floor: a collaborative cell at Hitachi America, then a six-station production line in Purdue's Smart Learning Factory.</p>
     </div>
-    <div class="ch2-media rv">
-      <img src="HRC-cell.webp" alt="Physical UR collaborative cell, its virtual twin in Visual Components, and operator fatigue curves" loading="lazy">
-    </div>
-    <div class="ch2-foot">
-      <div class="rv"><strong>+89%</strong>capacity predictability</div>
-      <div class="rv"><strong>&gt;50%</strong>lower operator fatigue</div>
-      <div class="rv"><strong>UR5 · Pi · VC</strong>robot, edge translator, virtual cell</div>
-    </div>
+
+    <article class="fx rv" id="hitachi">
+      <div class="fx-media wide"><img src="HRC-cell.webp" alt="Physical UR collaborative cell, its virtual twin in Visual Components, and operator fatigue curves over one work cycle" loading="lazy"></div>
+      <div class="fx-body">
+        <div>
+          <div class="fx-kicker">Hitachi America R&amp;D · 2023–24</div>
+          <h3>One task. Two cells. In sync.</h3>
+          <p>UR5 collaborative-robot tasks for human–robot workflows, a sensor-integrated twin of the cell fed with live robot data through ROS, and discrete-event simulation of packaging and demand scenarios, so programs and layouts were proven before physical commissioning.</p>
+          <div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>Model · Machine · People</span></div>
+        </div>
+        <div class="fx-stats">
+          <div><strong>+89%</strong>capacity predictability</div>
+          <div><strong>&gt;50%</strong>less operator fatigue</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="fx split rv" id="slf">
+      <div class="fx-media"><video src="URMR.mp4" poster="URMR-poster.webp" muted loop playsinline preload="none" aria-label="Mixed-reality twin of a UR collaborative robot in the learning factory"></video></div>
+      <div class="fx-body">
+        <div>
+          <div class="fx-kicker">Purdue Smart Learning Factory · in progress</div>
+          <h3>Six stations. One twin.</h3>
+          <p>A production-line twin in Visual Components, synchronized with the physical cell over OPC UA and extending to NVIDIA Isaac Sim, with UR10e kinematics validated against the real robot. Shop-floor data flows to AWS and over MQTT into simulation and monitoring.</p>
+          <p class="teach">I also teach it: a project-based course (Fall 2025) where students build digital twins of a production line with robots, conveyors and AGVs.</p>
+          <div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>Model · Machine · People</span></div>
+        </div>
+        <div class="fx-stats">
+          <div><strong>2 / 6</strong>stations recreated for virtual commissioning</div>
+          <div><strong>OPC UA</strong>live sync with the physical cell</div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============ CHAPTER 03 · SPH ============ -->
+<!-- ============ CHAPTER 03 · SIMULATION ============ -->
 <section class="ch2 sim" id="sph">
   <div class="wrap">
     <div class="ch2-head">
       <div class="rv">
-        <div class="eyebrow">Computational modeling · SPH / CFD</div>
+        <div class="eyebrow">The model layer · CFD / SPH</div>
         <h2>See the flow.<br>Understand<br>the physics.</h2>
       </div>
-      <p class="rv">GPU-accelerated Smoothed Particle Hydrodynamics of the internal flow in a hydraulic spool valve, compared with experiments and mesh CFD across 2–8 mm spool strokes. A view of behavior no installed sensor can measure.</p>
+      <p class="rv">Meshless CFD for parts that move: a hydraulic spool valve simulated with Smoothed Particle Hydrodynamics and no remeshing, compared with mesh CFD across 2–8 mm strokes. The same particle physics now runs in real time in my own GPU engine.</p>
     </div>
     <div class="ch2-media rv">
-      <video class="lazyplay" src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none" aria-label="SPH particles flowing through a hydraulic spool valve, colored by velocity"></video>
+      <video src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none" aria-label="SPH particles flowing through a hydraulic spool valve, compared with mesh CFD"></video>
     </div>
     <div class="ch2-foot">
-      <div class="rv"><strong>9 studies</strong>compared in a go/no-go guide for SPH vs. mesh CFD</div>
-      <div class="rv"><strong>J. Hydrodyn.</strong>review accepted (Springer), plus ASME/BATH FPMC 2023</div>
+      <div class="rv"><strong>No remeshing</strong>moving spool simulated with SPH (ASME/BATH FPMC 2023)</div>
+      <div class="rv"><strong>J. Hydrodyn.</strong>review of SPH for internal flow, accepted (Springer)</div>
+      <div class="rv"><strong>144k+</strong>particles in real time, C++ and GLSL compute shaders</div>
     </div>
   </div>
 </section>
@@ -411,36 +537,36 @@ section,details{scroll-margin-top:72px}
   <div class="wrap">
     <div class="more-head rv">
       <h2>More work.</h2>
-      <p>Simulation, real-time physics, robotics and the software that ships it.</p>
+      <p>Each one a piece of the same stack, from offline CFD to the software people use every day.</p>
     </div>
     <div class="tiles">
-      <a class="tile wide rv" href="#sph">
-        <video class="lazyplay" src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><b>Simulation · Peer-reviewed</b><h3>Spool valve SPH</h3><p>GPU particle simulation of internal valve flow, validated against experiments and CFD.</p></div>
+      <a class="tile wide rv" href="#gpu">
+        <video src="XPBD.mp4" poster="XPBD-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i class="on"></i><i></i></span><span>Model · People</span></div><h3>GPU physics engine</h3><p>C++, OpenGL and GLSL compute shaders: SPH fluids with 144,000+ particles, XPBD constraints and continuum-mechanics beams.</p></div>
       </a>
       <a class="tile wide rv" href="#relief">
-        <video class="lazyplay" src="Fluid.mp4" poster="Fluid-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><b>Simulation · XR</b><h3>Relief valve CFD in MR</h3><p>Solver output you can walk around and read in the room.</p></div>
-      </a>
-      <a class="tile rv" href="#xpbd">
-        <video class="lazyplay" src="XPBD.mp4" poster="XPBD-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><b>Real-time physics</b><h3>XPBD in Unity</h3><p>Neo-Hookean soft bodies a twin can run live.</p></div>
+        <video src="Fluid.mp4" poster="Fluid-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i class="on"></i><i></i></span><span>Model · People</span></div><h3>CFD you can walk into</h3><p>Gear-pump and relief-valve flow from Ansys CFX, rendered in virtual and mixed reality.</p></div>
       </a>
       <a class="tile rv" href="#pneumatic">
-        <video class="lazyplay" src="PneumaticDT-web.mp4" poster="PneumaticDT-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><b>Estimation · ML</b><h3>Pneumatic twin</h3><p>Hybrid EKF and machine learning, the proof of concept for the hydraulic platform.</p></div>
+        <video src="PneumaticDT-web.mp4" poster="PneumaticDT-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span>All four</span></div><h3>Pneumatic digital twin</h3><p>Hybrid physics and data-driven estimator, mixed-reality control, open dataset.</p></div>
       </a>
       <a class="tile rv" href="#planning">
-        <video class="lazyplay" src="Media2.mp4" poster="Media2-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><b>Robotics</b><h3>FABRIK + RRT*</h3><p>Inverse kinematics fused with path planning for a robotic crane.</p></div>
+        <video src="Media2.mp4" poster="Media2-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>FABRIK + RRT*</h3><p>Inverse kinematics and collision-free planning, now driving the real crane.</p></div>
       </a>
-      <a class="tile wide rv" href="https://www.youtube.com/watch?v=70PWStT7o1c" target="_blank" rel="noopener">
-        <video class="lazyplay" src="URMR.mp4" poster="URMR-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><b>Smart manufacturing · XR</b><h3>Mixed reality learning factory</h3><p>Robots, conveyors and AGVs connected to immersive interfaces.</p></div>
+      <a class="tile rv" href="#sph">
+        <video src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><span>Model</span></div><h3>Spool valve SPH</h3><p>Moving parts, meshless flow, no remeshing.</p></div>
       </a>
       <a class="tile wide rv" href="https://github.com/mrdurangoc" target="_blank" rel="noopener">
         <img src="assets/webapps/daq-plots.webp" alt="" loading="lazy" style="object-position:top left">
-        <div class="t"><b>Software</b><h3>Shipped web apps</h3><p>A lab DAQ and control dashboard plus offline-first PWAs I use daily.</p></div>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>Shipped web apps</h3><p>A lab DAQ and control dashboard, plus offline-first PWAs I use every day.</p></div>
+      </a>
+      <a class="tile wide text rv" href="#hydrocyclone">
+        <span class="watermark" aria-hidden="true">CFD–DEM</span>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><span>Model</span></div><h3>Hydrocyclone separators</h3><p>Coupled fluid–particle CFD with RNG k-ε, RSM and LES benchmarks, validated with laser-diffraction sizing. <i>Fluids</i>, 2020.</p></div>
       </a>
     </div>
   </div>
@@ -451,30 +577,33 @@ section,details{scroll-margin-top:72px}
   <div class="wrap">
     <div class="eyebrow">Project notes</div>
     <h2>The details.</h2>
-    <details id="relief"><summary>Relief valve CFD in mixed reality</summary>
-      <p>CFD results of the internal flow in a hydraulic relief valve (Ansys CFX), rebuilt in Unity as an interactive mixed-reality scene, with custom shaders for color, lighting and texture and scripts that animate the solution through its time steps.</p>
-      <p><b>Why it matters:</b> solver output you can walk around and read in the room, exposing internal velocity and pressure that no installed sensor can measure.</p></details>
-    <details id="xpbd"><summary>Real-time physics with XPBD</summary>
-      <p>Soft-body and deformable-body simulation built on Extended Position-Based Dynamics with energy-derived, neo-Hookean constraints, implemented in C++ and OpenGL compute shaders and in Unity.</p>
-      <p><b>Why it matters:</b> the real-time counterpart to offline CFD and SPH, fast and stable enough for a twin to run live.</p></details>
-    <details id="pneumatic"><summary>Pneumatic Digital Twin</summary>
-      <p>A teleoperation-ready twin built on a hybrid estimator (EKF, LuGre friction and Bayesian regression) that predicts actuator motion from measured signals only, with real-time proportional control from a HoloLens and an open dataset.</p>
-      <p><b>Why it matters:</b> the proof of concept that scaled into the hydraulic crane platform. Under revision at <i>Engineering Science and Technology, an International Journal</i>.</p></details>
-    <details id="planning"><summary>Crane motion planning: FABRIK + RRT*</summary>
-      <p>A FABRIK inverse-kinematics solver fused with RRT* path planning in Unity for collision-free control of a robotic crane.</p>
-      <p><b>Why it matters:</b> the same IK now turns a hand gesture in mixed reality into joint targets for the physical crane.</p></details>
+    <details id="gpu"><summary>GPU physics engine · C++, OpenGL, GLSL</summary>
+      <p>A real-time physics solver written in compute shaders: SPH fluids with more than 144,000 particles, XPBD constraints, and continuum-mechanics beams built on the Green strain tensor, all coupled to interactive 3D rendering.</p>
+      <p><b>Why it matters:</b> the real-time counterpart to offline CFD, the kind of physics a twin has to run live.</p></details>
+    <details id="relief"><summary>Hydraulic component CFD in VR and MR · Ansys CFX, Unity</summary>
+      <p>Gear-pump and pressure-relief-valve flow modeled in Ansys CFX, then rebuilt in Unity so the internal velocity and pressure fields can be explored in virtual and mixed reality.</p>
+      <p><b>Why it matters:</b> it shows what no installed sensor can measure, in a form people can walk around and read.</p></details>
+    <details id="pneumatic"><summary>Pneumatic digital twin</summary>
+      <p>A hybrid physics and data-driven estimator (EKF, LuGre friction and Bayesian ridge regression) with mixed-reality control and an open dataset. Journal manuscript in revision, co-authored with two undergraduate researchers I mentored.</p>
+      <p><b>Why it matters:</b> the proof of concept that scaled into the hydraulic crane platform.</p></details>
+    <details id="planning"><summary>Motion planning · FABRIK + RRT*</summary>
+      <p>A FABRIK inverse-kinematics solver fused with RRT* path planning in Unity for collision-free control of a hydraulic manipulator.</p>
+      <p><b>Why it matters:</b> the same planner now turns a hand gesture in mixed reality into joint commands for the physical crane.</p></details>
+    <details id="hydrocyclone"><summary>Hydrocyclone separators · Ansys Fluent, CFD–DEM</summary>
+      <p>Optimized hydrocyclone separators with coupled fluid–particle and Eulerian multiphase models, benchmarking RNG k-ε, RSM and LES turbulence models, with inputs validated by laser-diffraction particle sizing. Published in <i>Fluids</i> (2020).</p>
+      <p><b>Why it matters:</b> where the model layer started, grounding predictions in the real feed, not assumed inputs.</p></details>
   </div>
 </section>
 
 <!-- ============ ABOUT ============ -->
 <section class="about" id="about">
   <div class="wrap about-grid">
-    <img src="PPicture1.png" alt="Portrait of Marvin Durango-Cogollo" loading="lazy">
+    <img src="PPicture1.png" alt="Portrait of Marvin Durango Cogollo" loading="lazy">
     <div class="rv">
       <div class="eyebrow">About</div>
       <h2>Curiosity,<br>built into systems.</h2>
-      <p>I'm Marvin Durango-Cogollo, a mechanical engineer from Cartagena, Colombia, with a Ph.D. in Engineering Technology from Purdue. My work connects physical modeling, experimental validation and the software that puts both in front of people.</p>
-      <p>My doctoral research focuses on digital twins for hydraulic machinery. In industry, I worked on human–robot collaboration at Hitachi America's Industrial Innovation Laboratory.</p>
+      <p>I'm Marvin Durango Cogollo, a mechanical engineer from Cartagena, Colombia, with a Ph.D. in Engineering Technology from Purdue. For more than eight years I've built models and digital twins that run next to real machines.</p>
+      <p>My doctoral work is the hydraulic crane twin; in industry, I worked on human–robot collaboration at Hitachi America. I also teach and mentor: a smart-manufacturing course, two interns, and two undergraduate researchers who co-authored a journal manuscript.</p>
       <div class="hobbies" aria-label="Beyond the lab"><span>🏹 Archery</span><span>🎙️ Podcast for Latino grad students</span><span>🏋️ Gym</span><span>🌿 Tropical plants</span><span>🚲 Biking</span></div>
       <a class="btn ghost dark" href="CV_Marvin_Durango.pdf" download>Download CV</a>
     </div>
@@ -483,110 +612,70 @@ section,details{scroll-margin-top:72px}
 
 <div class="wrap records">
 <section id="resume" class="record">
-    <div class="sec-head"><span class="tag">04 / history</span><h2>Resume</h2></div>
-    <p class="sec-sub">The formal record behind the projects above — full version available as a PDF.</p>
+  <div class="sec-head"><span class="tag">Resume</span><h2>The record.</h2></div>
+  <p class="resume-summary">Digital twin, simulation and industrial automation engineer (Ph.D., Purdue; R&amp;D at Hitachi America) with 8+ years of experience building digital twins that run next to real machines. My work connects every layer a twin needs: <b>physics-based models</b> of the machine (CFD, FEA, dynamic systems), the <b>hardware and automation</b> that keep it synchronized with the physical asset (sensors, PLCs, robots, OPC UA, MQTT, ROS), and the <b>people</b> who use it (cloud applications and VR/MR interfaces in Unity), now extended with <b>AI</b> through physics-informed neural networks and surrogate models.</p>
+  <div class="hero-cta"><a class="btn ghost dark" href="CV_Marvin_Durango.pdf" download>Download full CV (PDF) →</a></div>
 
-    <p class="resume-summary">
-      I build the full <b>Digital Twin</b> stack and make it pay off: physics models at the right fidelity (CFD down to real-time), estimation that replaces sensors, industrial connectivity and edge computing, <b>robotics and discrete-event simulation</b> (Visual Components, NVIDIA Isaac Sim), and <b>VR/XR interfaces</b> that let people see and operate the machine, written in <b>Python and C++</b>. I prefer the simplest model that answers the question, and I prove it against measured data.
-    </p>
+  <div class="exp-group">
+    <h3 class="exp-group-title">Experience</h3>
+    <ul class="exp-list">
+      <li class="exp-item">
+        <div class="exp-head"><div><div class="exp-role">Graduate Researcher, Digital Twins and Simulation</div><div class="exp-org">Purdue University · School of Engineering Technology · West Lafayette, IN</div></div><div class="exp-dates">Aug 2021 – Present</div></div>
+        <ul class="exp-bullets">
+          <li>Designed and built an instrumented two-joint hydraulic crane and its real-time digital twin end to end: power unit, proportional valves, cylinder, hydraulic motor, electro-hydrostatic actuator, pressure, position, torque and encoder sensors, data acquisition and edge computing; components modeled in CAD (Inventor, NX); the twin tracks the physical machine within <b>7% error</b>.</li>
+          <li>Developed physics-based models of hydraulic cylinders, motors, EHAs, hydrostatic transmissions and proportional valves; ported them from MATLAB to open-source Python with <b>&lt;1.3% NRMSE</b>, enabling license-free deployment on low-cost edge devices.</li>
+          <li>Built a Unity/HoloLens 2 mixed-reality operator interface in which hand-defined targets drive inverse kinematics (FABRIK) and collision-free path planning (RRT*), streamed over TCP/IP to the physical boom and swing.</li>
+          <li>Automated the test system end to end: remote start-up and shutdown of the power unit, software speed control, automated sequences with fault handling and unattended test campaigns.</li>
+          <li>Building a six-station production-line digital twin for Purdue's Smart Learning Factory in Visual Components, synchronized over OPC UA (2 of 6 stations recreated) and extending it to NVIDIA Isaac Sim; validated UR10e kinematics against the physical robot.</li>
+          <li>Connected shop-floor equipment to cloud processing on AWS and integrated a process line over MQTT, streaming real-time machine data into simulation and monitoring.</li>
+        </ul>
+      </li>
+      <li class="exp-item">
+        <div class="exp-head"><div><div class="exp-role">R&amp;D Intern, Smart and Digital Manufacturing</div><div class="exp-org">Hitachi America · Industrial Innovation Laboratory · Farmington Hills, MI</div></div><div class="exp-dates">Jun 2023 – Jan 2024</div></div>
+        <ul class="exp-bullets">
+          <li>Programmed UR5 collaborative-robot tasks for human–robot workflows, improving capacity predictability by <b>89%</b> and reducing operator fatigue by <b>more than 50%</b>.</li>
+          <li>Built a sensor-integrated digital twin of a manufacturing cell and streamed live robot data through ROS, so programs and layout changes were validated before physical commissioning.</li>
+          <li>Developed discrete-event simulations of packaging processes and demand scenarios to evaluate throughput and capacity before investment.</li>
+          <li>Performed market and patent analysis of robotics and digital-twin technologies to identify customer-driven opportunities.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 
-    <div class="hero-cta" style="margin-top:26px">
-      <a class="btn ghost dark" href="CV_Marvin_Durango.pdf" download>Download full CV (PDF) →</a>
+  <div class="exp-group">
+    <h3 class="exp-group-title">Leadership &amp; teaching</h3>
+    <ul class="exp-bullets">
+      <li>Designed and taught a project-based smart-manufacturing course (Fall 2025) in which students build digital twins of a production line with robots, conveyors and AGVs; instructor or TA for fluid-power and pneumatic-control courses (2021 – present).</li>
+      <li>Mentored two undergraduate interns (industrial connectivity; LiDAR object and distance detection) and two undergraduate researchers who co-authored a journal manuscript; peer reviewer for the Maha Fluid Power Conference.</li>
+    </ul>
+  </div>
+
+  <div class="exp-group">
+    <h3 class="exp-group-title">Skills</h3>
+    <dl class="skills">
+      <div><dt>Modeling &amp; simulation</dt><dd>FEA (Ansys Mechanical), CFD with Ansys Fluent and CFX, SPH, CFD–DEM, multiphysics, discrete-event simulation (Visual Components)</dd></div>
+      <div><dt>Controls &amp; system modeling</dt><dd>MATLAB/Simulink, physics-based dynamic and lumped-parameter models, control design, system identification</dd></div>
+      <div><dt>Digital twins</dt><dd>Physical–digital synchronization, virtual commissioning, sensor fusion, physics-based, data-driven and hybrid approaches, V&amp;V, design of experiments</dd></div>
+      <div><dt>Automation &amp; robotics</dt><dd>Process and test automation, PLC programming, commissioning, UR5 and UR10e, ROS, inverse kinematics, motion planning, LiDAR and SLAM</dd></div>
+      <div><dt>Industrial IoT &amp; data</dt><dd>OPC UA, MQTT, AWS, REST APIs, web dashboards, data acquisition and signal conditioning, edge computing</dd></div>
+      <div><dt>3D, XR &amp; GPU</dt><dd>Unity, Meta Quest, Oculus Rift, HoloLens 2, NVIDIA Isaac Sim, Omniverse/PhysX (familiar), OpenGL, GLSL compute shaders</dd></div>
+      <div><dt>AI &amp; machine learning</dt><dd>Physics-informed neural networks (inverse PINN, in progress), Bayesian regression, computer vision (YOLO, OpenCV, CNNs)</dd></div>
+      <div><dt>Software &amp; CAD</dt><dd>Python (NumPy, SciPy, Flask, asyncio), C++, C#, MATLAB, Docker, Git, Linux; Autodesk Inventor, Siemens NX</dd></div>
+      <div><dt>Languages</dt><dd>English and Spanish (bilingual)</dd></div>
+    </dl>
+  </div>
+
+  <div class="exp-group">
+    <h3 class="exp-group-title">Education</h3>
+    <div class="edu-list">
+      <div class="edu-item"><div class="edu-deg">Ph.D., Engineering Technology</div><div class="edu-school">Purdue University, West Lafayette, IN</div><div class="edu-meta">Dec 2026 · Dissertation defended Sept 2026: physics-based digital twins for hydraulic machinery · Advisor: Dr. José Garcia-Bravo</div></div>
+      <div class="edu-item"><div class="edu-deg">M.S., Mechanical Engineering</div><div class="edu-school">Universidad de los Andes, Bogotá, Colombia</div><div class="edu-meta">2019 · Thesis: CFD–DEM optimization of hydrocyclones</div></div>
+      <div class="edu-item"><div class="edu-deg">B.S., Mechanical Engineering</div><div class="edu-school">Universidad Tecnológica de Bolívar, Cartagena, Colombia</div><div class="edu-meta">2015</div></div>
     </div>
-
-    <div class="exp-group">
-      <h3 class="exp-group-title mono">Experience</h3>
-      <ul class="exp-list">
-
-        <li class="exp-item">
-          <div class="exp-head">
-            <div>
-              <div class="exp-role">Digital Twin Research Engineer (Graduate Researcher, Ph.D.)</div>
-              <div class="exp-org">Purdue University · School of Engineering Technology</div>
-            </div>
-            <div class="exp-dates">Aug 2021 – Present</div>
-          </div>
-          <ul class="exp-bullets">
-            <li><b>Built a hydraulic crane and its Digital Twin from the ground up:</b> HPU with VFD, proportional valves, boom cylinder, hydraulic swing motor, EHA-driven load brake, full instrumentation, DAQ and edge computer.</li>
-            <li>Lumped-parameter models in Python of EHAs, hydrostatic transmissions, cylinders, motors and proportional valves, identified from bench data and validated to <b>&lt;7% tracking error</b>.</li>
-            <li>Real-time <b>Extended Kalman Filter</b> reconstructs actuator velocity and pressures on a Raspberry Pi 4 in <b>186 µs per update</b>, replacing a physical sensor.</li>
-            <li>Mixed-reality teleoperation on HoloLens 2: the operator drags the crane's tip by hand; FABRIK inverse kinematics streams joint targets over TCP and the physical machine follows.</li>
-            <li>Industrial network and safety: Modbus RTU fieldbus (370 transactions, 0 errors), zero-capital VFD automation of the power unit, and a supervisory state machine that latches faults and enforces travel limits.</li>
-            <li>Virtual commissioning of the 6-station skateboard line in Purdue's Smart Learning Factory (Visual Components, OPC UA); virtual UR10e validated against the physical robot; shop-floor data streamed to AWS and over MQTT.</li>
-          </ul>
-        </li>
-
-        <li class="exp-item">
-          <div class="exp-head">
-            <div>
-              <div class="exp-role">R&amp;D Intern — Smart &amp; Digital Manufacturing</div>
-              <div class="exp-org">Hitachi America, Ltd. · Industrial Innovation Laboratory · Farmington Hills, MI</div>
-            </div>
-            <div class="exp-dates">Jun 2023 – Jan 2024</div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Raised capacity predictability by <b>89%</b> and cut operator fatigue by <b>over 50%</b> by programming UR5 collaborative-robot tasks for hybrid human–robot workflows.</li>
-            <li>De-risked robot commissioning with a sensor-integrated <b>Digital Twin</b> of a manufacturing cell, so robot programs and layouts were tested virtually first.</li>
-            <li>Streamed live UR5 data through ROS into the cell's twin, so the virtual cell mirrored the physical robot without manual exports.</li>
-            <li>Discrete-event simulation of packaging processes and demand-forecast scenarios to evaluate throughput and capacity before investing.</li>
-          </ul>
-        </li>
-
-        <li class="exp-item">
-          <div class="exp-head">
-            <div>
-              <div class="exp-role">Instructor / Graduate Teaching Assistant</div>
-              <div class="exp-org">Purdue University · School of Engineering Technology</div>
-            </div>
-            <div class="exp-dates">2021 – Present</div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Instructor of record (Fall 2025) for <b>Mixed Reality Smart Manufacturing</b> and <b>AI &amp; Mixed Reality for Manufacturing</b> — a project-based course where students build digital twins of a full discrete-manufacturing line in Purdue Polytechnic's flagship learning factory.</li>
-            <li>Instructor / TA for Advanced Fluid Power (MET 334) and Pneumatic Control (MET 436): system modeling, instrumentation, and control.</li>
-            <li>Developed instructional materials integrating simulation and XR for real-time visualization of system dynamics.</li>
-          </ul>
-        </li>
-
-        <li class="exp-item">
-          <div class="exp-head">
-            <div>
-              <div class="exp-role">Earlier Research</div>
-              <div class="exp-org">Universidad de los Andes &amp; Purdue University</div>
-            </div>
-            <div class="exp-dates">2017 – 2020</div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Graduate Researcher &amp; TA, Universidad de los Andes (2017–2019): optimized hydrocyclone separators using coupled <b>CFD–DEM</b> (Eulerian flow with discrete-element particle tracking); measured particle-size distributions by laser diffraction (Malvern Mastersizer) to parameterize and validate the model.</li>
-            <li>Visiting Scholar, Purdue University (2019–2020): designed and built a custom hydraulic test rig; CFD modeling of multiphase reservoir systems.</li>
-          </ul>
-        </li>
-
-      </ul>
-    </div>
-
-    <div class="exp-group">
-      <h3 class="exp-group-title mono">Education</h3>
-      <div class="edu-list">
-        <div class="edu-item">
-          <div class="edu-deg">Ph.D., Engineering Technology</div>
-          <div class="edu-school">Purdue University, West Lafayette, IN</div>
-          <div class="edu-meta">2026 · Dissertation: Physics-Based Digital Twin for Hydraulic Serial Manipulators · Advisor: Dr. José Garcia-Bravo</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-deg">M.S., Mechanical Engineering</div>
-          <div class="edu-school">Universidad de los Andes, Bogotá, Colombia</div>
-          <div class="edu-meta">2019 · Thesis: CFD–DEM optimization of hydrocyclones (multiphase solid–liquid separation)</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-deg">B.S., Mechanical Engineering</div>
-          <div class="edu-school">Universidad Tecnológica de Bolívar, Cartagena, Colombia</div>
-          <div class="edu-meta">2015</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 <section id="publications" class="record">
-    <div class="sec-head"><span class="tag">05 / record</span><h2>Publications</h2></div>
+    <div class="sec-head"><span class="tag">Research</span><h2>Publications</h2></div>
     <p class="sec-sub">Peer-reviewed and presented work grounding the projects above in validated research.</p>
 
     <div class="pub-links">
@@ -629,13 +718,13 @@ section,details{scroll-margin-top:72px}
         <li class="pub-item">
           <p class="pub-cite">Durango-Cogollo, M., Garcia, Y., Duncan, S., &amp; Garcia-Bravo, J. M. (2026). <i>A Physics-Informed Hybrid Digital Twin Framework with Mixed Reality Interface for Fluid Power Teleoperation: A Pneumatic Proof-of-Concept.</i> Engineering Science and Technology, an International Journal (JESTECH).</p>
           <div class="pub-meta">
-            <span class="pub-status">Under revision</span>
+            <span class="pub-status">In revision</span>
             <span class="pub-note mono">citation finalizes on acceptance</span>
           </div>
         </li>
 
         <li class="pub-item">
-          <p class="pub-cite">Durango-Cogollo, M., &amp; Garcia-Bravo, J. M. (2026). <i>Smoothed Particle Hydrodynamics for Internal Flow Simulation in Hydraulic Components: Capabilities, Limitations, and Open Challenges.</i> Journal of Hydrodynamics.</p>
+          <p class="pub-cite">Durango-Cogollo, M., &amp; Garcia-Bravo, J. M. (2026). <i>Review of SPH for Internal Flow in Hydraulic Components.</i> Journal of Hydrodynamics.</p>
           <div class="pub-meta">
             <span class="pub-status published">Accepted</span>
             <span class="pub-note mono">in production</span>
@@ -723,13 +812,13 @@ section,details{scroll-margin-top:72px}
 <section class="contact" id="contact">
   <div class="wrap">
     <h2 class="rv">Let's build<br>the <span>twin.</span></h2>
-    <p class="rv">Open to R&amp;D roles in fluid power, simulation and digital twins.</p>
+    <p class="rv">Open to R&amp;D roles in digital twins, simulation and industrial automation.</p>
     <div class="ctas rv">
       <a class="btn primary" href="mailto:mdurango@purdue.edu">mdurango@purdue.edu</a>
       <a class="btn ghost dark" href="https://www.linkedin.com/in/marvin-durango-cogollo" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <div class="links">
-      <span>© 2026 Marvin Durango-Cogollo · Purdue University</span>
+      <span>© 2026 Marvin Durango Cogollo, Ph.D. · Purdue University</span>
       <span><a href="https://github.com/mrdurangoc" target="_blank" rel="noopener">GitHub</a><a href="#publications">Publications</a><a href="CV_Marvin_Durango.pdf" download>CV</a></span>
     </div>
   </div>
@@ -778,7 +867,9 @@ const stepObs=new IntersectionObserver(es=>es.forEach(e=>{
   const st=e.target.dataset.s;
   document.querySelectorAll('.step').forEach(x=>x.classList.toggle('on',x===e.target));
   layers.forEach(l=>l.classList.toggle('on',l.dataset.s===st));
-  tag.textContent=e.target.dataset.tag; refresh();
+  tag.textContent=e.target.dataset.tag;
+  document.querySelectorAll('#stageBars i').forEach((b,i)=>b.classList.toggle('on',String(i)===st));
+  refresh();
 }),{rootMargin:'-45% 0px -45% 0px'});
 document.querySelectorAll('.step').forEach(x=>stepObs.observe(x));
 refresh();
