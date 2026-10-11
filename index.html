@@ -297,10 +297,17 @@ section,details{scroll-margin-top:72px}
   .fx-stats{grid-template-columns:1fr 1fr}
 }
 
+.fx-media.video169{aspect-ratio:16/9;background:#0b0c10}
+
+/* ---------- contained video tile ---------- */
+.tile.fit{background:#000}
+.tile.fit video{object-fit:contain;object-position:center top}
+.tile.fit::before{background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.9) 75%)}
+
 /* ---------- text tile ---------- */
 .tile.text{background:radial-gradient(120% 90% at 85% 8%,rgba(255,94,26,.30),transparent 60%),linear-gradient(160deg,#1b1c21,#0e0f12)}
 .tile.text::before{display:none}
-.watermark{position:absolute;top:22px;right:26px;z-index:-1;font-family:var(--display);font-weight:800;font-size:clamp(56px,7vw,104px);letter-spacing:-.05em;line-height:1;color:rgba(255,255,255,.06)}
+.watermark{position:absolute;top:22px;right:26px;z-index:-1;font-family:var(--display);font-weight:800;font-size:clamp(44px,5vw,78px);letter-spacing:-.05em;line-height:1;color:rgba(255,255,255,.06)}
 
 /* ---------- skills ---------- */
 .skills{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
@@ -423,7 +430,7 @@ section,details{scroll-margin-top:72px}
         <article class="step" data-s="2" data-tag="People · mixed-reality view">
           <b>03 — People</b>
           <h3>Operate it by hand, from mixed reality.</h3>
-          <p>On HoloLens 2, the operator places a target by hand. FABRIK inverse kinematics and RRT* path planning turn it into collision-free joint commands, streamed over TCP/IP to the physical boom and swing, while a web dashboard shows every sensor live.</p>
+          <p>The crane's CAD assemblies become articulated real-time assets (Inventor/NX → Blender → FBX). On HoloLens 2, the operator places a target by hand. FABRIK inverse kinematics and RRT* path planning turn it into collision-free joint commands, streamed over TCP/IP to the physical boom and swing, while a web dashboard shows every sensor live.</p>
           <div class="m-media"><video src="hero-twin.mp4" poster="hero-twin-poster.webp" muted loop playsinline preload="none" aria-label="Mixed-reality view of the crane's digital twin with live telemetry"></video></div>
         </article>
         <article class="step" data-s="3" data-tag="AI · in progress">
@@ -492,13 +499,13 @@ section,details{scroll-margin-top:72px}
       </div>
     </article>
 
-    <article class="fx split rv" id="slf">
-      <div class="fx-media"><video src="URMR.mp4" poster="URMR-poster.webp" muted loop playsinline preload="none" aria-label="Mixed-reality twin of a UR collaborative robot in the learning factory"></video></div>
+    <article class="fx rv" id="slf">
+      <div class="fx-media video169"><video src="slf-sim.mp4" poster="slf-sim-poster.webp" muted loop playsinline preload="none" aria-label="Visual Components simulation of the Smart Learning Factory line: UR robots load parts onto pallets moving along a roller conveyor"></video></div>
       <div class="fx-body">
         <div>
           <div class="fx-kicker">Purdue Smart Learning Factory · in progress</div>
           <h3>Six stations. One twin.</h3>
-          <p>A production-line twin in Visual Components, synchronized with the physical cell over OPC UA and extending to NVIDIA Isaac Sim, with UR10e kinematics validated against the real robot. Shop-floor data flows to AWS and over MQTT into simulation and monitoring.</p>
+          <p>A production-line twin in Visual Components, synchronized with the physical cell over OPC UA and extending to NVIDIA Isaac Sim with OpenUSD scene assets, with UR10e kinematics validated against the real robot. Shop-floor data flows to AWS and over MQTT into simulation and monitoring.</p>
           <p class="teach">I also teach it: a project-based course (Fall 2025) where students build digital twins of a production line with robots, conveyors and AGVs.</p>
           <div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>Model · Machine · People</span></div>
         </div>
@@ -546,25 +553,25 @@ section,details{scroll-margin-top:72px}
       </a>
       <a class="tile wide rv" href="#relief">
         <video src="Fluid.mp4" poster="Fluid-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i class="on"></i><i></i></span><span>Model · People</span></div><h3>CFD you can walk into</h3><p>Gear-pump and relief-valve flow from Ansys CFX, rendered in virtual and mixed reality.</p></div>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i class="on"></i><i></i></span><span>Model · People</span></div><h3>CFD you can walk into</h3><p>Gear-pump and relief-valve flow from Ansys CFX, turned into real-time assets through ParaView and Blender for VR and HoloLens 2.</p></div>
       </a>
-      <a class="tile rv" href="#pneumatic">
+      <a class="tile wide fit rv" href="#planning">
+        <video src="Media2.mp4" aria-label="FABRIK inverse kinematics chain following a target, with the crane model alongside" poster="Media2-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>FABRIK + RRT*</h3><p>Inverse kinematics and collision-free planning, now driving the real crane.</p></div>
+      </a>
+      <a class="tile wide rv" href="#pneumatic">
         <video src="PneumaticDT-web.mp4" poster="PneumaticDT-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span>All four</span></div><h3>Pneumatic digital twin</h3><p>Hybrid physics and data-driven estimator, mixed-reality control, open dataset.</p></div>
-      </a>
-      <a class="tile rv" href="#planning">
-        <video src="Media2.mp4" poster="Media2-poster.webp" muted loop playsinline preload="none"></video>
-        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>FABRIK + RRT*</h3><p>Inverse kinematics and collision-free planning, now driving the real crane.</p></div>
       </a>
       <a class="tile rv" href="#sph">
         <video src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><span>Model</span></div><h3>Spool valve SPH</h3><p>Moving parts, meshless flow, no remeshing.</p></div>
       </a>
-      <a class="tile wide rv" href="https://github.com/mrdurangoc" target="_blank" rel="noopener">
+      <a class="tile rv" href="https://github.com/mrdurangoc" target="_blank" rel="noopener">
         <img src="assets/webapps/daq-plots.webp" alt="" loading="lazy" style="object-position:top left">
         <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>Shipped web apps</h3><p>A lab DAQ and control dashboard, plus offline-first PWAs I use every day.</p></div>
       </a>
-      <a class="tile wide text rv" href="#hydrocyclone">
+      <a class="tile text rv" href="#hydrocyclone">
         <span class="watermark" aria-hidden="true">CFD–DEM</span>
         <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><span>Model</span></div><h3>Hydrocyclone separators</h3><p>Coupled fluid–particle CFD with RNG k-ε, RSM and LES benchmarks, validated with laser-diffraction sizing. <i>Fluids</i>, 2020.</p></div>
       </a>
@@ -580,8 +587,8 @@ section,details{scroll-margin-top:72px}
     <details id="gpu"><summary>GPU physics engine · C++, OpenGL, GLSL</summary>
       <p>A real-time physics solver written in compute shaders: SPH fluids with more than 144,000 particles, XPBD constraints, and continuum-mechanics beams built on the Green strain tensor, all coupled to interactive 3D rendering.</p>
       <p><b>Why it matters:</b> the real-time counterpart to offline CFD, the kind of physics a twin has to run live.</p></details>
-    <details id="relief"><summary>Hydraulic component CFD in VR and MR · Ansys CFX, Unity</summary>
-      <p>Gear-pump and pressure-relief-valve flow modeled in Ansys CFX, then rebuilt in Unity so the internal velocity and pressure fields can be explored in virtual and mixed reality.</p>
+    <details id="relief"><summary>Simulation-to-XR pipeline · Ansys CFX, ParaView, Blender, Unity</summary>
+      <p>Gear-pump and pressure-relief-valve flow modeled in Ansys CFX; velocity and pressure fields post-processed in ParaView and Blender; geometry and animated results converted (STL → OBJ/FBX) into real-time assets rendered in VR and HoloLens 2 mixed reality.</p>
       <p><b>Why it matters:</b> it shows what no installed sensor can measure, in a form people can walk around and read.</p></details>
     <details id="pneumatic"><summary>Pneumatic digital twin</summary>
       <p>A hybrid physics and data-driven estimator (EKF, LuGre friction and Bayesian ridge regression) with mixed-reality control and an open dataset. Journal manuscript in revision, co-authored with two undergraduate researchers I mentored.</p>
@@ -613,7 +620,7 @@ section,details{scroll-margin-top:72px}
 <div class="wrap records">
 <section id="resume" class="record">
   <div class="sec-head"><span class="tag">Resume</span><h2>The record.</h2></div>
-  <p class="resume-summary">Digital twin, simulation and industrial automation engineer (Ph.D., Purdue; R&amp;D at Hitachi America) with 8+ years of experience building digital twins that run next to real machines. My work connects every layer a twin needs: <b>physics-based models</b> of the machine (CFD, FEA, dynamic systems), the <b>hardware and automation</b> that keep it synchronized with the physical asset (sensors, PLCs, robots, OPC UA, MQTT, ROS), and the <b>people</b> who use it (cloud applications and VR/MR interfaces in Unity), now extended with <b>AI</b> through physics-informed neural networks and surrogate models.</p>
+  <p class="resume-summary">Digital twin, simulation and industrial automation engineer with 8+ years of experience building <b>physics-based models</b>, <b>automating equipment</b>, connecting them to live equipment, and <b>validating them against measured data</b>. Ph.D. (Purdue) and industry R&amp;D experience at Hitachi America in smart manufacturing. Strong in FEA, CFD, CAD, dynamic system modeling, sensor fusion, AI-enabled and hybrid digital twins, industrial automation and connectivity (PLC, ROS, OPC UA, MQTT), and real-time 3D assets and XR visualization (Blender, OpenUSD, Unity, C++/OpenGL, NVIDIA Isaac Sim).</p>
   <div class="hero-cta"><a class="btn ghost dark" href="CV_Marvin_Durango.pdf" download>Download full CV (PDF) →</a></div>
 
   <div class="exp-group">
@@ -624,9 +631,9 @@ section,details{scroll-margin-top:72px}
         <ul class="exp-bullets">
           <li>Designed and built an instrumented two-joint hydraulic crane and its real-time digital twin end to end: power unit, proportional valves, cylinder, hydraulic motor, electro-hydrostatic actuator, pressure, position, torque and encoder sensors, data acquisition and edge computing; components modeled in CAD (Inventor, NX); the twin tracks the physical machine within <b>7% error</b>.</li>
           <li>Developed physics-based models of hydraulic cylinders, motors, EHAs, hydrostatic transmissions and proportional valves; ported them from MATLAB to open-source Python with <b>&lt;1.3% NRMSE</b>, enabling license-free deployment on low-cost edge devices.</li>
-          <li>Built a Unity/HoloLens 2 mixed-reality operator interface in which hand-defined targets drive inverse kinematics (FABRIK) and collision-free path planning (RRT*), streamed over TCP/IP to the physical boom and swing.</li>
+          <li>Converted the crane's CAD assemblies into articulated real-time 3D assets (Inventor/NX → Blender → FBX) and built a Unity/HoloLens 2 mixed-reality operator interface in which hand-defined targets drive inverse kinematics (FABRIK) and collision-free path planning (RRT*), streamed over TCP/IP to the physical boom and swing.</li>
           <li>Automated the test system end to end: remote start-up and shutdown of the power unit, software speed control, automated sequences with fault handling and unattended test campaigns.</li>
-          <li>Building a six-station production-line digital twin for Purdue's Smart Learning Factory in Visual Components, synchronized over OPC UA (2 of 6 stations recreated) and extending it to NVIDIA Isaac Sim; validated UR10e kinematics against the physical robot.</li>
+          <li>Building a six-station production-line digital twin for Purdue's Smart Learning Factory in Visual Components, synchronized over OPC UA (2 of 6 stations recreated) and extending it to NVIDIA Isaac Sim with OpenUSD scene assets; validated UR10e kinematics against the physical robot.</li>
           <li>Connected shop-floor equipment to cloud processing on AWS and integrated a process line over MQTT, streaming real-time machine data into simulation and monitoring.</li>
         </ul>
       </li>
@@ -658,7 +665,7 @@ section,details{scroll-margin-top:72px}
       <div><dt>Digital twins</dt><dd>Physical–digital synchronization, virtual commissioning, sensor fusion, physics-based, data-driven and hybrid approaches, V&amp;V, design of experiments</dd></div>
       <div><dt>Automation &amp; robotics</dt><dd>Process and test automation, PLC programming, commissioning, UR5 and UR10e, ROS, inverse kinematics, motion planning, LiDAR and SLAM</dd></div>
       <div><dt>Industrial IoT &amp; data</dt><dd>OPC UA, MQTT, AWS, REST APIs, web dashboards, data acquisition and signal conditioning, edge computing</dd></div>
-      <div><dt>3D, XR &amp; GPU</dt><dd>Unity, Meta Quest, Oculus Rift, HoloLens 2, NVIDIA Isaac Sim, Omniverse/PhysX (familiar), OpenGL, GLSL compute shaders</dd></div>
+      <div><dt>3D, XR &amp; GPU</dt><dd>3D asset pipelines in Blender (cleanup, decimation, STL/OBJ/FBX/OpenUSD), ParaView, Unity, Meta Quest, Oculus Rift, HoloLens 2, NVIDIA Isaac Sim, Omniverse/PhysX (familiar), OpenGL, GLSL compute shaders</dd></div>
       <div><dt>AI &amp; machine learning</dt><dd>Physics-informed neural networks (inverse PINN, in progress), Bayesian regression, computer vision (YOLO, OpenCV, CNNs)</dd></div>
       <div><dt>Software &amp; CAD</dt><dd>Python (NumPy, SciPy, Flask, asyncio), C++, C#, MATLAB, Docker, Git, Linux; Autodesk Inventor, Siemens NX</dd></div>
       <div><dt>Languages</dt><dd>English and Spanish (bilingual)</dd></div>
