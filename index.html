@@ -298,6 +298,9 @@ section,details{scroll-margin-top:72px}
 }
 
 .fx-media.video169{aspect-ratio:16/9;background:#0b0c10}
+.fx-media.labeled{position:relative}
+.fx-media + .fx-media{border-top:1px solid #000}
+.media-label{position:absolute;left:18px;top:16px;z-index:2;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);padding:6px 11px;border-radius:999px}
 
 /* ---------- contained video tile ---------- */
 .tile.fit{background:#000}
@@ -500,7 +503,8 @@ section,details{scroll-margin-top:72px}
     </article>
 
     <article class="fx rv" id="slf">
-      <div class="fx-media video169"><video src="slf-sim.mp4" poster="slf-sim-poster.webp" muted loop playsinline preload="none" aria-label="Visual Components simulation of the Smart Learning Factory line: UR robots load parts onto pallets moving along a roller conveyor"></video></div>
+      <div class="fx-media video169 labeled"><span class="media-label">Virtual line · Visual Components</span><video src="slf-sim.mp4" poster="slf-sim-poster.webp" muted loop playsinline preload="none" aria-label="Visual Components simulation of the Smart Learning Factory line: UR robots load parts onto pallets moving along a roller conveyor"></video></div>
+      <div class="fx-media video169 labeled"><span class="media-label">On the floor · mixed reality</span><video src="urmr-clean.mp4" poster="urmr-clean-poster.webp" muted loop playsinline preload="none" aria-label="Mixed-reality twin of a UR collaborative robot overlaid on the real learning factory"></video></div>
       <div class="fx-body">
         <div>
           <div class="fx-kicker">Purdue Smart Learning Factory · in progress</div>
