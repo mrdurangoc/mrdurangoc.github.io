@@ -346,6 +346,13 @@ section,details{scroll-margin-top:72px}
 .ui-grid figcaption{padding:14px 18px 18px;font-size:14.5px;color:var(--grey-2);line-height:1.45}
 .ui-grid figcaption b{color:#fff;font-weight:600}
 @media (max-width:760px){.ui-grid{grid-template-columns:1fr}.film{margin-bottom:70px}.ui-gallery{padding-bottom:90px}}
+.dash-film{margin:44px 0 0}
+.ui-grid a.play{display:block;color:inherit;text-decoration:none;border-radius:18px}
+.ui-grid a.play figure{position:relative;height:100%;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.ui-grid a.play:hover figure{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(255,138,80,.55)}
+.ui-grid a.play:focus-visible{outline:2px solid #ff8a50;outline-offset:4px}
+.play-tag{position:absolute;left:14px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);padding:6px 11px;border-radius:999px}
+.dash-cta{margin-top:32px;text-align:center}
 </style>
 </head>
 <body>
@@ -414,7 +421,7 @@ section,details{scroll-margin-top:72px}
 
     <div class="sticky-grid">
       <div class="stage" aria-hidden="true">
-        <img data-s="0" class="on contain" src="assets/webapps/daq-plots.webp" alt="">
+        <img data-s="0" class="on contain" src="assets/webapps/dash-results.webp" alt="">
         <img data-s="1" src="assets/crane-machine.webp" alt="" loading="lazy">
         <video data-s="2" src="hero-twin.mp4" poster="hero-twin-poster.webp" muted loop playsinline preload="none"></video>
         <div data-s="3" class="svgwrap"><svg viewBox="0 0 800 500" role="img" aria-label="Inverse physics-informed neural network: bench measurements feed a neural network that estimates states and model parameters; training minimizes data error plus the residual of the hydraulic model equations">
@@ -454,7 +461,7 @@ section,details{scroll-margin-top:72px}
           <h3>Physics that matches the machine.</h3>
           <p>Lumped-parameter models of cylinders, motors, electro-hydrostatic actuators, hydrostatic transmissions and proportional valves, identified from bench data, then ported from MATLAB to open-source Python so they run license-free on low-cost edge devices.</p>
           <div class="num">&lt;1.3%<small>NRMSE, Python port vs. MATLAB original</small></div>
-          <div class="m-media"><img src="assets/webapps/daq-plots.webp" alt="Pressure, torque, speed and command signals recorded on the hydraulic test bench" loading="lazy" style="object-fit:contain;background:#0b0c10"></div>
+          <div class="m-media"><img src="assets/webapps/dash-results.webp" alt="Results view of the lab dashboard: cylinder position, valve command and cap and rod pressures from a recorded test run" loading="lazy" style="object-fit:contain;background:#0b0c10"></div>
         </article>
         <article class="step" data-s="1" data-tag="Machine · the test bench">
           <b>02 — Machine</b>
@@ -505,6 +512,25 @@ section,details{scroll-margin-top:72px}
         <figure class="rv"><img src="assets/ui/hud-c.webp" alt="Telemetry panels for the power unit, hydraulic motor and boom cylinder with live plots" loading="lazy"><figcaption><b>Telemetry up close.</b> Power unit, hydraulic motor and boom cylinder, streamed live from the bench.</figcaption></figure>
         <figure class="rv"><img src="assets/ui/hud-d.webp" alt="Virtual-only view of the crane twin with telemetry panels, workspace rings and an obstacle" loading="lazy"><figcaption><b>Virtual mode.</b> The same twin and panels, with workspace rings and an obstacle to plan around.</figcaption></figure>
       </div>
+    </div>
+
+    <div class="ui-gallery" id="dashboard">
+      <div class="ui-head rv">
+        <div class="eyebrow">People layer · lab dashboard</div>
+        <h3>Run the bench from a browser.</h3>
+        <p>Configure a test, run it, watch the command, cylinder position and pressures live, then pull any run back up for analysis. Every run is logged and synced to the cloud.</p>
+      </div>
+      <figure class="film dash-film rv">
+        <video src="hydrolab-dashboard.mp4" poster="hydrolab-dashboard-poster.webp" muted loop playsinline controls preload="none" aria-label="Simulated walkthrough: the 3D test bench next to the web dashboard; the valve command and the boom cylinder move in sync, cap and rod pressures swap with each stroke, and the recorded run is retrieved in the Results view"></video>
+        <figcaption><b>Simulated walkthrough.</b> Valve command and cylinder motion in sync, cap and rod pressures swapping with each stroke, and the run retrieved afterwards. Simulated data; the 3D model and the UI mirror the real bench.</figcaption>
+      </figure>
+      <div class="ui-grid">
+        <figure class="rv"><img src="assets/webapps/dash-experiment.webp" alt="Experiment view: experiment and actuator selectors, run status, and the configuration of extension, retraction, timing and hydraulics with a command preview" loading="lazy"><figcaption><b>Configure.</b> Extension, retraction, pauses, cycles and pump speed, with a preview of the command before anything moves.</figcaption></figure>
+        <figure class="rv"><img src="assets/webapps/dash-live.webp" alt="Live charts: boom position against the valve command, cap and rod pressures with supply pressure, and recording progress" loading="lazy"><figcaption><b>Watch it live.</b> Position against command, P1/P2 and supply pressure, and acquisition and upload counted separately.</figcaption></figure>
+        <figure class="rv"><img src="assets/webapps/dash-results.webp" alt="Results view: list of recorded runs from the Pi and the HoloLens, with charts of distance, valve command and both pressures for the selected run" loading="lazy"><figcaption><b>Retrieve any run.</b> Runs from the bench and from the HoloLens in one list, charted or exported to CSV.</figcaption></figure>
+        <a class="play rv" href="hydrolab-3d.html"><figure><img src="assets/webapps/bench-3d.webp" alt="Interactive 3D model of the HydroLab test bench with its component list" loading="lazy"><span class="play-tag">Interactive · open in 3D →</span><figcaption><b>Play with the bench.</b> Orbit the 3D model, toggle the guards and click any part for what it does and how it is wired.</figcaption></figure></a>
+      </div>
+      <p class="dash-cta rv"><a class="btn primary" href="hydrolab-3d.html">Explore the bench in 3D <span aria-hidden="true">→</span></a></p>
     </div>
   </div>
 </section>
@@ -618,13 +644,21 @@ section,details{scroll-margin-top:72px}
         <video src="sph.mp4" poster="sph-poster.webp" muted loop playsinline preload="none"></video>
         <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><span>Model</span></div><h3>Spool valve SPH</h3><p>Moving parts, meshless flow, no remeshing.</p></div>
       </a>
-      <a class="tile rv" href="https://github.com/mrdurangoc" target="_blank" rel="noopener">
-        <img src="assets/webapps/daq-plots.webp" alt="" loading="lazy" style="object-position:top left">
-        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>Shipped web apps</h3><p>A lab DAQ and control dashboard, plus offline-first PWAs I use every day.</p></div>
-      </a>
       <a class="tile text rv" href="#hydrocyclone">
         <span class="watermark" aria-hidden="true">CFD–DEM</span>
         <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><span>Model</span></div><h3>Hydrocyclone separators</h3><p>Coupled fluid–particle CFD with RNG k-ε, RSM and LES benchmarks, validated with laser-diffraction sizing. <i>Fluids</i>, 2020.</p></div>
+      </a>
+      <a class="tile rv" href="https://mrdurangoc.github.io/my-gym/" target="_blank" rel="noopener">
+        <img src="assets/webapps/entreno.webp" alt="" loading="lazy" style="object-position:center top">
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i></span><span>People</span></div><h3>Entreno, a gym app</h3><p>An offline-first PWA I use every day: one set at a time, rest timer, history and progress.</p></div>
+      </a>
+      <a class="tile wide rv" href="#dashboard">
+        <img src="assets/webapps/dash-live.webp" alt="" loading="lazy" style="object-position:top left">
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>Lab control dashboard</h3><p>Flask, live streaming and cloud logging: configure, run, watch and retrieve every test on the bench.</p></div>
+      </a>
+      <a class="tile wide rv" href="hydrolab-3d.html">
+        <img src="assets/webapps/bench-3d.webp" alt="" loading="lazy">
+        <div class="t"><div class="lm"><span class="bars" aria-hidden="true"><i></i><i class="on"></i><i class="on"></i><i></i></span><span>Machine · People</span></div><h3>The bench in 3D</h3><p>An interactive Three.js model of the test bench. Orbit it, toggle the guards, click any part.</p></div>
       </a>
     </div>
   </div>

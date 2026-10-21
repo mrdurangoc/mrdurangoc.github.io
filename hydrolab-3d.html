@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HydroLab Bench 3D — Marvin Durango Cogollo</title>
+<meta name="description" content="Interactive 3D model of the HydroLab hydraulic crane test bench: boom cylinder, swing motor, EHA, power unit and sensors. Drag to orbit, click a part for details.">
+<link rel="canonical" href="https://mrdurangoc.github.io/hydrolab-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HydroLab Bench 3D">
+<meta property="og:description" content="Interactive 3D model of a hydraulic crane test bench built for digital twin research.">
+<meta property="og:image" content="https://mrdurangoc.github.io/assets/webapps/bench-3d.webp">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+html,body{margin:0}
+*,*::before,*::after{box-sizing:border-box}
+/* Layout: full-bleed 3D viewport; floating instrument panels (title, part list, info card, toolbar) */
+:root{
+  --scene:#dfe3e7; --floor:#c9ced4; --fg:#16191d; --muted:#5b636d; --faint:#7a828c;
+  --panel:rgba(250,251,252,.9); --panel-solid:#f7f8f9; --line:rgba(22,25,29,.12); --chip:#eceff2;
+  --accent:#d4561a; --accent-fg:#fff; --sel:#ff7a2f;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --scene:#15181c; --floor:#1d2126; --fg:#e6e8eb; --muted:#a9b0b9; --faint:#868e99;
+  --panel:rgba(23,26,30,.88); --panel-solid:#1a1d21; --line:rgba(255,255,255,.08); --chip:#23282d;
+  --accent:#ff7a2f; --accent-fg:#1a1206; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --scene:#15181c; --floor:#1d2126; --fg:#e6e8eb; --muted:#a9b0b9; --faint:#868e99;
+  --panel:rgba(23,26,30,.88); --panel-solid:#1a1d21; --line:rgba(255,255,255,.08); --chip:#23282d;
+  --accent:#ff7a2f; --accent-fg:#1a1206; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--scene);color:var(--fg);font-family:var(--sans);font-size:14px;line-height:1.45;overflow:hidden}
+button{font:inherit;color:inherit}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+#app{position:relative;height:100%;width:100%}
+#view{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none;outline:none}
+.float{position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#head{top:calc(14px + env(safe-area-inset-top,0px));left:max(16px,env(safe-area-inset-left,0px));padding:12px 16px;display:flex;flex-direction:column;gap:2px;max-width:calc(100% - 32px)}
+#head h1{margin:0;font-size:16px;font-weight:600;text-wrap:balance}
+#head p{margin:0;font-size:12px;color:var(--muted)}
+#head .back{margin-top:6px;font-size:12px;color:var(--accent);text-decoration:none;font-weight:500}
+#head .back:hover{text-decoration:underline}
+#parts{top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:250px;max-height:calc(100% - 110px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;overflow:hidden}
+#parts-toggle{display:none}
+.parts-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 6px;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+#part-list{overflow-y:auto;padding:0 8px 10px;display:flex;flex-direction:column;gap:1px}
+.grp{font-size:11px;color:var(--faint);padding:10px 8px 4px;letter-spacing:.05em;text-transform:uppercase}
+.pbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:8px;padding:6px 8px;cursor:pointer;font-size:13px}
+.pbtn:hover{background:var(--chip)}
+.pbtn[aria-pressed="true"]{background:var(--chip);border-color:var(--line);font-weight:500}
+.pbtn .dot{width:9px;height:9px;border-radius:3px;flex:none}
+#card{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));width:340px;max-width:calc(100% - 32px);padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
+#card h2{margin:0;font-size:16px;font-weight:600}
+#card .grp-l{font-size:11px;color:var(--faint);letter-spacing:.05em;text-transform:uppercase}
+#card p{margin:0;color:var(--muted);font-size:13px}
+#card dl{margin:4px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px}
+#card dt{color:var(--faint)}
+#card dd{margin:0;font-family:var(--mono);font-size:12px;overflow-wrap:anywhere}
+.x{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:8px;border:none;background:none;cursor:pointer;color:var(--muted);display:inline-flex;align-items:center;justify-content:center}
+.x:hover{background:var(--chip);color:var(--fg)}
+#bar{left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));padding:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 32px)}
+.seg{display:inline-flex;background:var(--chip);border-radius:9px;padding:3px;gap:2px}
+.seg button,.tb{border:none;background:transparent;border-radius:7px;min-height:34px;padding:0 11px;font-size:13px;cursor:pointer;color:var(--muted);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.seg button:hover,.tb:hover{color:var(--fg)}
+.seg button[aria-pressed="true"]{background:var(--panel-solid);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.tb[aria-pressed="true"]{color:var(--fg)}
+.tb[aria-pressed="true"] .sw{background:var(--accent)}
+.sw{width:26px;height:16px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .15s}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--panel-solid);transition:transform .15s}
+.tb[aria-pressed="true"] .sw::after{transform:translateX(10px)}
+.read{display:flex;gap:14px;padding:0 10px;font-size:12.5px;color:var(--muted)}
+.read b{color:var(--fg);font-weight:500}
+#tip{position:absolute;pointer-events:none;padding:5px 9px;border-radius:7px;background:var(--panel-solid);border:1px solid var(--line);font-size:12.5px;white-space:nowrap;transform:translate(12px,12px)}
+#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ico{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+@media (max-width:760px){
+  #head{padding:10px 12px}
+  #parts{top:auto;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto;left:max(16px,env(safe-area-inset-left,0px));max-height:45%}
+  #parts[data-open="false"] #part-list,#parts[data-open="false"] .parts-head .lbl{display:none}
+  #parts[data-open="false"]{left:auto}
+  #parts-toggle{display:inline-flex}
+  #card{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .read{display:none}
+  #bar{flex-wrap:nowrap;gap:2px;padding:4px;max-width:calc(100% - 24px)}
+  .seg button,.tb{padding:0 7px;font-size:12.5px;gap:5px}
+  .sw{width:22px;height:16px}
+  .tb[aria-pressed="true"] .sw::after{transform:translateX(6px)}
+}
+@media (prefers-reduced-motion: reduce){.sw,.sw::after{transition:none}}
+</style>
+
+</head>
+<body>
+<div id="app">
+  <canvas id="view" tabindex="0" aria-label="3D model of the HydroLab test bench. Drag to orbit, scroll or pinch to zoom, click a part for details."></canvas>
+  <div id="loading">Loading 3D model…</div>
+
+  <header class="float" id="head">
+    <h1>HydroLab test bench</h1>
+    <p>Boom cylinder, swing motor, EHA and HPU · drag to orbit, click a part</p>
+    <a class="back" href="./">← Marvin Durango · portfolio</a>
+  </header>
+
+  <aside class="float" id="parts" aria-label="Components" data-open="true">
+    <div class="parts-head"><span class="lbl">Components</span>
+      <button class="tb" id="parts-toggle" aria-expanded="true" aria-controls="part-list"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg><span>Parts</span></button>
+    </div>
+    <div id="part-list"></div>
+  </aside>
+
+  <section class="float" id="card" hidden aria-live="polite">
+    <button class="x" id="card-x" aria-label="Close details"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <span class="grp-l" id="card-grp"></span>
+    <h2 id="card-title"></h2>
+    <p id="card-desc"></p>
+    <dl id="card-specs"></dl>
+  </section>
+
+  <div class="float" id="bar" role="toolbar" aria-label="View controls">
+    <div class="seg" role="group" aria-label="Camera">
+      <button data-cam="iso" aria-pressed="true">3D</button>
+      <button data-cam="front" aria-pressed="false">Front</button>
+      <button data-cam="side" aria-pressed="false">Side</button>
+      <button data-cam="top" aria-pressed="false">Top</button>
+    </div>
+    <button class="tb" id="t-motion" aria-pressed="true"><span class="sw"></span>Motion</button>
+    <button class="tb" id="t-guards" aria-pressed="true"><span class="sw"></span>Guards</button>
+    <div class="read mono" aria-live="off"><span>Rod <b id="r-rod">0.00</b> in</span><span>Swing <b id="r-rpm">0</b> rpm</span></div>
+  </div>
+  <div id="tip" hidden></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/RoundedBoxGeometry.js"></script>
+<script>
+'use strict';
+(function(){
+if(!window.THREE){document.getElementById('loading').textContent='The 3D library could not load. Check your connection and reload.';return;}
+const $=id=>document.getElementById(id);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ── renderer / scene ─────────────────────────────────────────── */
+const canvas=$('view');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=0.9;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new THREE.RoomEnvironment(),0.04).texture;
+
+const camera=new THREE.PerspectiveCamera(34,1,0.05,50);
+const controls=new THREE.OrbitControls(camera,canvas);
+controls.enableDamping=true;controls.dampingFactor=0.08;
+controls.minDistance=0.5;controls.maxDistance=7;controls.maxPolarAngle=Math.PI*0.495;
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a8f96,0.25));
+const sun=new THREE.DirectionalLight(0xffffff,1.5);
+sun.position.set(2.2,4.2,2.8);sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-1.6,right:1.6,top:2.6,bottom:-0.6,near:0.5,far:10});
+sun.shadow.bias=-0.0004;sun.shadow.normalBias=0.02;
+scene.add(sun);
+
+/* ── materials ────────────────────────────────────────────────── */
+const std=(color,metalness,roughness,extra={})=>new THREE.MeshStandardMaterial(Object.assign({color,metalness,roughness},extra));
+const M={
+  blue:std(0x1272a6,0.2,0.42), blueDk:std(0x0f5f8a,0.2,0.5),
+  black:std(0x141517,0.15,0.55), blackGl:std(0x0f1012,0.3,0.32), matte:std(0x121314,0.02,0.92),
+  alu:std(0xc4c9cf,0.85,0.34), steel:std(0xd8dce0,1,0.2), chrome:std(0xf1f3f5,1,0.06),
+  red:std(0xb8141e,0.1,0.42), redDk:std(0x8e1018,0.1,0.5), orange:std(0xe9780c,0.05,0.5), yellow:std(0xe9b60e,0.05,0.5),
+  hose:std(0x0c0d0e,0,0.7), brass:std(0xb98a3c,0.9,0.32), white:std(0xe6e8ea,0.05,0.6), grey:std(0x8f969d,0.3,0.55),
+  vfd:std(0x34373c,0.2,0.6), teal:std(0x2fb3a8,0.1,0.4), wire:std(0x9aa1a8,0.9,0.4),
+  cable:std(0x50565c,0.05,0.7), cableBlk:std(0x18191b,0.02,0.8),
+  floor:std(0xc9ced4,0,0.95),
+  poly:new THREE.MeshStandardMaterial({color:0xd7e6ef,metalness:0,roughness:0.08,transparent:true,opacity:0.1,depthWrite:false,side:THREE.DoubleSide})
+};
+
+Object.values(M).forEach(m=>{if(m!==M.poly&&m!==M.floor)m.envMapIntensity=0.55;});
+M.floor.envMapIntensity=0.3;
+
+/* ── canvas textures ──────────────────────────────────────────── */
+function tex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+const texMesh=tex(128,128,(g,w,h)=>{g.clearRect(0,0,w,h);g.strokeStyle='#1272a6';g.lineWidth=14;g.beginPath();
+  g.moveTo(w/2,0);g.lineTo(w,h/2);g.lineTo(w/2,h);g.lineTo(0,h/2);g.closePath();g.stroke();});
+texMesh.wrapS=texMesh.wrapT=THREE.RepeatWrapping;texMesh.repeat.set(7,9);
+const label=(text,bg,fg,w=512,h=128,font)=>tex(w,h,(g)=>{g.fillStyle=bg;g.fillRect(0,0,w,h);g.fillStyle=fg;g.font=font||`bold ${Math.round(h*0.55)}px Helvetica, Arial, sans-serif`;g.textAlign='center';g.textBaseline='middle';g.fillText(text,w/2,h/2+2);});
+const sevenSeg=(text,color='#ff3b2f',bg='#120707')=>label(text,bg,color,256,96,'bold 58px "Courier New", monospace');
+
+/* ── geometry helpers ─────────────────────────────────────────── */
+const B=(w,h,d)=>new THREE.BoxGeometry(w,h,d);
+const RB=(w,h,d,r=0.006)=>new THREE.RoundedBoxGeometry(w,h,d,3,r);
+const CY=(r,h,seg=32,r2)=>new THREE.CylinderGeometry(r2===undefined?r:r2,r,h,seg);
+function mesh(parent,geo,mat,x=0,y=0,z=0,rot){
+  const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);
+  if(rot){m.rotation.set(rot[0]||0,rot[1]||0,rot[2]||0);}
+  m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;
+}
+const X=[0,0,Math.PI/2], Z=[Math.PI/2,0,0]; // rotate a Y-axis cylinder onto X or Z
+function hose(parent,pts,r=0.008,mat=M.hose,seg=60){
+  const curve=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(p[0],p[1],p[2])),false,'centripetal');
+  return mesh(parent,new THREE.TubeGeometry(curve,seg,r,10,false),mat);
+}
+function rod(parent,r,mat){const m=mesh(parent,CY(r,1,10),mat);m.userData.isRod=true;return m;}
+function placeRod(m,a,b){const va=new THREE.Vector3(...a),vb=new THREE.Vector3(...b);const d=vb.clone().sub(va);
+  m.position.copy(va).addScaledVector(d,0.5);m.scale.set(1,d.length(),1);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());}
+
+/* ── parts registry ───────────────────────────────────────────── */
+const PARTS=[];
+function part(id,name,grp,color,desc,specs){
+  const g=new THREE.Group();g.name=id;
+  g.userData={part:{id,name,grp,color,desc,specs}};
+  scene.add(g);PARTS.push(g);return g;
+}
+
+/* ═════════════════════ MODEL (metres, Y up, +Z = front) ═════════════════════ */
+const TOP=1.04; // upper table surface
+
+/* floor */
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(14,14),M.floor);
+floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+
+/* ── enclosure ── */
+const enc=part('enclosure','Enclosure','Safety & frame','#9aa1a8',
+  'Aluminum extrusion frame with polycarbonate guards around the upper table and the power unit.',
+  [['Frame','40 mm aluminum extrusion'],['Guards','Polycarbonate (toggle “Guards”)']]);
+const guards=new THREE.Group();scene.add(guards);
+{
+  const H=2.06, xs=[-0.57,0.57], zs=[-0.45,0.45];
+  xs.forEach(x=>zs.forEach(z=>mesh(enc,B(0.04,H,0.04),M.alu,x,H/2,z)));
+  [0.03,1.0,2.04].forEach(y=>{
+    zs.forEach(z=>mesh(enc,B(1.18,0.04,0.04),M.alu,0,y,z));
+    xs.forEach(x=>mesh(enc,B(0.04,0.04,0.86),M.alu,x,y,0));
+  });
+  mesh(enc,B(1.1,0.012,0.12),M.alu,0,1.0,0.4); // front shelf strip
+  const P=(w,h,x,y,z,ry)=>{const m=mesh(guards,new THREE.PlaneGeometry(w,h),M.poly,x,y,z,[0,ry||0,0]);m.castShadow=false;m.receiveShadow=false;m.userData.noPick=true;};
+  P(1.1,0.98,0,1.52,0.45);P(1.1,0.98,0,1.52,-0.45);P(0.86,0.98,-0.57,1.52,0,Math.PI/2);P(0.86,0.98,0.57,1.52,0,Math.PI/2);
+  P(0.86,0.95,-0.57,0.52,0,Math.PI/2);P(0.86,0.95,0.57,0.52,0,Math.PI/2);
+}
+
+/* ── lower cart + reservoir ── */
+const res=part('reservoir','Reservoir','Hydraulic power unit','#1d82b4',
+  'Oil tank of the hydraulic power unit, on a welded blue cart that also carries the upper test table.',
+  [['Location','Lower cart'],['Feeds','Pump suction and return line']]);
+{
+  [[-0.47,-0.32],[0.47,-0.32],[-0.47,0.32],[0.47,0.32]].forEach(([x,z])=>mesh(res,B(0.035,0.98,0.035),M.blue,x,0.5,z));
+  mesh(res,B(0.98,0.035,0.035),M.blue,0,0.06,0.32);mesh(res,B(0.98,0.035,0.035),M.blue,0,0.06,-0.32);
+  mesh(res,B(0.035,0.035,0.64),M.blue,-0.47,0.06,0);mesh(res,B(0.035,0.035,0.64),M.blue,0.47,0.06,0);
+  // trapezoid legs
+  [[-0.3,1],[0.3,-1]].forEach(([x,s])=>{mesh(res,B(0.05,0.16,0.44),M.blue,x,0.13,0,[0,0,s*0.35]);});
+  mesh(res,RB(0.72,0.34,0.5,0.01),M.blue,-0.02,0.34,-0.02);
+  mesh(res,B(0.76,0.016,0.54),M.blueDk,-0.02,0.518,-0.02);
+  mesh(res,B(0.1,0.03,0.002),M.white,-0.2,0.47,0.231);mesh(res,B(0.12,0.03,0.002),M.white,-0.04,0.47,0.231);
+  mesh(res,CY(0.03,0.04),M.blueDk,0.2,0.546,-0.18);
+}
+
+/* ── electric motor ── */
+const fanSpin=new THREE.Group();
+const emot=part('hpu-motor','Electric motor','Hydraulic power unit','#1d82b4',
+  'Three-phase motor that drives the hydraulic pump. Its speed, and so the pump flow, is set by the VFD.',
+  [['Drive','VFD, Modbus RTU ID 2'],['Default','60 Hz'],['Manual range','10–60 Hz']]);
+{
+  const y=0.66,z=-0.02;
+  mesh(emot,CY(0.115,0.3,40),M.blue,-0.25,y,z,X);
+  for(let i=0;i<9;i++)mesh(emot,CY(0.122,0.01,40),M.blue,-0.37+i*0.03,y,z,X);
+  mesh(emot,CY(0.105,0.045,40),M.blueDk,-0.425,y,z,X);
+  fanSpin.position.set(-0.449,y,z);emot.add(fanSpin);
+  for(let i=0;i<6;i++){const s=mesh(fanSpin,B(0.004,0.17,0.012),M.blueDk,0,0,0);s.rotation.x=i*Math.PI/6;}
+  mesh(emot,CY(0.12,0.03,40),M.blue,-0.085,y,z,X);
+  mesh(emot,RB(0.11,0.09,0.09,0.008),M.blue,-0.25,y+0.02,z+0.15);
+  mesh(emot,B(0.07,0.04,0.002),M.red,-0.36,y+0.06,z+0.112,[0.5,0,0]);
+  mesh(emot,B(0.08,0.035,0.002),M.white,-0.2,y-0.02,z+0.117);
+  [[-0.35],[-0.15]].forEach(([x])=>mesh(emot,B(0.05,0.07,0.24),M.blue,x,0.56,z));
+}
+
+/* ── pump ── */
+const pumpSpin=new THREE.Group();
+const pump=part('pump','Hydraulic pump','Hydraulic power unit','#1d82b4',
+  'Pump driven by the electric motor. Supply pressure to the table is measured as p_supply.',
+  [['Signal','p_supply · AIN 6'],['Range','0–10 V = 0–3000 psi'],['Ready threshold','300 psi before teleoperation']]);
+{
+  const y=0.66,z=-0.02;
+  const bell=mesh(pump,CY(0.065,0.11,36,0.11),M.blue,0.0,y,z,X);bell.rotation.z=-Math.PI/2;
+  mesh(pump,CY(0.07,0.14,36),M.blue,0.11,y,z,X);
+  mesh(pump,RB(0.1,0.13,0.13,0.01),M.blue,0.22,y,z);
+  mesh(pump,RB(0.08,0.05,0.07,0.006),M.blue,0.08,y+0.1,z);mesh(pump,RB(0.08,0.05,0.07,0.006),M.blue,0.18,y+0.1,z);
+  mesh(pump,CY(0.012,0.06),M.steel,0.08,y+0.15,z);
+  pumpSpin.position.set(0.28,y,z);pump.add(pumpSpin);
+  mesh(pumpSpin,CY(0.035,0.02,24),M.blueDk,0,0,0,X);mesh(pumpSpin,B(0.022,0.06,0.012),M.steel,0.004,0,0);
+  hose(pump,[[0.26,y+0.06,z],[0.34,0.82,-0.12],[0.12,0.98,-0.36],[-0.4,1.08,-0.36],[-0.45,1.22,-0.26]],0.011);
+  hose(pump,[[0.22,y-0.06,z+0.06],[0.36,0.6,0.1],[0.42,0.9,-0.2],[-0.1,1.0,-0.38],[-0.36,1.16,-0.3],[-0.4,1.27,-0.25]],0.011);
+  hose(pump,[[0.17,y-0.05,z-0.06],[0.16,0.56,-0.12],[0.16,0.52,-0.16]],0.016);
+}
+
+/* ── VFD ── */
+const vfd=part('vfd','VFD (inverter)','Hydraulic power unit','#5b636d',
+  'Variable-frequency drive that sets the pump motor speed. The dashboard starts, stops and reads it over Modbus.',
+  [['Bus','RS-485, 19 200 baud, shared with the torque sensor'],['Modbus ID','2'],['Default','60 Hz'],['Polling','2 Hz monitor, 1 Hz status']]);
+{
+  const x=0.34,y=0.42,z=0.27;
+  mesh(vfd,RB(0.19,0.3,0.13,0.008),M.vfd,x,y,z);
+  for(let i=0;i<9;i++)mesh(vfd,B(0.008,0.02,0.11),M.black,x-0.08+i*0.02,y+0.16,z);
+  const disp=mesh(vfd,new THREE.PlaneGeometry(0.11,0.035),new THREE.MeshBasicMaterial({map:sevenSeg('60.00')}),x,y+0.07,z+0.0655);
+  disp.castShadow=false;
+  for(let r=0;r<2;r++)for(let c=0;c<4;c++)mesh(vfd,B(0.016,0.01,0.006),c===3&&r===1?M.red:M.black,x-0.036+c*0.024,y+0.01-r*0.025,z+0.066);
+  mesh(vfd,CY(0.012,0.008,20),M.black,x+0.04,y-0.04,z+0.066,Z);
+  mesh(vfd,B(0.42,0.03,0.03),M.alu,0.34,0.6,0.27);
+  hose(vfd,[[-0.25,0.68,0.17],[-0.2,0.52,0.32],[0.1,0.3,0.36],[0.3,0.25,0.3],[0.33,0.27,0.27]],0.009,M.cableBlk);
+}
+
+/* ── upper table ── */
+const table=part('table','Test table','Safety & frame','#1d82b4',
+  'Grated work surface that carries the actuators, sensors and the black back panel.',
+  [['Height','≈ 1.0 m'],['Surface','Steel grating on a blue frame']]);
+{
+  mesh(table,B(1.0,0.035,0.035),M.blue,0,TOP-0.02,0.33);mesh(table,B(1.0,0.035,0.035),M.blue,0,TOP-0.02,-0.33);
+  mesh(table,B(0.035,0.035,0.66),M.blue,-0.49,TOP-0.02,0);mesh(table,B(0.035,0.035,0.66),M.blue,0.49,TOP-0.02,0);
+  for(let z=-0.29;z<=0.3;z+=0.045)mesh(table,B(0.95,0.022,0.006),M.black,0,TOP-0.014,z);
+  [-0.32,0,0.32].forEach(x=>mesh(table,B(0.012,0.022,0.64),M.black,x,TOP-0.02,0));
+  // back frame, mesh and panel
+  [-0.49,0.49].forEach(x=>mesh(table,B(0.03,0.64,0.03),M.blue,x,TOP+0.31,-0.31));
+  mesh(table,B(1.01,0.03,0.03),M.blue,0,TOP+0.63,-0.31);
+  const meshMat=new THREE.MeshStandardMaterial({map:texMesh,transparent:true,alphaTest:0.4,side:THREE.DoubleSide,metalness:0.2,roughness:0.5,envMapIntensity:0.55});
+  const mp=mesh(table,new THREE.PlaneGeometry(0.36,0.6),meshMat,-0.3,TOP+0.31,-0.315);mp.castShadow=true;
+  mesh(table,B(0.7,0.58,0.012),M.matte,0.12,TOP+0.31,-0.302);
+  mesh(table,B(0.13,0.15,0.006),M.blackGl,0.34,TOP+0.25,-0.293);
+}
+
+/* ── back-panel modules ── */
+const mods=part('modules','XMD-02 modules','Upper table','#3a3f45',
+  'Two XMD-02 modules at the top of the back panel, labelled Cylinder and Motor.',
+  [['Labels','Cylinder · Motor']]);
+{
+  [[0.09,'Cylinder'],[0.19,'Motor']].forEach(([x,t])=>{
+    mesh(mods,RB(0.055,0.085,0.03,0.006),M.blackGl,x,TOP+0.53,-0.28);
+    mesh(mods,CY(0.012,0.012,20),M.grey,x,TOP+0.56,-0.262,Z);
+    mesh(mods,new THREE.PlaneGeometry(0.05,0.04),new THREE.MeshStandardMaterial({map:label(t,'#f4f4f2','#3a3f45',256,200,'italic 54px Georgia, serif'),roughness:0.9}),x,TOP+0.455,-0.2955).castShadow=false;
+    hose(mods,[[x,TOP+0.575,-0.28],[x,TOP+0.64,-0.28],[x+0.05,TOP+0.75,-0.3]],0.006,M.cable);
+  });
+}
+
+/* ── bench power supplies ── */
+const psu=part('psu','Bench power supplies','Upper table','#3a3f45',
+  'DC bench supplies on the table for the sensors and auxiliary electronics.',
+  [['Make','BK Precision'],['Location','Back-left of the table']]);
+{
+  mesh(psu,RB(0.19,0.085,0.16,0.006),M.blackGl,-0.4,TOP+0.044,-0.18);
+  mesh(psu,new THREE.PlaneGeometry(0.11,0.028),new THREE.MeshBasicMaterial({map:sevenSeg('12.0  1.2')}),-0.41,TOP+0.06,-0.0995).castShadow=false;
+  mesh(psu,RB(0.09,0.13,0.14,0.006),M.blackGl,-0.255,TOP+0.066,-0.2);
+  mesh(psu,new THREE.PlaneGeometry(0.06,0.05),std(0x3b4a50,0.2,0.3),-0.255,TOP+0.085,-0.1295).castShadow=false;
+  [-0.27,-0.255,-0.24].forEach((x,i)=>mesh(psu,CY(0.005,0.01,12),[M.black,M.red,M.teal][i],x,TOP+0.02,-0.128,Z));
+}
+
+/* ── valve manifold ── */
+const man=part('manifold','Valve manifold','Upper table','#c4c9cf',
+  'Aluminum manifold on the back mesh with two solenoid cartridge valves. Supply and return lines come up from the HPU.',
+  [['Valves','2 × solenoid cartridge'],['Lines','Supply and return from the pump']]);
+{
+  const x=-0.38,y=TOP+0.24,z=-0.25;
+  mesh(man,RB(0.12,0.1,0.08,0.006),M.alu,x,y,z);
+  [[0.035],[-0.035]].forEach(([dy],i)=>{
+    const g=new THREE.Group();g.position.set(x-0.06,y+dy,z+0.01);g.rotation.z=-0.35;man.add(g);
+    mesh(g,CY(0.016,0.06,24),M.steel,-0.03,0,0,X);
+    mesh(g,CY(0.026,0.05,24),M.black,-0.085,0,0,X);
+    mesh(g,RB(0.03,0.035,0.035,0.004),M.black,-0.085,0.035,0);
+    mesh(g,CY(0.011,0.03,20),M.steel,-0.125,0,0,X);
+    mesh(g,CY(0.011,0.012,20),M.red,-0.145,0,0,X);
+    hose(man,[[x-0.14,y+dy+0.08,z],[x-0.1,y+0.22,z-0.02],[x+0.05,y+0.3,z-0.04]],0.007,M.cableBlk);
+  });
+  [[-0.03],[0.03]].forEach(([dx])=>mesh(man,CY(0.012,0.03,16),M.brass,x+dx,y-0.064,z));
+}
+
+/* ── swing motor + driveline ── */
+const AXY=TOP+0.13, AXZ=-0.08;
+const swing=part('swing-motor','Swing hydraulic motor','Upper table','#7c5cc4',
+  'Hydraulic motor that drives the turret (swing) axis. It turns the torque sensor, couplings and brake disc on one shaft.',
+  [['Valve','DAQC2 DAC 0'],['Neutral','2.0 V · 0.5–3.8 V'],['Command','−0.60 to +0.70'],['Deadband','0.35 / 0.40 (provisional)'],['Signals','p_m1, p_m2, rpm, mb_torque_nm, enc_deg_multi']]);
+{
+  mesh(swing,CY(0.055,0.1,36),M.black,-0.11,AXY,AXZ,X);
+  mesh(swing,CY(0.048,0.03,36),M.black,-0.175,AXY,AXZ,X);
+  mesh(swing,RB(0.1,0.055,0.08,0.006),M.black,-0.115,AXY+0.07,AXZ);
+  [-0.145,-0.085].forEach(x=>mesh(swing,CY(0.011,0.03,16),M.steel,x,AXY+0.11,AXZ));
+  mesh(swing,B(0.014,0.17,0.17),M.black,-0.05,AXY,AXZ);
+  mesh(swing,B(0.16,0.03,0.17),M.black,-0.09,TOP+0.015,AXZ);
+  mesh(swing,B(0.03,0.09,0.02),M.black,-0.05,TOP+0.04,AXZ+0.07);
+  // hoses from manifold to motor ports
+  hose(swing,[[-0.34,TOP+0.22,-0.22],[-0.26,TOP+0.12,-0.2],[-0.18,TOP+0.2,-0.12],[-0.145,TOP+0.25,AXZ]],0.009);
+  hose(swing,[[-0.34,TOP+0.26,-0.24],[-0.2,TOP+0.33,-0.2],[-0.09,TOP+0.29,-0.12],[-0.085,TOP+0.25,AXZ]],0.009);
+}
+const torque=part('torque','Torque sensor','Upper table','#c41f28',
+  'Rotary torque and speed sensor between the motor and the load. The dashboard reads it over Modbus.',
+  [['Model','DYN-200 (per label)'],['Bus','Modbus RTU, ID 1, 20 Hz'],['Signals','mb_torque_nm, mb_speed_rpm, mb_power_w']]);
+{
+  mesh(torque,RB(0.11,0.11,0.12,0.008),M.red,0.15,AXY,AXZ);
+  mesh(torque,new THREE.PlaneGeometry(0.06,0.03),new THREE.MeshBasicMaterial({map:label('T 12.4  N 0','#0b1a22','#6fd3ff',256,128,'bold 42px "Courier New", monospace')}),0.15,AXY+0.0555,AXZ,[-Math.PI/2,0,0]).castShadow=false;
+  mesh(torque,new THREE.PlaneGeometry(0.09,0.06),new THREE.MeshStandardMaterial({map:label('Torque Sensor','#f1f1ef','#222',512,340,'bold 64px Helvetica, Arial'),roughness:0.8}),0.15,AXY-0.005,AXZ+0.0605).castShadow=false;
+  mesh(torque,CY(0.009,0.03,16),M.black,0.17,AXY+0.07,AXZ-0.02);
+  mesh(torque,B(0.1,0.07,0.06),M.alu,0.15,TOP+0.035,AXZ);
+  hose(torque,[[0.17,AXY+0.085,AXZ-0.02],[0.2,AXY+0.16,AXZ-0.1],[0.26,AXY+0.2,-0.28]],0.005,M.cableBlk);
+}
+const spin=new THREE.Group();spin.position.set(0,AXY,AXZ);scene.add(spin);
+const load=part('load','Brake disc & encoder','Upper table','#4a5058',
+  'Flexible coupling, bearing block and a perforated brake disc on the output shaft. The AMT24 absolute encoder sits on the shaft end.',
+  [['Encoder','AMT24, RS-485, 2 Mbaud'],['Resolution','16 384 counts/rev'],['Signal','enc_deg_multi'],['Software limit','±110° (Unity frame)']]);
+{
+  // rotating parts are added to `spin` but registered under the load / swing parts for picking
+  const sp=(geo,mat,x,rot,owner)=>{const m=mesh(spin,geo,mat,x,0,0,rot);m.userData.owner=owner;return m;};
+  sp(CY(0.012,0.62,16),M.steel,0.1,X,swing);
+  sp(CY(0.058,0.12,36),M.alu,0.03,X,swing);
+  const ring=sp(new THREE.TorusGeometry(0.058,0.004,8,48),M.teal,0.03,[0,Math.PI/2,0],swing);ring.castShadow=false;
+  for(let i=0;i<4;i++)sp(CY(0.05,0.01,32),M.black,0.235+i*0.02,X,load);
+  for(let i=0;i<6;i++){const a=i*Math.PI/3;const b=mesh(spin,CY(0.004,0.07,8),M.steel,0.265,Math.cos(a)*0.035,Math.sin(a)*0.035,X);b.userData.owner=load;}
+  // brake disc with holes
+  const sh=new THREE.Shape();sh.absarc(0,0,0.12,0,Math.PI*2,false);
+  const hole=(r,x,y)=>{const p=new THREE.Path();p.absarc(x,y,r,0,Math.PI*2,true);sh.holes.push(p);};
+  hole(0.022,0,0);
+  for(let i=0;i<24;i++){const a=i/24*Math.PI*2;hole(0.006,Math.cos(a)*0.088,Math.sin(a)*0.088);}
+  for(let i=0;i<12;i++){const a=(i+0.5)/12*Math.PI*2;hole(0.007,Math.cos(a)*0.106,Math.sin(a)*0.106);}
+  const dg=new THREE.ExtrudeGeometry(sh,{depth:0.008,bevelEnabled:false,curveSegments:28});dg.center();dg.rotateY(Math.PI/2);
+  const disc=mesh(spin,dg,std(0x1e2124,0.6,0.4,{envMapIntensity:0.55}),0.375,0,0);disc.userData.owner=load;
+  sp(CY(0.035,0.03,24),M.black,0.36,X,load);
+  sp(CY(0.024,0.02,24),M.brass,0.4,X,load);
+  sp(CY(0.02,0.012,24),M.black,0.415,X,load);
+  mesh(load,RB(0.05,0.12,0.12,0.006),M.black,0.325,AXY,AXZ);
+  mesh(load,B(0.06,0.07,0.14),M.black,0.325,TOP+0.035,AXZ);
+  hose(load,[[0.42,AXY+0.02,AXZ],[0.46,AXY+0.1,AXZ-0.1],[0.45,AXY+0.3,-0.28]],0.004,M.cable);
+}
+
+/* ── motor pressure transmitters ── */
+const pm=part('pm','Motor pressures P_M1 / P_M2','Upper table','#9aa1a8',
+  'Two pressure transmitters teed into the swing motor ports.',
+  [['Signals','p_m1 · AIN 2, p_m2 · AIN 0'],['Calibration','600 psi/V (placeholder)']]);
+{
+  [[-0.145,0],[-0.085,1]].forEach(([x,i])=>{
+    const zt=-0.2;
+    mesh(pm,CY(0.007,0.05,12),M.steel,x,AXY+0.14,AXZ);
+    hose(pm,[[x,AXY+0.16,AXZ],[x,AXY+0.2,AXZ-0.04],[x+0.04*i,AXY+0.24,zt],[x+0.04*i,AXY+0.3,zt]],0.0045,M.steel,30);
+    const px=x+0.04*i;
+    mesh(pm,CY(0.011,0.02,6),M.steel,px,AXY+0.31,zt);
+    mesh(pm,CY(0.013,0.07,24),M.steel,px,AXY+0.36,zt);
+    mesh(pm,RB(0.034,0.045,0.034,0.004),M.black,px,AXY+0.42,zt);
+    hose(pm,[[px,AXY+0.44,zt-0.017],[px+0.02,AXY+0.5,-0.27],[px+0.08,AXY+0.55,-0.29]],0.004,M.cable);
+  });
+}
+
+/* ── boom cylinder ── */
+const CYY=TOP+0.06, CYZ=0.17, STROKE=0.2032;
+const boom=part('boom-cyl','Boom cylinder','Upper table','#4fc3f7',
+  'Parker tie-rod cylinder that drives the crane boom. A negative valve command extends it.',
+  [['Bore / rod','2.00 in / 33 mm'],['Stroke','8 in (pot_cyl 0–8 in)'],['Valve','DAQC2 DAC 1 · 2.0 V neutral'],['Deadband','−0.20 / +0.25'],['End-stop guard','≤ 0.40 in / ≥ 7.60 in']]);
+const rodGrp=new THREE.Group();scene.add(rodGrp);
+{
+  const capX=0.29, headX=-0.07;
+  mesh(boom,RB(0.07,0.075,0.075,0.004),M.black,capX,CYY,CYZ);
+  mesh(boom,RB(0.065,0.075,0.075,0.004),M.black,headX,CYY,CYZ);
+  mesh(boom,CY(0.034,0.29,40),M.blackGl,0.11,CYY,CYZ,X);
+  [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([a,b])=>{
+    mesh(boom,CY(0.0045,0.42,10),M.steel,0.11,CYY+a*0.028,CYZ+b*0.028,X);
+    [-0.105,0.327].forEach(x=>mesh(boom,CY(0.008,0.012,6),M.steel,x,CYY+a*0.028,CYZ+b*0.028,X));
+  });
+  const lbl=mesh(boom,new THREE.PlaneGeometry(0.14,0.03),new THREE.MeshStandardMaterial({map:label('','#f2c21b','#111',512,110,'bold italic 58px Helvetica, Arial'),roughness:0.6}),0.11,CYY+0.004,CYZ+0.0345);lbl.castShadow=false;
+  mesh(boom,B(0.07,0.03,0.12),M.black,capX+0.01,TOP+0.012,CYZ);
+  mesh(boom,B(0.03,0.05,0.02),M.black,capX+0.01,TOP+0.03,CYZ-0.045);mesh(boom,B(0.03,0.05,0.02),M.black,capX+0.01,TOP+0.03,CYZ+0.045);
+  mesh(boom,B(0.06,0.024,0.11),M.black,headX,TOP+0.01,CYZ);
+  // hoses manifold → cylinder ports
+  hose(boom,[[-0.3,TOP+0.2,-0.24],[-0.28,TOP+0.09,-0.05],[-0.14,TOP+0.08,0.06],[headX,TOP+0.17,CYZ-0.01]],0.009);
+  hose(boom,[[-0.33,TOP+0.28,-0.25],[-0.15,TOP+0.12,-0.02],[0.12,TOP+0.07,0.06],[0.24,TOP+0.1,0.12],[capX,TOP+0.17,CYZ-0.01]],0.009);
+  // rod + rod-end block (moves)
+  const r=mesh(rodGrp,CY(0.0165,0.32,24),M.chrome,0.01,CYY,CYZ,X);r.userData.owner=boom;
+  const blk=mesh(rodGrp,RB(0.08,0.07,0.1,0.006),M.black,-0.21,CYY-0.005,CYZ);blk.userData.owner=boom;
+  const puck=mesh(rodGrp,CY(0.032,0.025,32),M.black,-0.21,CYY+0.005,CYZ-0.06,Z);puck.userData.owner=boom;
+  const eye=mesh(rodGrp,CY(0.006,0.012,12),M.steel,-0.252,CYY,CYZ+0.03,X);eye.userData.owner=boom;
+}
+const p1=part('p1','Pressure P1 (cap end)','Upper table','#9aa1a8',
+  'Pressure transducer on the cap-side port. Cap pressure acts on the full bore area.',
+  [['Signal','p1 · AIN 1'],['Calibration','602.42 psi/V + 69.76']]);
+const p2=part('p2','Pressure P2 (rod end)','Upper table','#9aa1a8',
+  'Pressure transducer on the rod-side port. Rod pressure acts on the annular area.',
+  [['Signal','p2 · AIN 3'],['Calibration','616.34 psi/V − 45.44']]);
+[[p1,0.29],[p2,-0.07]].forEach(([g,x])=>{
+  mesh(g,CY(0.009,0.05,12),M.steel,x,CYY+0.06,CYZ);
+  mesh(g,B(0.05,0.016,0.016),M.steel,x,CYY+0.09,CYZ);
+  mesh(g,CY(0.008,0.03,6),M.steel,x,CYY+0.11,CYZ);
+  mesh(g,CY(0.019,0.085,28),M.steel,x,CYY+0.165,CYZ);
+  mesh(g,CY(0.01,0.02,16),M.black,x,CYY+0.215,CYZ);
+  hose(g,[[x,CYY+0.225,CYZ],[x+0.02,CYY+0.3,CYZ-0.1],[x+0.08,CYY+0.42,-0.27]],0.0035,M.cable);
+});
+
+/* ── string pots ── */
+const potC=part('pot-cyl','Boom string pot','Upper table','#d9dde1',
+  'Celesco string potentiometer that measures boom cylinder stroke from the rod-end block.',
+  [['Signal','pot_cyl · AIN 5'],['Range','0–8 in'],['Calibration','1.03 in/V − 0.16']]);
+const potCable=rod(potC,0.0012,M.wire);
+{ mesh(potC,RB(0.06,0.055,0.06,0.008),M.white,-0.3,TOP+0.03,0.33);mesh(potC,CY(0.014,0.03,16),M.black,-0.3,TOP+0.07,0.33);
+  hose(potC,[[-0.3,TOP+0.085,0.33],[-0.36,TOP+0.12,0.36],[-0.5,TOP+0.06,0.3]],0.003,M.cable); }
+const eha=part('eha','EHA','Upper table','#f5b748',
+  'Electro-hydrostatic actuator: an electric motor-pump unit driving its own small cylinder, run from the manual panel of the dashboard.',
+  [['Command limit','|u| ≤ 0.60'],['Rate limit','1.0 per second'],['Heartbeat','0.5 s, returns to 0 if lost'],['Position window','0.05–0.55 in']]);
+const ehaRod=new THREE.Group();scene.add(ehaRod);
+{
+  const y=TOP+0.045,z=0.335;
+  mesh(eha,CY(0.042,0.17,36),M.blackGl,0.39,y,z,X);
+  mesh(eha,RB(0.09,0.1,0.095,0.01),M.black,0.52,y+0.005,z);
+  mesh(eha,new THREE.PlaneGeometry(0.06,0.03),std(0xc9ced4,0.6,0.4),0.39,y+0.0,z+0.0425).castShadow=false;
+  mesh(eha,CY(0.012,0.02,16),M.grey,0.36,y+0.045,z);
+  mesh(eha,CY(0.028,0.15,32),M.alu,0.23,y,z,X);
+  mesh(eha,CY(0.03,0.02,32),M.alu,0.3,y,z,X);
+  mesh(eha,RB(0.07,0.04,0.05,0.005),M.red,0.07,y-0.005,z);
+  mesh(eha,B(0.02,0.03,0.02),M.redDk,0.07,y+0.02,z);
+  mesh(eha,CY(0.008,0.04,12),M.brass,0.12,y,z,X);
+  [[0.0,0],[0.05,1]].forEach(([dx])=>mesh(eha,B(0.04,0.008,0.04),M.alu,0.06+dx,TOP+0.003,z-0.06));
+  hose(eha,[[0.07,y,z-0.025],[0.02,y-0.02,z-0.08],[-0.05,y,z-0.06],[-0.12,y+0.02,z]],0.008);
+  const er=mesh(ehaRod,CY(0.008,0.1,16),M.chrome,0.13,y,z,X);er.userData.owner=eha;
+  mesh(eha,B(0.06,0.012,0.06),M.alu,0.5,TOP+0.005,z);
+}
+const potE=part('pot-eha','EHA string pot','Upper table','#d9dde1',
+  'String potentiometer that measures EHA position.',
+  [['Signal','pot_eha · AIN 4'],['Excitation','12 V'],['Range','0–4.75 in (scale factor pending check)']]);
+const potECable=rod(potE,0.0012,M.wire);
+{ mesh(potE,RB(0.055,0.05,0.055,0.008),M.white,0.2,TOP+0.028,0.24);mesh(potE,CY(0.013,0.03,16),M.black,0.2,TOP+0.066,0.24);
+  hose(potE,[[0.2,TOP+0.08,0.24],[0.26,TOP+0.14,0.12],[0.42,TOP+0.25,-0.27]],0.003,M.cable); }
+
+/* ── pulley + wire rope ── */
+const pul=part('pulley','Cable pulley','Upper table','#c4c9cf',
+  'Pulley and wire rope tied to the boom rod-end block at the front-left corner of the table.',
+  [['Location','Front-left of the table']]);
+const wire1=rod(pul,0.0014,M.wire);
+{ mesh(pul,B(0.09,0.02,0.05),M.alu,-0.47,TOP+0.01,0.25);mesh(pul,B(0.012,0.06,0.04),M.alu,-0.47,TOP+0.04,0.25);
+  mesh(pul,CY(0.024,0.014,28),M.steel,-0.455,TOP+0.06,0.25,Z); }
+
+/* ── E-stops ── */
+const es=part('estop','Emergency stops','Safety & frame','#f08a14',
+  'Two hard-wired emergency stops on the right post of the enclosure. Use them whenever a software stop is not confirmed.',
+  [['Count','2'],['Location','Right front post'],['Software stop','“Stop all” on the dashboard (End session)']]);
+[[1.05],[1.3]].forEach(([y])=>{
+  mesh(es,RB(0.075,0.085,0.06,0.008),M.orange,0.67,y,0.42);
+  mesh(es,new THREE.CircleGeometry(0.031,32),M.yellow,0.67,y,0.4505).castShadow=false;
+  const m=mesh(es,new THREE.SphereGeometry(0.023,32,16,0,Math.PI*2,0,Math.PI/2),M.red,0.67,y,0.452,[Math.PI/2,0,0]);
+  mesh(es,CY(0.013,0.012,24),M.redDk,0.67,y,0.455,Z);mesh(es,B(0.06,0.02,0.04),M.alu,0.62,y,0.42);void m;
+});
+
+/* ═════════════════════ PICKING / UI ═════════════════════ */
+const owner=o=>{for(let n=o;n;n=n.parent){if(n.userData&&n.userData.owner)return n.userData.owner;if(n.userData&&n.userData.part)return n;}return null;};
+let selected=null;
+function setHighlight(g,on){
+  const targets=[];g.traverse(o=>{if(o.isMesh)targets.push(o);});
+  scene.traverse(o=>{if(o.isMesh&&o.userData.owner===g)targets.push(o);});
+  targets.forEach(m=>{
+    if(on){if(!m.userData.orig){m.userData.orig=m.material;const c=m.material.clone();if(c.emissive){c.emissive=new THREE.Color(0xff7a2f);c.emissiveIntensity=0.45;}m.material=c;}}
+    else if(m.userData.orig){m.material.dispose();m.material=m.userData.orig;delete m.userData.orig;}
+  });
+}
+function bboxOf(g){
+  const box=new THREE.Box3();
+  g.traverse(o=>{if(o.isMesh&&!o.userData.noPick&&!o.userData.isRod)box.expandByObject(o);});
+  scene.traverse(o=>{if(o.isMesh&&o.userData.owner===g)box.expandByObject(o);});
+  return box;
+}
+function select(g,focus){
+  if(selected)setHighlight(selected,false);
+  selected=g;
+  document.querySelectorAll('.pbtn').forEach(b=>b.setAttribute('aria-pressed',String(!!g&&b.dataset.id===g.name)));
+  if(!g){$('card').hidden=true;return;}
+  setHighlight(g,true);
+  const p=g.userData.part;
+  $('card-grp').textContent=p.grp;$('card-title').textContent=p.name;$('card-desc').textContent=p.desc;
+  $('card-specs').innerHTML='';
+  p.specs.forEach(([k,v])=>{const dt=document.createElement('dt');dt.textContent=k;const dd=document.createElement('dd');dd.textContent=v;$('card-specs').append(dt,dd);});
+  $('card').hidden=false;
+  if(focus){
+    const box=bboxOf(g),c=box.getCenter(new THREE.Vector3()),s=box.getSize(new THREE.Vector3());
+    const dist=Math.min(4,Math.max(0.55,s.length()*2.2));
+    const dir=camera.position.clone().sub(controls.target).normalize();
+    tweenTo(c.clone().addScaledVector(dir,dist),c);
+  }
+}
+
+// parts list
+const grpOrder=['Upper table','Hydraulic power unit','Safety & frame'];
+grpOrder.forEach(gn=>{
+  const h=document.createElement('div');h.className='grp';h.textContent=gn;$('part-list').append(h);
+  PARTS.filter(p=>p.userData.part.grp===gn).forEach(p=>{
+    const b=document.createElement('button');b.className='pbtn';b.dataset.id=p.name;b.setAttribute('aria-pressed','false');
+    const d=document.createElement('span');d.className='dot';d.style.background=p.userData.part.color;
+    b.append(d,document.createTextNode(p.userData.part.name));
+    b.onclick=()=>select(selected===p?null:p,selected!==p);
+    $('part-list').append(b);
+  });
+});
+$('card-x').onclick=()=>select(null);
+$('parts-toggle').onclick=()=>{const el=$('parts');const open=el.dataset.open!=='true';el.dataset.open=String(open);$('parts-toggle').setAttribute('aria-expanded',String(open));};
+if(matchMedia('(max-width:760px)').matches){$('parts').dataset.open='false';$('parts-toggle').setAttribute('aria-expanded','false');}
+
+// raycast
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+function pick(ev){
+  const r=canvas.getBoundingClientRect();ndc.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);
+  ray.setFromCamera(ndc,camera);
+  const hits=ray.intersectObjects(scene.children,true);
+  for(const h of hits){if(h.object.userData.noPick||h.object===floor)continue;const g=owner(h.object);if(g)return g;}
+  return null;
+}
+let down=null,hoverT=0;
+canvas.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});
+canvas.addEventListener('pointerup',e=>{if(!down)return;const moved=Math.hypot(e.clientX-down.x,e.clientY-down.y);down=null;if(moved<5){const g=pick(e);select(g,false);}});
+canvas.addEventListener('pointermove',e=>{
+  const now=performance.now();if(now-hoverT<40)return;hoverT=now;
+  if(e.buttons){$('tip').hidden=true;return;}
+  const g=pick(e);const tip=$('tip');
+  if(g){tip.textContent=g.userData.part.name;tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';tip.hidden=false;canvas.style.cursor='pointer';}
+  else{tip.hidden=true;canvas.style.cursor='grab';}
+});
+canvas.addEventListener('pointerleave',()=>{$('tip').hidden=true;});
+canvas.addEventListener('keydown',e=>{if(e.key==='Escape')select(null);});
+
+/* ── camera presets + tween ── */
+const CAMS={
+  iso:{p:[1.1,1.75,2.6],t:[0,1.05,0]},
+  front:{p:[0,1.25,3.0],t:[0,1.05,0]},
+  side:{p:[3.0,1.25,0.01],t:[0,1.05,0]},
+  top:{p:[0.001,3.4,0.25],t:[0,1.0,0]}
+};
+let tween=null;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tweenTo(pos,target){
+  const p0=camera.position.clone(),t0=controls.target.clone();
+  tween={p0,t0,p1:pos.clone(),t1:target.clone(),start:performance.now(),dur:reduce?1:650};
+}
+function fitFor(c){const a=camera.aspect;const k=a<0.9?Math.min(1.9,1.15/a):1;return new THREE.Vector3(...c.t).add(new THREE.Vector3(...c.p).sub(new THREE.Vector3(...c.t)).multiplyScalar(k));}
+document.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-cam]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  const c=CAMS[b.dataset.cam];tweenTo(fitFor(c),new THREE.Vector3(...c.t));
+});
+
+/* ── toggles ── */
+let motion=!reduce;
+$('t-motion').setAttribute('aria-pressed',String(motion));
+$('t-motion').onclick=()=>{motion=!motion;$('t-motion').setAttribute('aria-pressed',String(motion));};
+$('t-guards').onclick=()=>{guards.visible=!guards.visible;$('t-guards').setAttribute('aria-pressed',String(guards.visible));};
+
+/* ── theme ── */
+function applyTheme(){
+  const bg=new THREE.Color(css('--scene')||'#dfe3e7');scene.background=bg;
+  M.floor.color.set(css('--floor')||'#c9ced4');
+  scene.fog=new THREE.Fog(bg,6,14);
+}
+applyTheme();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+/* ── resize ── */
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(canvas);resize();
+{const c=CAMS.iso;camera.position.copy(fitFor(c));controls.target.set(...c.t);controls.update();}
+
+/* ── animation: double-step stroke profile + swing speed ── */
+const smooth=x=>x<=0?0:x>=1?1:x*x*(3-2*x);
+function strokeAt(t){ // 24 s cycle: hold, extend 6 s, hold 4 s, retract 6 s, hold
+  const u=t%24; if(u<2)return 0; if(u<8)return smooth((u-2)/6); if(u<12)return 1; if(u<18)return 1-smooth((u-12)/6); return 0;
+}
+let simT=0,angle=0,last=performance.now(),readT=0;
+const ROD_END=new THREE.Vector3(),POT_C=new THREE.Vector3(-0.3,TOP+0.085,0.33);
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000);last=now;
+  if(motion)simT+=dt;
+  const s=strokeAt(simT)*STROKE;
+  rodGrp.position.x=-s;
+  const rpm=motion?28*Math.sin(simT*2*Math.PI/16):0;
+  if(motion){angle+=rpm/60*2*Math.PI*dt;fanSpin.rotation.x+=dt*40;pumpSpin.rotation.x+=dt*40;}
+  spin.rotation.x=angle;
+  ehaRod.position.x=-0.04*(0.5+0.5*Math.sin(simT*0.5));
+  // cables follow the moving parts
+  ROD_END.set(-0.252-s,CYY,CYZ+0.03);
+  placeRod(potCable,[POT_C.x,POT_C.y,POT_C.z],[ROD_END.x,ROD_END.y,ROD_END.z]);
+  placeRod(wire1,[-0.455,TOP+0.06,0.226],[-0.25-s,CYY+0.01,CYZ-0.02]);
+  placeRod(potECable,[0.2,TOP+0.066,0.24],[0.08+ehaRod.position.x,TOP+0.045,0.335]);
+  if(now-readT>150){readT=now;$('r-rod').textContent=(s/0.0254).toFixed(2);$('r-rpm').textContent=Math.round(rpm).toString();}
+  if(tween){
+    const k=Math.min(1,(now-tween.start)/tween.dur),e=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    camera.position.lerpVectors(tween.p0,tween.p1,e);controls.target.lerpVectors(tween.t0,tween.t1,e);
+    if(k>=1)tween=null;
+  }
+  controls.update();
+  renderer.render(scene,camera);
+  requestAnimationFrame(frame);
+}
+$('loading').hidden=true;
+requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
